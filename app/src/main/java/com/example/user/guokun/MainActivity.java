@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.example.user.guokun.ui.fragment.MainFragment;
 import com.example.user.guokun.ui.widget.CustomViewPager;
@@ -42,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         tabIndicators.add("我");
         tabFragments = new ArrayList<>();
         tabFragments.add(MainFragment.newInstance(tabIndicators.get(0)));
-        tabFragments.add(HealthCardFragment.newInstance(tabIndicators.get(1)));
-        tabFragments.add(MallFragment.newInstance(tabIndicators.get(2)));
-        tabFragments.add(RegFragment.newInstance(tabIndicators.get(3)));
-        tabFragments.add(PersonFragment.newInstance(tabIndicators.get(4)));
+        tabFragments.add(MainFragment.newInstance(tabIndicators.get(1)));
+        tabFragments.add(MainFragment.newInstance(tabIndicators.get(2)));
+        tabFragments.add(MainFragment.newInstance(tabIndicators.get(3)));
+        tabFragments.add(MainFragment.newInstance(tabIndicators.get(4)));
         ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mContentVp.setAdapter(contentAdapter);
     }
@@ -58,32 +57,32 @@ public class MainActivity extends AppCompatActivity {
         mTabTl.setupWithViewPager(mContentVp);
         for (int i = 0; i < tabIndicators.size(); i++) {
             TabLayout.Tab itemTab = mTabTl.getTabAt(i);
-            if (itemTab != null) {
-                switch (i) {
-                    case 0:
-                        itemTab.setCustomView(R.layout.item_tab_layout_custom);
-                        TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
-                                .tv_menu_item);
-                        itemTv.setText(tabIndicators.get(i));
-                        break;
-                    case 1:
-                        itemTab.setCustomView(R.layout.item_tab_layout_jkj);
-                        TextView itemTv1 = (TextView) itemTab.getCustomView().findViewById(R.id
-                                .tv_menu_item1);
-                        itemTv1.setText(tabIndicators.get(i));
-                        break;
-                    case 2:
-                        itemTab.setCustomView(R.layout.item_tab_layout_jksc);
-                        TextView itemTv2 = (TextView) itemTab.getCustomView().findViewById(R.id
-                                .tv_menu_item2);
-                        itemTv2.setText(tabIndicators.get(i));
-                        break;
-                }
-//                itemTab.setCustomView(R.layout.item_tab_layout_custom);
-//                TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
-// .tv_menu_item);
-//                itemTv.setText(tabIndicators.get(i));
-            }
+//            if (itemTab != null) {
+//                switch (i) {
+//                    case 0:
+//                        itemTab.setCustomView(R.layout.item_tab_layout_custom);
+//                        TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
+//                                .tv_menu_item);
+//                        itemTv.setText(tabIndicators.get(i));
+//                        break;
+//                    case 1:
+//                        itemTab.setCustomView(R.layout.item_tab_layout_jkj);
+//                        TextView itemTv1 = (TextView) itemTab.getCustomView().findViewById(R.id
+//                                .tv_menu_item1);
+//                        itemTv1.setText(tabIndicators.get(i));
+//                        break;
+//                    case 2:
+//                        itemTab.setCustomView(R.layout.item_tab_layout_jksc);
+//                        TextView itemTv2 = (TextView) itemTab.getCustomView().findViewById(R.id
+//                                .tv_menu_item2);
+//                        itemTv2.setText(tabIndicators.get(i));
+//                        break;
+//                }
+////                itemTab.setCustomView(R.layout.item_tab_layout_custom);
+////                TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
+//// .tv_menu_item);
+////                itemTv.setText(tabIndicators.get(i));
+//            }
         }
     }
 
