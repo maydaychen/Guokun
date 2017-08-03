@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Guokun</string>
+    <string name="coupon">优惠券</string>
+    <string name="coupon_detail">优惠券说明</string>
 </resources>

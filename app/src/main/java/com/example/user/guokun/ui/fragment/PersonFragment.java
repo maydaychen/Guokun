@@ -7,20 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.ui.activity.CaptureActivity;
-import com.example.user.guokun.ui.activity.CouponActivity;
+import com.example.user.guokun.ui.activity.MyOrderActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 作者：JTR on 2016/8/29 10:35
- * 邮箱：2091320109@qq.com
+ * Created by 译 on 2017/8/4.
  */
-public class MainFragment extends Fragment {
+
+public class PersonFragment extends Fragment {
 
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
@@ -28,7 +26,7 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_person, container, false);
         ButterKnife.bind(this, root);
         initData();
         initView();
@@ -40,11 +38,11 @@ public class MainFragment extends Fragment {
         super.onDestroy();
     }
 
-    public static MainFragment newInstance(String content) {
+    public static PersonFragment newInstance(String content) {
         Bundle arguments = new Bundle();
         arguments.putString(EXTRA_CONTENT, content);
 
-        MainFragment mallFragment = new MainFragment();
+        PersonFragment mallFragment = new PersonFragment();
         mallFragment.setArguments(arguments);
         return mallFragment;
     }
@@ -59,25 +57,27 @@ public class MainFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.iv_saoyisao, R.id.iv_youhuiquan, R.id.iv_fujin})
+
+    @OnClick({R.id.rl_person_yue, R.id.rl_person_coupon, R.id.rl_person_purse, R.id.rl_person_order, R.id.rl_person_invite, R.id.rl_person_question, R.id.rl_person_setting, R.id.rl_person_kefu})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_saoyisao:
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent, SHOW_SUBACTIVITY);
+            case R.id.rl_person_yue:
                 break;
-            case R.id.iv_youhuiquan:
-                startActivity(new Intent(getActivity(), CouponActivity.class));
+            case R.id.rl_person_coupon:
                 break;
-            case R.id.iv_fujin:
+            case R.id.rl_person_purse:
                 break;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null != data) {
-            Toast.makeText(getActivity(), data.getStringExtra("code"), Toast.LENGTH_SHORT).show();
+            case R.id.rl_person_order:
+                startActivity(new Intent(getActivity(), MyOrderActivity.class));
+                break;
+            case R.id.rl_person_invite:
+                break;
+            case R.id.rl_person_question:
+                break;
+            case R.id.rl_person_setting:
+                break;
+            case R.id.rl_person_kefu:
+                break;
         }
     }
 }

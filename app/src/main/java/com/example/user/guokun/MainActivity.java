@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.user.guokun.ui.activity.InitActivity;
 import com.example.user.guokun.ui.fragment.MainFragment;
+import com.example.user.guokun.ui.fragment.PersonFragment;
 import com.example.user.guokun.ui.widget.CustomViewPager;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class MainActivity extends InitActivity {
         tabFragments = new ArrayList<>();
         tabFragments.add(MainFragment.newInstance(tabIndicators.get(0)));
         tabFragments.add(MainFragment.newInstance(tabIndicators.get(1)));
-        tabFragments.add(MainFragment.newInstance(tabIndicators.get(2)));
+        tabFragments.add(PersonFragment.newInstance(tabIndicators.get(2)));
 
         ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mContentVp.setAdapter(contentAdapter);
@@ -68,25 +69,25 @@ public class MainActivity extends InitActivity {
             if (itemTab != null) {
                 switch (i) {
                     case 0:
-                        itemTab.setCustomView(R.layout.item_tab_layout_custom);
-                        TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
+                        itemTab.setCustomView(R.layout.item_left);
+                        TextView itemTv = itemTab.getCustomView().findViewById(R.id
                                 .tv_menu_item);
                         itemTv.setText(tabIndicators.get(i));
                         break;
                     case 1:
-                        itemTab.setCustomView(R.layout.item_tab_layout_jkj);
-                        TextView itemTv1 = (TextView) itemTab.getCustomView().findViewById(R.id
+                        itemTab.setCustomView(R.layout.item_middle);
+                        TextView itemTv1 = itemTab.getCustomView().findViewById(R.id
                                 .tv_menu_item1);
                         itemTv1.setText(tabIndicators.get(i));
                         break;
                     case 2:
-                        itemTab.setCustomView(R.layout.item_tab_layout_jksc);
-                        TextView itemTv2 = (TextView) itemTab.getCustomView().findViewById(R.id
+                        itemTab.setCustomView(R.layout.item_right);
+                        TextView itemTv2 = itemTab.getCustomView().findViewById(R.id
                                 .tv_menu_item2);
                         itemTv2.setText(tabIndicators.get(i));
                         break;
                 }
-//                itemTab.setCustomView(R.layout.item_tab_layout_custom);
+//                itemTab.setCustomView(R.layout.item_left);
 //                TextView itemTv = (TextView) itemTab.getCustomView().findViewById(R.id
 // .tv_menu_item);
 //                itemTv.setText(tabIndicators.get(i));
