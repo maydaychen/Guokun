@@ -41,7 +41,9 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="手机号"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="11"
+            android:singleLine="true"/>
     </LinearLayout>
 
     <View
@@ -78,7 +80,9 @@
             android:drawablePadding="@dimen/margin_size_8dp"
             android:hint="短信验证码"
             android:inputType="number"
-            android:padding="8dp"/>
+            android:maxLength="6"
+            android:padding="8dp"
+            android:singleLine="true"/>
     </RelativeLayout>
 
     <View
