@@ -2,4 +2,5 @@
     <string name="app_name">Guokun</string>
     <string name="coupon">优惠券</string>
     <string name="coupon_detail">优惠券说明</string>
+    <string name="questions">常见问题</string>
 </resources>

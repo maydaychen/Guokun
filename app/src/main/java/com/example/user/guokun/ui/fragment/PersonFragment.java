@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.ui.activity.MyOrderActivity;
+import com.example.user.guokun.ui.activity.QuestionActivity;
+import com.example.user.guokun.ui.activity.SettingActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -73,8 +75,10 @@ public class PersonFragment extends Fragment {
             case R.id.rl_person_invite:
                 break;
             case R.id.rl_person_question:
+                startActivity(new Intent(getActivity(), QuestionActivity.class));
                 break;
             case R.id.rl_person_setting:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.rl_person_kefu:
                 break;

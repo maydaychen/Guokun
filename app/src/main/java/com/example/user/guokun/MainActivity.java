@@ -9,6 +9,7 @@ import android.support.v4.view.ViewCompat;
 import android.widget.TextView;
 
 import com.example.user.guokun.ui.activity.InitActivity;
+import com.example.user.guokun.ui.fragment.DiscoveryFragment;
 import com.example.user.guokun.ui.fragment.MainFragment;
 import com.example.user.guokun.ui.fragment.PersonFragment;
 import com.example.user.guokun.ui.widget.CustomViewPager;
@@ -51,7 +52,7 @@ public class MainActivity extends InitActivity {
 
         tabFragments = new ArrayList<>();
         tabFragments.add(MainFragment.newInstance(tabIndicators.get(0)));
-        tabFragments.add(MainFragment.newInstance(tabIndicators.get(1)));
+        tabFragments.add(DiscoveryFragment.newInstance(tabIndicators.get(1)));
         tabFragments.add(PersonFragment.newInstance(tabIndicators.get(2)));
 
         ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());

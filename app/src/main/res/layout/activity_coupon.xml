@@ -14,7 +14,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:src="@drawable/zuo_jian_tou"
+            android:src="@drawable/back"
             android:id="@+id/iv_coupon_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

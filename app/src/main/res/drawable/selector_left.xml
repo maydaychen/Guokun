@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/bao_jian_anmo" android:state_selected="true"/>
-    <item android:drawable="@drawable/bao_jian_anmo"/>
+    <item android:drawable="@drawable/bao_jian_anmo_grey"/>
 </selector>

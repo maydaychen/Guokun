@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:background="@color/font_red"
         android:orientation="horizontal"
+
         android:weightSum="3">
 
         <ImageView
@@ -36,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/margin_size_10dp"
             android:src="@drawable/sao_yi_sao"/>
 
         <ImageView
@@ -43,6 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/margin_size_10dp"
             android:src="@drawable/shou_ye_quan"/>
 
         <ImageView
@@ -50,44 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/margin_size_10dp"
             android:src="@drawable/ding_wei_icon"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/font_red"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/margin_size_10dp"
-        android:weightSum="3">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="扫一扫"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="优惠券"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="附近"
-            android:textColor="@color/white"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

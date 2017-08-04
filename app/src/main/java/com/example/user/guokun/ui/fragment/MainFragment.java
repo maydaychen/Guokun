@@ -1,6 +1,8 @@
 package com.example.user.guokun.ui.fragment;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +14,13 @@ import android.widget.Toast;
 import com.example.user.guokun.R;
 import com.example.user.guokun.ui.activity.CaptureActivity;
 import com.example.user.guokun.ui.activity.CouponActivity;
+import com.example.user.guokun.ui.activity.FujinActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.Manifest.permission.CALL_PHONE;
+import static android.Manifest.permission.CAMERA;
 
 /**
  * 作者：JTR on 2016/8/29 10:35
@@ -24,6 +30,7 @@ public class MainFragment extends Fragment {
 
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     @Nullable
     @Override
@@ -63,14 +70,40 @@ public class MainFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_saoyisao:
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent, SHOW_SUBACTIVITY);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (getActivity().checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{CAMERA},
+                                MY_PERMISSIONS_REQUEST_CALL_PHONE);
+                    } else {
+                        init();
+                    }
+                } else init();
                 break;
             case R.id.iv_youhuiquan:
                 startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.iv_fujin:
+                startActivity(new Intent(getActivity(), FujinActivity.class));
                 break;
+        }
+    }
+
+    private void init() {
+        Intent intent = new Intent(getActivity(), CaptureActivity.class);
+        startActivityForResult(intent, SHOW_SUBACTIVITY);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
+            if (permissions[0].equals(CALL_PHONE)
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //用户同意使用write
+                init();
+            } else {
+                //用户不同意，自行处理即可
+                Toast.makeText(getActivity(), "没有相机相关权限，请设置！", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

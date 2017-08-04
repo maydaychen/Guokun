@@ -25,6 +25,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -318,6 +319,28 @@ public final class CameraManager {
     }
     throw new IllegalArgumentException("Unsupported picture format: " +
         previewFormat + '/' + previewFormatString);
+  }
+
+  public void turnOn(){
+    try {
+      Camera.Parameters mParameters;
+      mParameters = camera.getParameters();
+      mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+      camera.setParameters(mParameters);
+    }catch (Exception ex){
+      Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  public void turnOff(){
+    try {
+      Camera.Parameters mParameters;
+      mParameters = camera.getParameters();
+      mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+      camera.setParameters(mParameters);
+    }catch (Exception ex){
+      Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
+    }
   }
 
 }
