@@ -25,13 +25,11 @@ public class SettingActivity extends InitActivity {
 
     }
 
-    @OnClick({R.id.iv_setting_back, R.id.rl_ask_title, R.id.rl_account, R.id.rl_setting_about, R.id.bt_logout})
+    @OnClick({R.id.iv_setting_back, R.id.rl_account, R.id.rl_setting_about, R.id.bt_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting_back:
                 finish();
-                break;
-            case R.id.rl_ask_title:
                 break;
             case R.id.rl_account:
                 break;
@@ -46,7 +44,7 @@ public class SettingActivity extends InitActivity {
     public static void logout(Activity context) {
         new AlertDialog.Builder(context)
                 .setTitle("国坤健康")
-                .setMessage("确定要推出么？")
+                .setMessage("确定要退出么？")
                 .setPositiveButton("确定", (dialog, which) -> {
                     SharedPreferences mySharedPreferences = context.getSharedPreferences("user",
                             Activity.MODE_PRIVATE);

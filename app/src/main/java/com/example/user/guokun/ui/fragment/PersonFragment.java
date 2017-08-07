@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.guokun.R;
+import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.MyOrderActivity;
+import com.example.user.guokun.ui.activity.PurseActivity;
 import com.example.user.guokun.ui.activity.QuestionActivity;
 import com.example.user.guokun.ui.activity.SettingActivity;
 
@@ -66,8 +68,10 @@ public class PersonFragment extends Fragment {
             case R.id.rl_person_yue:
                 break;
             case R.id.rl_person_coupon:
+                startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.rl_person_purse:
+                startActivity(new Intent(getActivity(), PurseActivity.class));
                 break;
             case R.id.rl_person_order:
                 startActivity(new Intent(getActivity(), MyOrderActivity.class));

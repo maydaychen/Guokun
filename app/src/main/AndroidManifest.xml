@@ -47,6 +47,8 @@
         </activity>
         <activity android:name=".ui.activity.FujinActivity">
         </activity>
+        <activity android:name=".ui.activity.PurseActivity">
+        </activity>
     </application>
 
 </manifest>
