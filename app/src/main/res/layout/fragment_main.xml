@@ -27,6 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="40dp"
         android:background="@color/font_red"
         android:orientation="horizontal"
 
@@ -58,9 +59,9 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"></LinearLayout>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

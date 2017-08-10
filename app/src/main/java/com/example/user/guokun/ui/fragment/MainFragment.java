@@ -15,7 +15,13 @@ import com.example.user.guokun.R;
 import com.example.user.guokun.ui.activity.CaptureActivity;
 import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.FujinActivity;
+import com.example.user.guokun.ui.widget.GlideImageLoader;
+import com.youth.banner.Banner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -31,6 +37,11 @@ public class MainFragment extends Fragment {
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private List<String> url_list;
+
+
+    @BindView(R.id.banner)
+    Banner mBanner;
 
     @Nullable
     @Override
@@ -58,11 +69,15 @@ public class MainFragment extends Fragment {
 
 
     public void initData() {
-
+        url_list = new ArrayList<>();
+        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
     }
 
     public void initView() {
-
+        mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
+        mBanner.setOnBannerListener(position -> Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show());
     }
 
 
@@ -113,4 +128,5 @@ public class MainFragment extends Fragment {
             Toast.makeText(getActivity(), data.getStringExtra("code"), Toast.LENGTH_SHORT).show();
         }
     }
+
 }
