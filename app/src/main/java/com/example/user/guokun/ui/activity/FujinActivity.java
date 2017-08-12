@@ -14,6 +14,7 @@ public class FujinActivity extends InitActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_fujin);
+        ButterKnife.bind(this);
 
     }
 
@@ -22,12 +23,6 @@ public class FujinActivity extends InitActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.iv_coupon_back, R.id.tv_coupon_detail, R.id.tv_relocate})
     public void onViewClicked(View view) {

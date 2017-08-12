@@ -27,7 +27,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:background="@color/font_red"
         android:orientation="horizontal"
 
@@ -38,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingBottom="@dimen/margin_size_10dp"
+
             android:src="@drawable/sao_yi_sao"/>
 
         <ImageView
@@ -46,7 +47,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingBottom="@dimen/margin_size_10dp"
             android:src="@drawable/shou_ye_quan"/>
 
         <ImageView
@@ -54,7 +54,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingBottom="@dimen/margin_size_10dp"
             android:src="@drawable/ding_wei_icon"/>
     </LinearLayout>
 

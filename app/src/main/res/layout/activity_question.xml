@@ -9,7 +9,6 @@
     tools:context="com.example.user.guokun.ui.activity.QuestionActivity">
 
     <RelativeLayout
-        android:id="@+id/rl_ask_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white">
@@ -17,9 +16,9 @@
         <ImageView
             android:id="@+id/iv_coupon_detail_back"
             style="@style/iv_back"
-            android:padding="@dimen/margin_size_8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/margin_size_8dp"
             android:src="@drawable/back"/>
 
         <TextView
@@ -29,23 +28,9 @@
             android:text="@string/questions"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/ri_how_to_use"
+    <com.example.user.guokun.ui.widget.MyAffair_1
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <TextView
-            style="@style/tv_person_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="如何使用"/>
-
-        <ImageView
-            style="@style/iv_person_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/zuo_jian_tou"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <View
         android:layout_width="match_parent"

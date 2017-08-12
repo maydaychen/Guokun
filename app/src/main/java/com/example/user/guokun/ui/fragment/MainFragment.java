@@ -1,11 +1,14 @@
 package com.example.user.guokun.ui.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +27,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
 
 /**
  * 作者：JTR on 2016/8/29 10:35
  * 邮箱：2091320109@qq.com
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
 
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private static final int RC_CAMERA_PERM = 123;
     private List<String> url_list;
 
 
@@ -103,22 +109,33 @@ public class MainFragment extends Fragment {
         }
     }
 
-    private void init() {
-        Intent intent = new Intent(getActivity(), CaptureActivity.class);
-        startActivityForResult(intent, SHOW_SUBACTIVITY);
+    @AfterPermissionGranted(RC_CAMERA_PERM)
+    public void init() {
+        if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.CAMERA)) {
+            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+            startActivityForResult(intent, SHOW_SUBACTIVITY);
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
+                    RC_CAMERA_PERM, Manifest.permission.CAMERA);
+        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
-            if (permissions[0].equals(CALL_PHONE)
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //用户同意使用write
-                init();
-            } else {
-                //用户不同意，自行处理即可
-                Toast.makeText(getActivity(), "没有相机相关权限，请设置！", Toast.LENGTH_SHORT).show();
-            }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Log.d("chenyi", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.d("chenyi", "onPermissionsDenied:" + requestCode + ":" + perms.size());
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
         }
     }
 

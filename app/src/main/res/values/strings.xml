@@ -4,4 +4,5 @@
     <string name="coupon_detail">优惠券说明</string>
     <string name="questions">常见问题</string>
     <string name="item_coupons_project">项目：%1$s</string>
+    <string name="rationale_camera">此应用需要摄像头权限</string>
 </resources>
