@@ -33,6 +33,8 @@ public class LoginActivity extends InitActivity {
     TextView mTvGetEms;
     @BindView(R.id.et_login_tele)
     EditText mEtLoginTele;
+    @BindView(R.id.et_yanzhengma)
+    EditText mEtYanzhengma;
     private int recLen = 10;
     private boolean flag = true;
     private SubscriberOnNextListener<LoginBean> LoginOnNext;
@@ -54,12 +56,14 @@ public class LoginActivity extends InitActivity {
         });
 
         LoginOnNext = resultBean -> {
-
-        };
-
-        ResultOnNext = resultBean -> {
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+//            if (resultBean.getCode() == 1) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//            }
         };
+
+        ResultOnNext = resultBean -> Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -101,7 +105,9 @@ public class LoginActivity extends InitActivity {
                 }
                 break;
             case R.id.tv_login:
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                String tele1 = mEtLoginTele.getText().toString();
+                HttpMethods.getInstance().login(
+                        new ProgressSubscriber(LoginOnNext, LoginActivity.this), tele1, mEtYanzhengma.getText().toString());
                 break;
             case R.id.tv_signin:
                 startActivity(new Intent(LoginActivity.this, SigninActivity.class));
