@@ -2,12 +2,21 @@ package com.example.user.guokun.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.guokun.MainActivity;
 import com.example.user.guokun.R;
+import com.example.user.guokun.Utils;
+import com.example.user.guokun.bean.LoginBean;
+import com.example.user.guokun.bean.ResultBean;
+import com.example.user.guokun.http.HttpMethods;
+import com.example.user.guokun.http.ProgressSubscriber;
+import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
 import butterknife.BindView;
@@ -20,6 +29,14 @@ public class LoginActivity extends InitActivity {
     CheckBox mCbRead;
     @BindView(R.id.tv_login)
     TextView mTvLogin;
+    @BindView(R.id.tv_get_ems)
+    TextView mTvGetEms;
+    @BindView(R.id.et_login_tele)
+    EditText mEtLoginTele;
+    private int recLen = 10;
+    private boolean flag = true;
+    private SubscriberOnNextListener<LoginBean> LoginOnNext;
+    private SubscriberOnNextListener<ResultBean> ResultOnNext;
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -36,6 +53,14 @@ public class LoginActivity extends InitActivity {
             }
         });
 
+        LoginOnNext = resultBean -> {
+
+        };
+
+        ResultOnNext = resultBean -> {
+            Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+        };
+
     }
 
     @Override
@@ -43,11 +68,37 @@ public class LoginActivity extends InitActivity {
 
     }
 
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (recLen >= 1) {
+                recLen--;
+                mTvGetEms.setText(recLen + "");
+                handler.postDelayed(this, 1000);
+            } else {
+                flag = true;
+                recLen = 10;
+                mTvGetEms.setClickable(true);
+                mTvGetEms.setText("获取验证码");
+            }
+        }
+    };
 
     @OnClick({R.id.tv_get_ems, R.id.tv_login, R.id.tv_signin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_get_ems:
+                String tele = mEtLoginTele.getText().toString();
+                if (flag && Utils.isChinaPhoneLegal(tele)) {
+                    flag = false;
+                    mTvGetEms.setClickable(false);
+                    handler.post(runnable);
+                    HttpMethods.getInstance().send_code(
+                            new ProgressSubscriber(ResultOnNext, LoginActivity.this), tele);
+                } else {
+                    Toast.makeText(LoginActivity.this, "请填写手机号！", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.tv_login:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -58,10 +109,4 @@ public class LoginActivity extends InitActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

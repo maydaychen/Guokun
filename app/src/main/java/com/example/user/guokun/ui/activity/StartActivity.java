@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.user.guokun.MainActivity;
 import com.example.user.guokun.R;
 
 import butterknife.BindView;
@@ -40,7 +39,7 @@ public class StartActivity extends AppCompatActivity {
             /* Create an Intent that will start the Main WordPress Activity. */
             SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 //            if (preferences.getBoolean("autoLog", false)) {
-            Intent mainIntent = new Intent(StartActivity.this, MainActivity.class);
+            Intent mainIntent = new Intent(StartActivity.this, LoginActivity.class);
             StartActivity.this.startActivity(mainIntent);
             StartActivity.this.finish();
 //            } else {

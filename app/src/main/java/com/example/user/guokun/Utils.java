@@ -7,6 +7,10 @@ import android.content.SharedPreferences;
 
 import com.example.user.guokun.ui.activity.LoginActivity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
 /**
  * Created by user on 2017/8/4.
  */
@@ -28,5 +32,12 @@ public class Utils {
                     }
                 })
                 .show();
+    }
+
+    public static boolean isChinaPhoneLegal(String str) throws PatternSyntaxException {
+        String regExp = "^((13[0-9])|(15[0-9])|(18[0-9])|(17[0-9])|(147))\\d{8}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(str);
+        return m.matches();
     }
 }

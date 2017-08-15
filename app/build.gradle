@@ -44,6 +44,12 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxjava-math:1.0.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
+
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+
     testCompile 'junit:junit:4.12'
     compile 'pub.devrel:easypermissions:0.4.3'
     compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
