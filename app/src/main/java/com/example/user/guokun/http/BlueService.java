@@ -1,5 +1,7 @@
 package com.example.user.guokun.http;
 
+import com.example.user.guokun.bean.ChargeBean;
+import com.example.user.guokun.bean.ChargePayBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
@@ -52,11 +54,11 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/recharge/list.do")
-    rx.Observable<VspaBean> charge(@Field("accessToken") String accessToken);
+    rx.Observable<ChargeBean> charge(@Field("accessToken") String accessToken);
 
     @FormUrlEncoded
     @POST("/recharge/pay.do")
-    rx.Observable<VspaBean> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") String rechargeId);
+    rx.Observable<ChargePayBean> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") String rechargeId);
 
     @FormUrlEncoded
     @POST("/pay/index.do")

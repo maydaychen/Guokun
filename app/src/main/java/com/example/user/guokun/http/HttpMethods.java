@@ -1,7 +1,10 @@
 package com.example.user.guokun.http;
 
+import com.example.user.guokun.bean.ChargeBean;
+import com.example.user.guokun.bean.ChargePayBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
+import com.example.user.guokun.bean.VspaBean;
 
 import java.util.concurrent.TimeUnit;
 
@@ -78,4 +81,30 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    public void vspa_order(Subscriber<VspaBean> subscriber, String accessToken) {
+        movieService.vspa_order(accessToken)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void charge(Subscriber<ChargeBean> subscriber, String accessToken) {
+        movieService.charge(accessToken)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void charge_pay(Subscriber<ChargePayBean> subscriber, String accessToken, String payType, String rechargeId) {
+        movieService.charge_pay(accessToken, payType, rechargeId)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 }

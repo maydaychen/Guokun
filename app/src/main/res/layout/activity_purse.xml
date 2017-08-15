@@ -67,6 +67,7 @@
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_charge_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_size_10dp"/>
