@@ -1,7 +1,9 @@
 package com.example.user.guokun.http;
 
+import com.example.user.guokun.bean.ChairInfoBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.ChargePayBean;
+import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.VspaBean;
@@ -81,6 +83,15 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    public void char_info(Subscriber<ChairInfoBean> subscriber, String accessToken, String mobile) {
+        movieService.char_info(accessToken, mobile)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
     public void vspa_order(Subscriber<VspaBean> subscriber, String accessToken) {
         movieService.vspa_order(accessToken)
 //                .map(new HttpResultFunc<>())
@@ -99,8 +110,17 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
-    public void charge_pay(Subscriber<ChargePayBean> subscriber, String accessToken, String payType, String rechargeId) {
+    public void charge_pay(Subscriber<ChargePayBean> subscriber, String accessToken, String payType, int rechargeId) {
         movieService.charge_pay(accessToken, payType, rechargeId)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void check_info(Subscriber<CheckInfoBean> subscriber, String accessToken, String orderNum) {
+        movieService.check_info(accessToken,orderNum)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -1,7 +1,5 @@
 package com.example.user.guokun.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by user on 2017/8/15.
  */
@@ -9,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class LoginBean {
     /**
      * code : 1
-     * data : {"accessToken":{"access_token":"747dbe436cddc2b14dc3f6464 173f0","add_time":"2017-08-08 15:46:18","expires_in":2592000000,"id":4,"refres h_token":"1271e04ae448791b7a64b037c3c25cd","update_time":"2017-08-12 15:33:42"},"head_imgurl":"","id":1001135,"insert_dt":"2017-08-08 13:57:10.0","m obile":"18651039625","nick_name":"18651039625","user_deposit":0,"user_scor e":0,"wx_sex":0}
+     * data : {"accessToken":{"access_token":"747dbe436cddc2b14dc3f6464 173f0","add_time":"2017-08-08 15:46:18","expires_in":2592000000,"id":4,"refresh_token":"1271e04ae448791b7a64b037c3c25cd","update_time":"2017-08-12 15:33:42"},"head_imgurl":"","id":1001135,"insert_dt":"2017-08-08 13:57:10.0","mobile":"18651039625","nick_name":"18651039625","user_deposit":0,"user_score":0,"wx_sex":0}
      * mag : 登录成功
      */
 
@@ -43,14 +41,14 @@ public class LoginBean {
 
     public static class DataBean {
         /**
-         * accessToken : {"access_token":"747dbe436cddc2b14dc3f6464 173f0","add_time":"2017-08-08 15:46:18","expires_in":2592000000,"id":4,"refres h_token":"1271e04ae448791b7a64b037c3c25cd","update_time":"2017-08-12 15:33:42"}
+         * accessToken : {"access_token":"747dbe436cddc2b14dc3f6464 173f0","add_time":"2017-08-08 15:46:18","expires_in":2592000000,"id":4,"refresh_token":"1271e04ae448791b7a64b037c3c25cd","update_time":"2017-08-12 15:33:42"}
          * head_imgurl :
          * id : 1001135
          * insert_dt : 2017-08-08 13:57:10.0
-         * m obile : 18651039625
+         * mobile : 18651039625
          * nick_name : 18651039625
          * user_deposit : 0
-         * user_scor e : 0
+         * user_score : 0
          * wx_sex : 0
          */
 
@@ -58,12 +56,10 @@ public class LoginBean {
         private String head_imgurl;
         private int id;
         private String insert_dt;
-        @SerializedName("m obile")
-        private String _$MObile196; // FIXME check this code
+        private String mobile;
         private String nick_name;
         private int user_deposit;
-        @SerializedName("user_scor e")
-        private int _$User_scorE192; // FIXME check this code
+        private int user_score;
         private int wx_sex;
 
         public AccessTokenBean getAccessToken() {
@@ -98,12 +94,12 @@ public class LoginBean {
             this.insert_dt = insert_dt;
         }
 
-        public String get_$MObile196() {
-            return _$MObile196;
+        public String getMobile() {
+            return mobile;
         }
 
-        public void set_$MObile196(String _$MObile196) {
-            this._$MObile196 = _$MObile196;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
 
         public String getNick_name() {
@@ -122,12 +118,12 @@ public class LoginBean {
             this.user_deposit = user_deposit;
         }
 
-        public int get_$User_scorE192() {
-            return _$User_scorE192;
+        public int getUser_score() {
+            return user_score;
         }
 
-        public void set_$User_scorE192(int _$User_scorE192) {
-            this._$User_scorE192 = _$User_scorE192;
+        public void setUser_score(int user_score) {
+            this.user_score = user_score;
         }
 
         public int getWx_sex() {
@@ -144,7 +140,7 @@ public class LoginBean {
              * add_time : 2017-08-08 15:46:18
              * expires_in : 2592000000
              * id : 4
-             * refres h_token : 1271e04ae448791b7a64b037c3c25cd
+             * refresh_token : 1271e04ae448791b7a64b037c3c25cd
              * update_time : 2017-08-12 15:33:42
              */
 
@@ -152,8 +148,7 @@ public class LoginBean {
             private String add_time;
             private long expires_in;
             private int id;
-            @SerializedName("refres h_token")
-            private String _$RefresH_token22; // FIXME check this code
+            private String refresh_token;
             private String update_time;
 
             public String getAccess_token() {
@@ -188,12 +183,12 @@ public class LoginBean {
                 this.id = id;
             }
 
-            public String get_$RefresH_token22() {
-                return _$RefresH_token22;
+            public String getRefresh_token() {
+                return refresh_token;
             }
 
-            public void set_$RefresH_token22(String _$RefresH_token22) {
-                this._$RefresH_token22 = _$RefresH_token22;
+            public void setRefresh_token(String refresh_token) {
+                this.refresh_token = refresh_token;
             }
 
             public String getUpdate_time() {

@@ -6,8 +6,14 @@
     <string name="item_coupons_project">项目：%1$s</string>
     <string name="rationale_camera">此应用需要摄像头权限</string>
     <string name="item_charge_name">%1$s金币</string>
+    <string name="purse_price">售价：￥%1$s</string>
+    <string name="price">￥%1$s</string>
+    <string name="project_price">￥%1$s %2$s分钟</string>
 
     <string name="alipay_result_success">支付成功</string>
     <string name="alipay_result_fail">支付失败</string>
     <string name="alipay_result_delay">支付结果确认中</string>
+    <string name="submit">￥%1$s 提交订单</string>
+    <string name="service_time">服务时间：%1$s分钟</string>
+    <string name="service_type">项目类型： %1$s</string>
 </resources>

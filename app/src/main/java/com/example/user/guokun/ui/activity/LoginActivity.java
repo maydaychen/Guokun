@@ -1,6 +1,8 @@
 package com.example.user.guokun.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -37,6 +39,8 @@ public class LoginActivity extends InitActivity {
     EditText mEtYanzhengma;
     private int recLen = 10;
     private boolean flag = true;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
     private SubscriberOnNextListener<LoginBean> LoginOnNext;
     private SubscriberOnNextListener<ResultBean> ResultOnNext;
 
@@ -57,9 +61,13 @@ public class LoginActivity extends InitActivity {
 
         LoginOnNext = resultBean -> {
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
-//            if (resultBean.getCode() == 1) {
+            if (resultBean.getCode() == 1) {
+                mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
+                mEditor.putBoolean("autoLog", true);
+                mEditor.apply();
+                finish();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            }
+            }
         };
 
         ResultOnNext = resultBean -> Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
@@ -69,7 +77,8 @@ public class LoginActivity extends InitActivity {
 
     @Override
     public void initData() {
-
+        mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        mEditor = mPreferences.edit();
     }
 
     Handler handler = new Handler();

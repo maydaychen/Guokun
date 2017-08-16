@@ -2,23 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@drawable/selector_charge_list"
+              android:gravity="center"
               android:orientation="vertical"
               android:paddingBottom="4dp"
               android:paddingTop="@dimen/margin_size_4dp">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_purse_charge_list"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/item_charge_name"/>
+        android:background="@drawable/selector_charge_list"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="售价：￥%1$s"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:gravity="center_horizontal"
+            android:text="@string/item_charge_name"
+            android:textColor="@color/selector_red"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:gravity="center_horizontal"
+            android:text="@string/purse_price"
+            android:textColor="@color/selector_red"/>
+
+    </LinearLayout>
 
 </LinearLayout>

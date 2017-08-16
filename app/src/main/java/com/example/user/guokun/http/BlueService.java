@@ -1,11 +1,15 @@
 package com.example.user.guokun.http;
 
+import com.example.user.guokun.bean.ChairInfoBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.ChargePayBean;
+import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
 import com.example.user.guokun.bean.VspaBean;
+
+import org.json.JSONObject;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -46,7 +50,7 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/massagechair/info.do")
-    rx.Observable<VspaBean> char_info(@Field("accessToken") String accessToken, @Field("mobile") String mobile);
+    rx.Observable<ChairInfoBean> char_info(@Field("accessToken") String accessToken, @Field("mobile") String mobile);
 
     @FormUrlEncoded
     @POST("/massagechair/info.do")
@@ -58,14 +62,14 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/recharge/pay.do")
-    rx.Observable<ChargePayBean> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") String rechargeId);
+    rx.Observable<ChargePayBean> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") int rechargeId);
 
     @FormUrlEncoded
     @POST("/pay/index.do")
-    rx.Observable<VspaBean> pay(@Field("accessToken") String accessToken, @Field("accountingId") String accountingId, @Field("mobile") String mobile,
-                                @Field("plat") String plat, @Field("payType") String payType);
+    rx.Observable<JSONObject> pay(@Field("accessToken") String accessToken, @Field("accountingId") int accountingId, @Field("mobile") String mobile,
+                                  @Field("plat") String plat, @Field("payType") String payType);
 
     @FormUrlEncoded
     @POST("/pay/use.do")
-    rx.Observable<VspaBean> check_info(@Field("accessToken") String accessToken, @Field("outTradeNo") String outTradeNo);
+    rx.Observable<CheckInfoBean> check_info(@Field("accessToken") String accessToken, @Field("outTradeNo") String outTradeNo);
 }

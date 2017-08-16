@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.ui.activity.CaptureActivity;
 import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.FujinActivity;
+import com.example.user.guokun.ui.activity.GuigeActivity;
 import com.example.user.guokun.ui.widget.GlideImageLoader;
 import com.youth.banner.Banner;
 
@@ -44,7 +44,6 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int RC_CAMERA_PERM = 123;
     private List<String> url_list;
-
 
     @BindView(R.id.banner)
     Banner mBanner;
@@ -112,8 +111,11 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @AfterPermissionGranted(RC_CAMERA_PERM)
     public void init() {
         if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.CAMERA)) {
-            Intent intent = new Intent(getActivity(), CaptureActivity.class);
-            startActivityForResult(intent, SHOW_SUBACTIVITY);
+//            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+//            startActivityForResult(intent, SHOW_SUBACTIVITY);
+            Intent intent = new Intent(getActivity(), GuigeActivity.class);
+            intent.putExtra("code","898602b6101740177983");
+            startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
                     RC_CAMERA_PERM, Manifest.permission.CAMERA);
@@ -143,6 +145,11 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (null != data) {
             Toast.makeText(getActivity(), data.getStringExtra("code"), Toast.LENGTH_SHORT).show();
+            String code = data.getStringExtra("code").substring(data.getStringExtra("code").indexOf("=") + 1);
+            Log.i("chenyi", "onActivityResult: " + code);
+            Intent intent = new Intent(getActivity(), GuigeActivity.class);
+            intent.putExtra("code",code);
+            startActivity(intent);
         }
     }
 

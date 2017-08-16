@@ -3,8 +3,8 @@ package com.example.user.guokun.ui.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,6 +42,7 @@ public class PurseActivity extends InitActivity {
     private SubscriberOnNextListener<ChargePayBean> ChargePayOnNext;
     private SharedPreferences mPreferences;
     private String PAY_TYPE = "";
+    private ChargeListAdapter chargeListAdapter;
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -61,8 +62,8 @@ public class PurseActivity extends InitActivity {
         });
         RxCompoundButton.checkedChanges(mCbChongzhi).subscribe(aBoolean -> {
             if (!aBoolean) {
-               mBtChongzhi.setClickable(false);
-               mBtChongzhi.setBackgroundColor(getResources().getColor(R.color.second_font));
+                mBtChongzhi.setClickable(false);
+                mBtChongzhi.setBackgroundColor(getResources().getColor(R.color.second_font));
             } else {
                 mBtChongzhi.setClickable(true);
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
@@ -76,8 +77,9 @@ public class PurseActivity extends InitActivity {
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         ChargeOnNext = resultBean -> {
             if (resultBean.getCode() == 1) {
-                mRvChargeList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                ChargeListAdapter chargeListAdapter = new ChargeListAdapter(resultBean.getData());
+//                mRvChargeList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                mRvChargeList.setLayoutManager(new GridLayoutManager(this, 2));
+                chargeListAdapter = new ChargeListAdapter(resultBean.getData(), getApplicationContext());
                 mRvChargeList.setAdapter(chargeListAdapter);
             }
         };
@@ -112,7 +114,7 @@ public class PurseActivity extends InitActivity {
                     Toast.makeText(this, "请选择支付方式！", Toast.LENGTH_SHORT).show();
                 } else {
                     HttpMethods.getInstance().charge_pay(new ProgressSubscriber(ChargePayOnNext,
-                            PurseActivity.this), mPreferences.getString("token", ""), PAY_TYPE, "");
+                            PurseActivity.this), mPreferences.getString("token", ""), PAY_TYPE, chargeListAdapter.ID);
                 }
 
                 break;

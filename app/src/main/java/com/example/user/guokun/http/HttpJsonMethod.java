@@ -1,18 +1,23 @@
 package com.example.user.guokun.http;
 
+import org.json.JSONObject;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by user on 2017/7/13.
  */
 
 public class HttpJsonMethod {
-    public static final String BASE_URL = "https://api.duoyunjiav2.wshoto.com";
+    public static final String BASE_URL = "http://api.guokunjiankangkeji.com";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -54,14 +59,14 @@ public class HttpJsonMethod {
     }
 
 
-//    public void get_token(Subscriber<JSONObject> subscriber, String apiname, String apipass) {
-//        movieService.index_info(apiname, apipass)
-////                .map(new HttpResultFunc<>())
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(subscriber);
-//    }
+    public void pay(Subscriber<JSONObject> subscriber, String token, int id, String mobile, String payType) {
+        movieService.pay(token, id,mobile,"android",payType)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 //
 //    public void send_code(Subscriber<JSONObject> subscriber, String access_token, String mobile, String sign, int timestamp) {
 //        movieService.send_code(access_token, mobile, sign, timestamp)
