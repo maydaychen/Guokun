@@ -1,6 +1,7 @@
 package com.example.user.guokun.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,18 @@ import android.widget.TextView;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.alipay.AliPayManager;
+import com.example.user.guokun.alipay.AliPayMessage;
 import com.example.user.guokun.http.HttpJsonMethod;
 import com.example.user.guokun.http.ProgressSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.wxapi.pay.WXPayEntry;
+import com.example.user.guokun.wxapi.pay.WXPayMessage;
 import com.example.user.guokun.wxapi.pay.WXUtils;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -53,6 +59,7 @@ public class PayTypeActivity extends InitActivity {
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_pay_type);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         mBtSubmit.setText(String.format(getResources().getString(R.string.submit), getIntent().getStringExtra("price")));
         mTvPayPrice.setText(String.format(getResources().getString(R.string.price), getIntent().getStringExtra("price")));
         mTvPayProject.setText(getIntent().getStringExtra("type"));
@@ -87,7 +94,7 @@ public class PayTypeActivity extends InitActivity {
         mRlYue.setOnClickListener(v -> mCbPayYue.setChecked(true));
         PayOnNext = jsonObject -> {
             if (jsonObject.getInt("code") == 1) {
-                order_num =  jsonObject.getJSONObject("data").getString("outTradeNo");
+                order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
                 switch (PAY_TYPE) {
                     case "0":
                         break;
@@ -117,5 +124,29 @@ public class PayTypeActivity extends InitActivity {
                         getIntent().getIntExtra("id", 0), getIntent().getStringExtra("code"), PAY_TYPE);
                 break;
         }
+    }
+
+    //EventBus阿里支付结果回调事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoonEvent(AliPayMessage payMessage) {
+        if (payMessage.errorCode == 1) {
+            Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    //EventBus微信支付结果回调事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoonEvent(WXPayMessage payMessage) {
+        if (payMessage.errorCode == 1) {
+            Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
