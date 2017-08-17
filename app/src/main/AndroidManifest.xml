@@ -84,7 +84,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="AK" />       //key:开发者申请的Key
+            android:value="hGK98BdMGKg2xc0WA3T19kPm0Xwb49Ru" />       //key:开发者申请的Key
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.user.guokun.http;
 
 import com.example.user.guokun.bean.ChairInfoBean;
+import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.LoginBean;
@@ -94,6 +95,15 @@ public class HttpMethods {
 
     public void char_info(Subscriber<ChairInfoBean> subscriber, String accessToken, String mobile) {
         movieService.char_info(accessToken, mobile)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void char_nearby(Subscriber<ChairNearbyBean> subscriber, String accessToken, String lng, String lat) {
+        movieService.char_nearby(accessToken, lng,lat)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

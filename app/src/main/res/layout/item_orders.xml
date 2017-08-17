@@ -20,11 +20,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_size_4dp"
+            android:src="@drawable/spend"/>
 
         <TextView
             android:id="@+id/order_price"
@@ -34,13 +37,15 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_12dp"
+            android:padding="@dimen/margin_size_4dp"
+            android:src="@drawable/time"/>
 
         <TextView
             android:id="@+id/order_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
             android:text="@string/order_time"/>
     </LinearLayout>
 

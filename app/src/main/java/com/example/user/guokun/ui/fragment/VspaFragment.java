@@ -36,6 +36,7 @@ public class VspaFragment extends Fragment implements PullLoadMoreRecyclerView.P
     private SharedPreferences mPreferences;
     private VspaAdapter mRecyclerViewAdapter;
     private int page = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,12 +71,9 @@ public class VspaFragment extends Fragment implements PullLoadMoreRecyclerView.P
             public void onNext(VspaBean vspaBean) {
                 mRvVspaOrder.setVisibility(View.VISIBLE);
                 try {
-                        mRvVspaOrder.setPullLoadMoreCompleted();
-                        mRecyclerViewAdapter.clearData();
-                        mRecyclerViewAdapter.notifyDataSetChanged();
-                        mRvVspaOrder.scrollToTop();
-                        mRecyclerViewAdapter.addAllData(vspaBean.getData().getList());
-
+                    mRvVspaOrder.setPullLoadMoreCompleted();
+                    mRecyclerViewAdapter.addAllData(vspaBean.getData().getList());
+                    mRecyclerViewAdapter.notifyDataSetChanged();
                 } catch (NullPointerException e) {
                     if (page != 0) {
                         Toast.makeText(getActivity(), "已经加载完毕！", Toast.LENGTH_LONG).show();

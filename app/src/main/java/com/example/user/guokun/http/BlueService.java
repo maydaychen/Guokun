@@ -1,6 +1,7 @@
 package com.example.user.guokun.http;
 
 import com.example.user.guokun.bean.ChairInfoBean;
+import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.LoginBean;
@@ -54,7 +55,7 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/massagechair/info.do")
-    rx.Observable<VspaBean> char_nearby(@Field("accessToken") String accessToken, @Field("lng") String lng, @Field("lat") String lat);
+    rx.Observable<ChairNearbyBean> char_nearby(@Field("accessToken") String accessToken, @Field("lng") String lng, @Field("lat") String lat);
 
     @FormUrlEncoded
     @POST("/recharge/list.do")

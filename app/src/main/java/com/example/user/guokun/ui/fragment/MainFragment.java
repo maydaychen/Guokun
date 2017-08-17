@@ -143,7 +143,10 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
                 startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.iv_fujin:
-                startActivity(new Intent(getActivity(), FujinActivity.class));
+                Intent intent = new Intent(getActivity(),FujinActivity.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lon",lon);
+                startActivity(intent);
                 break;
         }
     }
