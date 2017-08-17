@@ -207,8 +207,8 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
         myLoc = bdLocation.getBuildingName();
         if (isFirstLocate) {
             isFirstLocate = false;
-            Log.d("chenyi", "lat == " + lat);
-            Log.d("chenyi", "lon == " + lon);
+            Log.i("chenyi", "lat == " + lat);
+            Log.i("chenyi", "lon == " + lon);
             String request = "{\"lat\":\"" + lat + "\",\"lng\":\"" + lon + "\"}";
             Log.d("chenyi", request);
           /*  webView.callHandler("frame", request, new CallBackFunction() {
