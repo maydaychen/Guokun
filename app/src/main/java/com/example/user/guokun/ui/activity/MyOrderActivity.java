@@ -5,7 +5,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.ui.fragment.GoodsFragment;
@@ -45,7 +44,6 @@ public class MyOrderActivity extends InitActivity {
         mVpContent.setAdapter(contentAdapter);
 
         mTbOrder.setTabMode(TabLayout.MODE_FIXED);
-        ViewCompat.setElevation(mTbOrder, 10);
         mTbOrder.setupWithViewPager(mVpContent);
     }
 

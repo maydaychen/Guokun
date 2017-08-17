@@ -8,19 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.adapter.ChargeListAdapter;
 import com.example.user.guokun.alipay.AliPayManager;
 import com.example.user.guokun.bean.ChargeBean;
-import com.example.user.guokun.bean.ChargePayBean;
+import com.example.user.guokun.http.HttpJsonMethod;
 import com.example.user.guokun.http.HttpMethods;
 import com.example.user.guokun.http.ProgressSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.wxapi.pay.WXPayEntry;
 import com.example.user.guokun.wxapi.pay.WXUtils;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +41,10 @@ public class PurseActivity extends InitActivity {
     Button mBtChongzhi;
     @BindView(R.id.cb_chongzhi)
     CheckBox mCbChongzhi;
+    @BindView(R.id.tv_purse_yue)
+    TextView mTvPurseYue;
     private SubscriberOnNextListener<ChargeBean> ChargeOnNext;
-    private SubscriberOnNextListener<ChargePayBean> ChargePayOnNext;
+    private SubscriberOnNextListener<JSONObject> ChargePayOnNext;
     private SharedPreferences mPreferences;
     private String PAY_TYPE = "";
     private ChargeListAdapter chargeListAdapter;
@@ -69,7 +74,7 @@ public class PurseActivity extends InitActivity {
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
             }
         });
-
+        mTvPurseYue.setText(getIntent().getDoubleExtra("yue", 0.00) + "");
     }
 
     @Override
@@ -83,14 +88,20 @@ public class PurseActivity extends InitActivity {
                 mRvChargeList.setAdapter(chargeListAdapter);
             }
         };
-        ChargePayOnNext = resultBean -> {
-            if (resultBean.getCode() == 1) {
-                if (PAY_TYPE.equals("1")) {
-                    WXPayEntry entry = WXUtils.parseWXData(resultBean.getData().getResult());
-                    WXUtils.startWeChat(PurseActivity.this, entry);
-                } else {
-                    AliPayManager.getInstance().payV2(PurseActivity.this, resultBean.getData().getResult());
+        ChargePayOnNext = jsonObject -> {
+            if (jsonObject.getInt("code") == 1) {
+                switch (PAY_TYPE) {
+                    case "1":
+                        WXPayEntry entry = WXUtils.parseWXData(jsonObject.getString("data"));
+                        WXUtils.startWeChat(PurseActivity.this, entry);
+                        break;
+                    case "2":
+                        AliPayManager.getInstance().payV2(PurseActivity.this, jsonObject.getJSONObject("data").getString("result"));
+                        break;
+
                 }
+            } else {
+                Toast.makeText(PurseActivity.this, jsonObject.getString("mag"), Toast.LENGTH_SHORT).show();
             }
         };
         HttpMethods.getInstance().charge(
@@ -113,12 +124,11 @@ public class PurseActivity extends InitActivity {
                 if (PAY_TYPE.equals("")) {
                     Toast.makeText(this, "请选择支付方式！", Toast.LENGTH_SHORT).show();
                 } else {
-                    HttpMethods.getInstance().charge_pay(new ProgressSubscriber(ChargePayOnNext,
+                    HttpJsonMethod.getInstance().charge_pay(new ProgressSubscriber(ChargePayOnNext,
                             PurseActivity.this), mPreferences.getString("token", ""), PAY_TYPE, chargeListAdapter.ID);
                 }
 
                 break;
         }
     }
-
 }

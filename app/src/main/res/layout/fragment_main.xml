@@ -27,10 +27,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:background="@color/font_red"
         android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
 
         android:weightSum="3">
 
@@ -57,10 +57,10 @@
             android:src="@drawable/ding_wei_icon"/>
     </LinearLayout>
 
-
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
+    <ImageView
+        android:id="@+id/iv_main_pic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:src="@drawable/main_gg_img"/>
 
 </LinearLayout>

@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/affair_title_rl"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/ri_how_to_use"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
+            android:id="@+id/affair_title_rl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/ri_how_to_use"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <TextView
+                    style="@style/tv_person_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="如何使用"/>
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    style="@style/iv_person_right"
+                    android:scaleType="centerCrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/zuo_jian_tou"/>
+            </RelativeLayout>
 
             <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="如何使用"/>
-
-            <ImageView
-                android:id="@+id/iv_image"
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
+                android:id="@+id/tv_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ri_how_to_use"
+                android:paddingBottom="@dimen/margin_size_10dp"
+                android:paddingLeft="@dimen/margin_size_18dp"
+                android:paddingTop="@dimen/margin_size_10dp"
+                android:text="111"
+                android:visibility="gone"/>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ri_how_to_use"
-            android:paddingBottom="@dimen/margin_size_10dp"
-            android:paddingLeft="@dimen/margin_size_18dp"
-            android:paddingTop="@dimen/margin_size_10dp"
-            android:text="111"
-            android:visibility="gone"/>
-    </RelativeLayout>
-
-
-</RelativeLayout>
+    </FrameLayout>
+</FrameLayout>

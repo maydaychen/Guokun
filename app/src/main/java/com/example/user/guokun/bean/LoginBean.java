@@ -58,7 +58,7 @@ public class LoginBean {
         private String insert_dt;
         private String mobile;
         private String nick_name;
-        private int user_deposit;
+        private double user_deposit;
         private int user_score;
         private int wx_sex;
 
@@ -110,11 +110,11 @@ public class LoginBean {
             this.nick_name = nick_name;
         }
 
-        public int getUser_deposit() {
+        public double getUser_deposit() {
             return user_deposit;
         }
 
-        public void setUser_deposit(int user_deposit) {
+        public void setUser_deposit(double user_deposit) {
             this.user_deposit = user_deposit;
         }
 

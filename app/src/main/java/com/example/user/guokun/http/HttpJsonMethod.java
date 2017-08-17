@@ -67,6 +67,15 @@ public class HttpJsonMethod {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    public void charge_pay(Subscriber<JSONObject> subscriber, String accessToken, String payType, int rechargeId) {
+        movieService.charge_pay(accessToken, payType, rechargeId)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 //
 //    public void send_code(Subscriber<JSONObject> subscriber, String access_token, String mobile, String sign, int timestamp) {
 //        movieService.send_code(access_token, mobile, sign, timestamp)

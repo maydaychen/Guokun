@@ -67,6 +67,8 @@ public class LoginActivity extends InitActivity {
                 mEditor.apply();
                 finish();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }else {
+                Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             }
         };
 

@@ -29,18 +29,18 @@ public class MyAffair_1 extends RelativeLayout {
 
     private boolean animatorLock = false;
 
-    public MyAffair_1(Context context, AttributeSet attrs, int defStyle, String a) {
+    public MyAffair_1(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
         init();
     }
 
-    public MyAffair_1(Context context, AttributeSet attrs, String a) {
-        this(context, attrs, 0,a);
+    public MyAffair_1(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public MyAffair_1(Context context, String a) {
-        this(context, null,a);
+    public MyAffair_1(Context context) {
+        this(context, null);
     }
 
     private void init() {
@@ -51,11 +51,10 @@ public class MyAffair_1 extends RelativeLayout {
         titleRl.setOnClickListener(v -> {
             if (!animatorLock) {
                 getObjectAnimator().start();
-                if(isOpened){
-                    directionIv.setBackgroundResource(R.drawable.back);
-                }
-                else {
-                    directionIv.setBackgroundResource(R.drawable.zuo_jian_tou);
+                if (isOpened) {
+                    directionIv.setImageResource(R.drawable.zuo_jian_tou);
+                } else {
+                    directionIv.setImageResource(R.drawable.back);
                 }
             }
         });
@@ -63,40 +62,39 @@ public class MyAffair_1 extends RelativeLayout {
 
     private ObjectAnimator getObjectAnimator() {
         AnimatorListener changeStatusListener = new AnimatorListener() {
-            
+
             @Override
             public void onAnimationStart(Animator animation) {
                 animatorLock = true;
-                if(!isOpened){
+                if (!isOpened) {
                     infoRl.setVisibility(View.VISIBLE);
                 }
             }
-            
+
             @Override
             public void onAnimationRepeat(Animator animation) {
             }
-            
+
             @Override
             public void onAnimationEnd(Animator animation) {
-                if(isOpened){
+                if (isOpened) {
                     infoRl.setVisibility(View.GONE);
                 }
                 isOpened = !isOpened;
                 animatorLock = false;
             }
-            
+
             @Override
             public void onAnimationCancel(Animator animation) {
             }
         };
         ObjectAnimator result = null;
-        if(!isOpened){
+        if (!isOpened) {
             result = ObjectAnimator.ofFloat(infoRl, "scaleY", 0, 1f);
-        }
-        else {
+        } else {
             result = ObjectAnimator.ofFloat(infoRl, "scaleY", 1f, 0);
         }
-        result.setDuration(1000);
+        result.setDuration(200);
         result.addListener(changeStatusListener);
         return result;
     }

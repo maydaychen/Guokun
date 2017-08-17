@@ -19,11 +19,11 @@
             android:src="@drawable/tuo_yuan_icon"/>
 
         <TextView
+            android:id="@+id/tv_person_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/margin_size_10dp"
-            android:text="110110110"/>
+            android:padding="@dimen/margin_size_10dp"/>
 
         <View
             android:layout_width="match_parent"
@@ -63,6 +63,7 @@
                         android:textColor="@color/font_red"/>
 
                     <TextView
+                        android:id="@+id/tv_person_yue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -139,10 +140,10 @@
         </RelativeLayout>
 
         <View
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_marginRight="@dimen/margin_size_8dp"
             android:background="@color/line_e7"/>
 
         <RelativeLayout
@@ -257,10 +258,20 @@
                 android:text="客服咨询"/>
 
             <ImageView
+                android:id="@+id/iv_zixun"
                 style="@style/iv_person_right"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/zuo_jian_tou"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_zixun"
+                android:text="400-855-7878"/>
+
         </RelativeLayout>
 
 

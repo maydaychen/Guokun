@@ -3,6 +3,7 @@ package com.example.user.guokun.ui.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
@@ -13,26 +14,30 @@ import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.ui.widget.CountDownView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PaySuccessActivity extends InitActivity {
     @BindView(R.id.count)
     CountDownView mCount;
     private SubscriberOnNextListener<CheckInfoBean> ChairInfoOnNext;
     private SharedPreferences mPreferences;
+    private String order_num;
+    private ProgressSubscriber mProgressSubscriber;
 
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_pay_success);
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         ChairInfoOnNext = resultBean -> {
-            switch (resultBean.getData().getIs_used()) {
+            Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+            switch (resultBean.getCode()) {
                 case 0:
-                    HttpMethods.getInstance().check_info(new ProgressSubscriber(ChairInfoOnNext,
-                            PaySuccessActivity.this), mPreferences.getString("token", ""), getIntent().getStringExtra("code"));
+                    new Handler().postDelayed(() -> {
+                        HttpMethods.getInstance().check_info(new ProgressSubscriber(ChairInfoOnNext,
+                                PaySuccessActivity.this), mPreferences.getString("token", ""), order_num);
+                    }, 1500);
                     break;
                 case 1:
-                    mCount.initTime(0, 6, 0);
+                    mCount.initTime(0, resultBean.getData().getTime_len(), 0);
                     mCount.setOnTimeCompleteListener(() -> Toast.makeText(PaySuccessActivity.this, "计时完成!", Toast.LENGTH_LONG).show());
                     break;
                 case 2:
@@ -40,18 +45,21 @@ public class PaySuccessActivity extends InitActivity {
                     break;
             }
         };
+        mProgressSubscriber = new ProgressSubscriber(ChairInfoOnNext, PaySuccessActivity.this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(!mProgressSubscriber.isUnsubscribed()){
+            mProgressSubscriber.unsubscribe();
+        }
+        super.onDestroy();
     }
 
     @Override
     public void initData() {
-        HttpMethods.getInstance().check_info(new ProgressSubscriber(ChairInfoOnNext,
-                PaySuccessActivity.this), mPreferences.getString("token", ""), getIntent().getStringExtra("code"));
+        order_num = getIntent().getStringExtra("order_num");
+        HttpMethods.getInstance().check_info(mProgressSubscriber, mPreferences.getString("token", ""), order_num);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

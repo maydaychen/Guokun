@@ -12,16 +12,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MyLocationData;
 import com.example.user.guokun.R;
 import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.FujinActivity;
 import com.example.user.guokun.ui.activity.GuigeActivity;
-import com.example.user.guokun.ui.widget.GlideImageLoader;
-import com.youth.banner.Banner;
+import com.example.user.guokun.ui.activity.PurseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,16 +42,25 @@ import static android.Manifest.permission.CAMERA;
  * 作者：JTR on 2016/8/29 10:35
  * 邮箱：2091320109@qq.com
  */
-public class MainFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
+public class MainFragment extends Fragment implements EasyPermissions.PermissionCallbacks, BaiduMap.OnMapLoadedCallback, BDLocationListener {
 
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int RC_CAMERA_PERM = 123;
-    private List<String> url_list;
+    private LocationClient mLocationClient;
+    private double lat;
+    private double lon;
+    private boolean isFirstLocate = true;
+    private String myLoc;
 
-    @BindView(R.id.banner)
-    Banner mBanner;
+
+    @BindView(R.id.iv_main_pic)
+    ImageView mIvMainPic;
+//    private List<String> url_list;
+//
+//    @BindView(R.id.banner)
+//    Banner mBanner;
 
     @Nullable
     @Override
@@ -55,6 +69,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
         ButterKnife.bind(this, root);
         initData();
         initView();
+        initMap();
         return root;
     }
 
@@ -74,17 +89,42 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 
 
     public void initData() {
-        url_list = new ArrayList<>();
-        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
-        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
-        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+//        url_list = new ArrayList<>();
+//        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+//        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+//        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
     }
 
     public void initView() {
-        mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
-        mBanner.setOnBannerListener(position -> Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show());
+//        mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
+//        mBanner.setOnBannerListener(position -> Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show());
+        mIvMainPic.setOnClickListener(v -> startActivity(new Intent(getActivity(), PurseActivity.class)));
     }
 
+    private void initMap() {
+        mLocationClient = new LocationClient(getActivity()); //声明LocationClient类
+        mLocationClient.registerLocationListener(this);//注册监听函数
+        initLocation();
+        mLocationClient.start();//开启定位
+    }
+
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
+        );//可选，默认高精度，设置定位模式，高 精度，低功耗，仅设备
+        option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
+        int span = 1000;
+        option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.setLocationNotify(true);//可选，默认false，设置是否当                                                                                                                                                                                                                                gps有效时按照1S1次频率输出GPS结果
+        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
+        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
+        mLocationClient.setLocOption(option);
+    }
 
     @OnClick({R.id.iv_saoyisao, R.id.iv_youhuiquan, R.id.iv_fujin})
     public void onViewClicked(View view) {
@@ -114,7 +154,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 //            Intent intent = new Intent(getActivity(), CaptureActivity.class);
 //            startActivityForResult(intent, SHOW_SUBACTIVITY);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);
-            intent.putExtra("code","898602b6101740177983");
+            intent.putExtra("code", "898602b6101740177983");
             startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
@@ -148,9 +188,40 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
             String code = data.getStringExtra("code").substring(data.getStringExtra("code").indexOf("=") + 1);
             Log.i("chenyi", "onActivityResult: " + code);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);
-            intent.putExtra("code",code);
+            intent.putExtra("code", code);
             startActivity(intent);
         }
     }
 
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(bdLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(100).latitude(bdLocation.getLatitude())
+                .longitude(bdLocation.getLongitude()).build();
+        // 设置定位数据
+        //mBaiduMap.setMyLocationData(locData);
+        lat = bdLocation.getLatitude();
+        lon = bdLocation.getLongitude();
+        myLoc = bdLocation.getBuildingName();
+        if (isFirstLocate) {
+            isFirstLocate = false;
+            Log.d("chenyi", "lat == " + lat);
+            Log.d("chenyi", "lon == " + lon);
+            String request = "{\"lat\":\"" + lat + "\",\"lng\":\"" + lon + "\"}";
+            Log.d("chenyi", request);
+          /*  webView.callHandler("frame", request, new CallBackFunction() {
+                @Override
+                public void onCallBack(String jsResponseData) {
+                    Log.d("chenyi", "getLat " + jsResponseData);
+                }
+            });*/
+        }
+    }
+
+    @Override
+    public void onMapLoaded() {
+
+    }
 }

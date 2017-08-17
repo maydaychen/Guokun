@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.alipay.AliPayManager;
@@ -97,9 +98,17 @@ public class PayTypeActivity extends InitActivity {
                 order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
                 switch (PAY_TYPE) {
                     case "0":
+                        if (jsonObject.getString("mag").equals("支付成功")) {
+                            Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+                            String order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
+                            intent.putExtra("order_num", order_num);
+                            startActivity(intent);
+                        } else {
+
+                        }
                         break;
                     case "1":
-                        WXPayEntry entry = WXUtils.parseWXData(jsonObject.getString("result"));
+                        WXPayEntry entry = WXUtils.parseWXData(jsonObject.getString("data"));
                         WXUtils.startWeChat(PayTypeActivity.this, entry);
                         break;
                     case "2":
@@ -107,6 +116,8 @@ public class PayTypeActivity extends InitActivity {
                         break;
 
                 }
+            }else {
+                Toast.makeText(this, jsonObject.getString("mag"), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -129,18 +140,24 @@ public class PayTypeActivity extends InitActivity {
     //EventBus阿里支付结果回调事件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(AliPayMessage payMessage) {
-        if (payMessage.errorCode == 1) {
+        if (payMessage.errorCode == 0) {
             Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+            intent.putExtra("order_num",order_num);
             startActivity(intent);
+        } else {
+            Toast.makeText(this, payMessage.result, Toast.LENGTH_SHORT).show();
         }
     }
 
     //EventBus微信支付结果回调事件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(WXPayMessage payMessage) {
-        if (payMessage.errorCode == 1) {
+        if (payMessage.errorCode == 0) {
             Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+            intent.putExtra("order_num",order_num);
             startActivity(intent);
+        } else {
+            Toast.makeText(this, payMessage.errorStr, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -14,23 +14,24 @@
         android:background="@color/white">
 
         <ImageView
-            android:src="@drawable/back"
-            android:padding="@dimen/margin_size_8dp"
             android:id="@+id/iv_coupon_detail_back"
+            style="@style/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/iv_back"/>
+            android:padding="@dimen/margin_size_8dp"
+            android:src="@drawable/back"/>
 
         <TextView
+            style="@style/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/tv_title"
             android:text="@string/coupon_detail"/>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <ImageView
         android:layout_width="match_parent"
-        android:padding="@dimen/margin_size_8dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/coupon_detail"/>
 </LinearLayout>

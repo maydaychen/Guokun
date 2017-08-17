@@ -2,7 +2,6 @@ package com.example.user.guokun.http;
 
 import com.example.user.guokun.bean.ChairInfoBean;
 import com.example.user.guokun.bean.ChargeBean;
-import com.example.user.guokun.bean.ChargePayBean;
 import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
@@ -46,7 +45,8 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/order/vspa/list.do")
-    rx.Observable<VspaBean> vspa_order(@Field("accessToken") String accessToken);
+    rx.Observable<VspaBean> vspa_order(@Field("accessToken") String accessToken,
+                                       @Field("pageNum") int pageNum,@Field("pageSize")  int pageSize);
 
     @FormUrlEncoded
     @POST("/massagechair/info.do")
@@ -62,7 +62,7 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/recharge/pay.do")
-    rx.Observable<ChargePayBean> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") int rechargeId);
+    rx.Observable<JSONObject> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") int rechargeId);
 
     @FormUrlEncoded
     @POST("/pay/index.do")
@@ -70,6 +70,6 @@ public interface BlueService {
                                   @Field("plat") String plat, @Field("payType") String payType);
 
     @FormUrlEncoded
-    @POST("/pay/use.do")
+    @POST("/pay/using.do")
     rx.Observable<CheckInfoBean> check_info(@Field("accessToken") String accessToken, @Field("outTradeNo") String outTradeNo);
 }
