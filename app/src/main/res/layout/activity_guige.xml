@@ -29,6 +29,8 @@
     </RelativeLayout>
 
     <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/order_title"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
 
@@ -102,19 +104,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="4"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:weightSum="4">
 
         <View
-            android:layout_weight="1"
             android:layout_width="@dimen/margin_size_0dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
         <LinearLayout
             android:id="@+id/ll_project3"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_weight="2"
             android:background="@drawable/selector_charge_list"
             android:clickable="true"
             android:focusable="true"
@@ -141,9 +144,9 @@
         </LinearLayout>
 
         <View
-            android:layout_weight="1"
             android:layout_width="@dimen/margin_size_0dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -213,38 +216,37 @@
             android:textColor="@color/font_red"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_size_16dp">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="@dimen/margin_size_16dp">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="手机号"
-            android:textColor="@color/first_font"/>
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:text="手机号"-->
+    <!--android:textColor="@color/first_font"/>-->
 
-        <ImageView
-            android:id="@+id/iv_bianjikuang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/bian_ji_kuang"/>
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_bianjikuang"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:src="@drawable/bian_ji_kuang"/>-->
 
-        <TextView
-            android:id="@+id/tv_guige_telephone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/iv_bianjikuang"
-            android:paddingRight="@dimen/margin_size_4dp"
-            android:text="13665137658"/>
-    </RelativeLayout>
+    <!--<TextView-->
+    <!--android:id="@+id/tv_guige_telephone"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_toLeftOf="@id/iv_bianjikuang"-->
+    <!--android:paddingRight="@dimen/margin_size_4dp"-->
+    <!--android:text="13665137658"/>-->
+    <!--</RelativeLayout>-->
 
     <Button
         android:id="@+id/bt_submit"
         style="@style/button_red"
-        android:layout_marginTop="@dimen/margin_size_10dp"
-        android:text="@string/submit"/>
+        android:layout_marginTop="@dimen/margin_size_10dp"/>
 </LinearLayout>

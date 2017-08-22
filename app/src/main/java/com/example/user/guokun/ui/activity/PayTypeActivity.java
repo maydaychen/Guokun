@@ -130,9 +130,13 @@ public class PayTypeActivity extends InitActivity {
                 finish();
                 break;
             case R.id.bt_submit:
-                HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
-                                PayTypeActivity.this), mPreferences.getString("token", ""),
-                        getIntent().getIntExtra("id", 0), getIntent().getStringExtra("code"), PAY_TYPE);
+                if (PAY_TYPE.equals("")) {
+                    Toast.makeText(this, "请选择支付方式！", Toast.LENGTH_SHORT).show();
+                }else {
+                    HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
+                                    PayTypeActivity.this), mPreferences.getString("token", ""),
+                            getIntent().getIntExtra("id", 0), getIntent().getStringExtra("code"), PAY_TYPE);
+                }
                 break;
         }
     }

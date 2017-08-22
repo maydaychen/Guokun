@@ -25,14 +25,14 @@ public class SettingActivity extends InitActivity {
 
     }
 
-    @OnClick({R.id.iv_setting_back, R.id.rl_account, R.id.rl_setting_about, R.id.bt_logout})
+    @OnClick({R.id.iv_setting_back, R.id.rl_setting_about, R.id.bt_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting_back:
                 finish();
                 break;
-            case R.id.rl_account:
-                break;
+//            case R.id.rl_account:
+//                break;
             case R.id.rl_setting_about:
                 break;
             case R.id.bt_logout:

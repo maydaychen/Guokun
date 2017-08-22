@@ -5,13 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.bean.ChairNearbyBean;
-import com.example.user.guokun.bean.ChargeBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,6 +25,7 @@ public class FujinAdapter extends RecyclerView.Adapter<FujinAdapter.ViewHolder> 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private List<ChairNearbyBean.DataBean.ListBean> mData;
     private Context mContext;
+    private DecimalFormat df = new DecimalFormat("######0.00");
     public int ID;
 
     //define interface
@@ -54,8 +54,8 @@ public class FujinAdapter extends RecyclerView.Adapter<FujinAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         viewHolder.mTvAddress.setText(mData.get(position).getName());
-        viewHolder.mTvAddressDetail.setText(mData.get(position).getName());
-        viewHolder.mTvDistance.setText(mData.get(position).getDistance_um() + "km");
+        viewHolder.mTvAddressDetail.setText(mData.get(position).getAddress());
+        viewHolder.mTvDistance.setText(df.format(mData.get(position).getDistance_um() / 1000.00) + "km");
         viewHolder.itemView.setTag(position);
     }
 

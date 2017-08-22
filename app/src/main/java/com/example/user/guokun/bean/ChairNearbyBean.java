@@ -1,5 +1,6 @@
 package com.example.user.guokun.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -106,7 +107,7 @@ public class ChairNearbyBean {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean implements Serializable {
             /**
              * distance_um : 1646
              * id : 10123
@@ -114,7 +115,7 @@ public class ChairNearbyBean {
              * longitude : 119.011
              * name : 怡和出厂001
              */
-
+            private String address;
             private int distance_um;
             private int id;
             private String latitude;
@@ -159,6 +160,14 @@ public class ChairNearbyBean {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public String getAddress() {
+                return address;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
             }
         }
     }

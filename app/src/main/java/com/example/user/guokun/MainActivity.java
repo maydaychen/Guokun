@@ -40,7 +40,6 @@ public class MainActivity extends InitActivity {
 
     @Override
     public void initData() {
-
     }
 
 
@@ -57,6 +56,7 @@ public class MainActivity extends InitActivity {
 
         ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mContentVp.setAdapter(contentAdapter);
+        mContentVp.setOffscreenPageLimit(3);
     }
 
 

@@ -40,23 +40,10 @@
         android:layout_marginRight="@dimen/margin_size_8dp"
         android:background="@color/line_e7"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_sao_question"
+    <com.example.user.guokun.ui.widget.MyAffair_2
+        android:id="@+id/question2"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <TextView
-            style="@style/tv_person_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="扫码问题"/>
-
-        <ImageView
-            style="@style/iv_person_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/zuo_jian_tou"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <View
         android:layout_width="match_parent"
@@ -65,23 +52,10 @@
         android:layout_marginRight="@dimen/margin_size_8dp"
         android:background="@color/line_e7"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_pay_question"
+    <com.example.user.guokun.ui.widget.MyAffair_3
+        android:id="@+id/question3"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <TextView
-            style="@style/tv_person_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="支付问题"/>
-
-        <ImageView
-            style="@style/iv_person_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/zuo_jian_tou"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <View
         android:layout_width="match_parent"
@@ -90,23 +64,10 @@
         android:layout_marginRight="@dimen/margin_size_8dp"
         android:background="@color/line_e7"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_order_question"
+    <com.example.user.guokun.ui.widget.MyAffair_4
+        android:id="@+id/question4"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <TextView
-            style="@style/tv_person_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="订单问题"/>
-
-        <ImageView
-            style="@style/iv_person_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/zuo_jian_tou"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <View
         android:layout_width="match_parent"
@@ -115,22 +76,9 @@
         android:layout_marginRight="@dimen/margin_size_8dp"
         android:background="@color/line_e7"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_account_question"
+    <com.example.user.guokun.ui.widget.MyAffair_5
+        android:id="@+id/question5"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <TextView
-            style="@style/tv_person_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="账户问题"/>
-
-        <ImageView
-            style="@style/iv_person_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/zuo_jian_tou"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

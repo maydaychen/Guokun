@@ -2,9 +2,13 @@ package com.example.user.guokun.ui.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +19,7 @@ import com.example.user.guokun.R;
 import com.example.user.guokun.adapter.ChargeListAdapter;
 import com.example.user.guokun.alipay.AliPayManager;
 import com.example.user.guokun.bean.ChargeBean;
+import com.example.user.guokun.bean.UserInfoBean;
 import com.example.user.guokun.http.HttpJsonMethod;
 import com.example.user.guokun.http.HttpMethods;
 import com.example.user.guokun.http.ProgressSubscriber;
@@ -28,6 +33,8 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.user.guokun.Utils.qiangzhi_logout;
 
 public class PurseActivity extends InitActivity {
 
@@ -43,16 +50,26 @@ public class PurseActivity extends InitActivity {
     CheckBox mCbChongzhi;
     @BindView(R.id.tv_purse_yue)
     TextView mTvPurseYue;
+    @BindView(R.id.tv_purse_xieyi)
+    TextView tvPurseXieyi;
+
+    private SubscriberOnNextListener<UserInfoBean> UserOnNext;
     private SubscriberOnNextListener<ChargeBean> ChargeOnNext;
     private SubscriberOnNextListener<JSONObject> ChargePayOnNext;
     private SharedPreferences mPreferences;
     private String PAY_TYPE = "";
     private ChargeListAdapter chargeListAdapter;
 
+
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_purse);
         ButterKnife.bind(this);
+        SpannableStringBuilder builder1 = new SpannableStringBuilder(tvPurseXieyi.getText().toString());
+        ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
+        builder1.setSpan(redSpan, tvPurseXieyi.getText().length() - 6, tvPurseXieyi.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvPurseXieyi.setText(builder1);
+
         RxCompoundButton.checkedChanges(mCbPurseAli).subscribe(aBoolean -> {
             if (aBoolean) {
                 PAY_TYPE = "2";
@@ -74,7 +91,12 @@ public class PurseActivity extends InitActivity {
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
             }
         });
-        mTvPurseYue.setText(getIntent().getDoubleExtra("yue", 0.00) + "");
+        tvPurseXieyi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -86,6 +108,8 @@ public class PurseActivity extends InitActivity {
                 mRvChargeList.setLayoutManager(new GridLayoutManager(this, 2));
                 chargeListAdapter = new ChargeListAdapter(resultBean.getData(), getApplicationContext());
                 mRvChargeList.setAdapter(chargeListAdapter);
+            } else if (resultBean.getCode() == -9) {
+                qiangzhi_logout(PurseActivity.this);
             }
         };
         ChargePayOnNext = jsonObject -> {
@@ -104,8 +128,25 @@ public class PurseActivity extends InitActivity {
                 Toast.makeText(PurseActivity.this, jsonObject.getString("mag"), Toast.LENGTH_SHORT).show();
             }
         };
+        UserOnNext = userInfoBean -> {
+            if (userInfoBean.getCode() == 1) {
+                mTvPurseYue.setText(userInfoBean.getData().getUser_deposit() + "");
+            } else if (userInfoBean.getCode() == -9) {
+                qiangzhi_logout(PurseActivity.this);
+            } else {
+                Toast.makeText(PurseActivity.this, userInfoBean.getMag(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         HttpMethods.getInstance().charge(
                 new ProgressSubscriber(ChargeOnNext, PurseActivity.this), mPreferences.getString("token", ""));
+        HttpMethods.getInstance().user_info(new ProgressSubscriber(UserOnNext,
+                PurseActivity.this), mPreferences.getString("token", ""));
     }
 
     @OnClick({R.id.iv_purse_back, R.id.rl_ali, R.id.rl_wechat, R.id.bt_chongzhi})
@@ -130,5 +171,12 @@ public class PurseActivity extends InitActivity {
 
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

@@ -18,9 +18,10 @@
             android:src="@drawable/shou_ye_dingwei"/>
 
         <TextView
+            android:id="@+id/tv_main_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="滨湖区太湖创意产业园"
+            android:text="定位中....."
             android:textColor="@color/white"/>
     </LinearLayout>
 

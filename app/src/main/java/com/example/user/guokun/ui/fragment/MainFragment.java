@@ -1,7 +1,9 @@
 package com.example.user.guokun.ui.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -22,6 +25,10 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MyLocationData;
 import com.example.user.guokun.R;
+import com.example.user.guokun.bean.UserInfoBean;
+import com.example.user.guokun.http.HttpMethods;
+import com.example.user.guokun.http.ProgressSubscriber;
+import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.FujinActivity;
 import com.example.user.guokun.ui.activity.GuigeActivity;
@@ -37,6 +44,7 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.Manifest.permission.CAMERA;
+import static com.example.user.guokun.Utils.qiangzhi_logout;
 
 /**
  * 作者：JTR on 2016/8/29 10:35
@@ -45,18 +53,21 @@ import static android.Manifest.permission.CAMERA;
 public class MainFragment extends Fragment implements EasyPermissions.PermissionCallbacks, BaiduMap.OnMapLoadedCallback, BDLocationListener {
 
     private static final String EXTRA_CONTENT = "content";
-    private static final int SHOW_SUBACTIVITY = 1;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int RC_CAMERA_PERM = 123;
     private LocationClient mLocationClient;
     private double lat;
     private double lon;
+    private String address;
     private boolean isFirstLocate = true;
-    private String myLoc;
-
+    private SubscriberOnNextListener<UserInfoBean> UserOnNext;
+    private UserInfoBean mUserInfoBean;
+    private SharedPreferences mPreferences;
 
     @BindView(R.id.iv_main_pic)
     ImageView mIvMainPic;
+    @BindView(R.id.tv_main_address)
+    TextView mTvMainAddress;
 //    private List<String> url_list;
 //
 //    @BindView(R.id.banner)
@@ -89,16 +100,33 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 
 
     public void initData() {
+        mPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 //        url_list = new ArrayList<>();
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
+        UserOnNext = userInfoBean -> {
+            if (userInfoBean.getCode() == 1) {
+                mUserInfoBean = userInfoBean;
+            } else if (userInfoBean.getCode() == -9) {
+                qiangzhi_logout(getActivity());
+            } else {
+                Toast.makeText(getActivity(), userInfoBean.getMag(), Toast.LENGTH_SHORT).show();
+            }
+
+        };
     }
 
     public void initView() {
 //        mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
 //        mBanner.setOnBannerListener(position -> Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show());
-        mIvMainPic.setOnClickListener(v -> startActivity(new Intent(getActivity(), PurseActivity.class)));
+        mIvMainPic.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PurseActivity.class);
+            intent.putExtra("yue", mUserInfoBean.getData().getUser_deposit());
+            startActivity(intent);
+        });
+        HttpMethods.getInstance().user_info(new ProgressSubscriber(UserOnNext,
+                getActivity()), mPreferences.getString("token", ""));
     }
 
     private void initMap() {
@@ -114,7 +142,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
         );//可选，默认高精度，设置定位模式，高 精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         int span = 1000;
-        option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+//        option.setScanSpan(0);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
         option.setOpenGps(true);//可选，默认false,设置是否使用gps
         option.setLocationNotify(true);//可选，默认false，设置是否当                                                                                                                                                                                                                                gps有效时按照1S1次频率输出GPS结果
@@ -143,9 +171,10 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
                 startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.iv_fujin:
-                Intent intent = new Intent(getActivity(),FujinActivity.class);
-                intent.putExtra("lat",lat);
-                intent.putExtra("lon",lon);
+                Intent intent = new Intent(getActivity(), FujinActivity.class);
+                intent.putExtra("lat", lat);
+                intent.putExtra("lon", lon);
+                intent.putExtra("address", address);
                 startActivity(intent);
                 break;
         }
@@ -157,7 +186,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 //            Intent intent = new Intent(getActivity(), CaptureActivity.class);
 //            startActivityForResult(intent, SHOW_SUBACTIVITY);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);
-            intent.putExtra("code", "898602b6101740177983");
+            intent.putExtra("code", "898602b6101740177935");
             startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
@@ -174,6 +203,9 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         Log.d("chenyi", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+        Intent intent = new Intent(getActivity(), GuigeActivity.class);
+        intent.putExtra("code", "898602b6101740177983");
+        startActivity(intent);
     }
 
     @Override
@@ -207,7 +239,8 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
         //mBaiduMap.setMyLocationData(locData);
         lat = bdLocation.getLatitude();
         lon = bdLocation.getLongitude();
-        myLoc = bdLocation.getBuildingName();
+        address = bdLocation.getAddress().address;
+        mTvMainAddress.setText(bdLocation.getAddress().address);
         if (isFirstLocate) {
             isFirstLocate = false;
             Log.i("chenyi", "lat == " + lat);
@@ -220,6 +253,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
                     Log.d("chenyi", "getLat " + jsResponseData);
                 }
             });*/
+            mLocationClient.stop();
         }
     }
 

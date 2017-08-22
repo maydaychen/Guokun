@@ -103,7 +103,7 @@ public class HttpMethods {
     }
 
     public void char_nearby(Subscriber<ChairNearbyBean> subscriber, String accessToken, String lng, String lat) {
-        movieService.char_nearby(accessToken, lng,lat)
+        movieService.char_nearby(accessToken, lng, lat, 1, 10)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

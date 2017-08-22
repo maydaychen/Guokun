@@ -180,10 +180,11 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tv_purse_xieyi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/cb_chongzhi"
-                android:text="我已阅读并同意《国坤健康充返协议》，知悉充值本机和返现以魔豆的形式不可体现，转移。"/>
+                android:text="我已阅读并同意《国坤健康充返协议》，知悉充值本机和返现以魔豆的形式不可体现，转移。查看详细协议"/>
         </RelativeLayout>
 
     </LinearLayout>

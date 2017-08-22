@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,27 +21,29 @@
                     style="@style/tv_person_left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="如何使用"/>
+                    android:text="如何使用" />
 
                 <ImageView
                     android:id="@+id/iv_image"
                     style="@style/iv_person_right"
-                    android:scaleType="centerCrop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/zuo_jian_tou"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/zuo_jian_tou" />
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_text"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ri_how_to_use"
                 android:paddingBottom="@dimen/margin_size_10dp"
+                android:background="@color/second_font"
                 android:paddingLeft="@dimen/margin_size_18dp"
+                android:paddingRight="@dimen/margin_size_18dp"
                 android:paddingTop="@dimen/margin_size_10dp"
-                android:text="111"
-                android:visibility="gone"/>
+                android:text="打开首页->点击扫一扫->选择相应按摩套餐->支付->开启按摩椅" />
         </RelativeLayout>
 
     </FrameLayout>

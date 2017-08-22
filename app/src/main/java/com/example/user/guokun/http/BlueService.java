@@ -20,18 +20,6 @@ import retrofit2.http.POST;
  * 邮箱：2091320109@qq.com
  */
 public interface BlueService {
-//    @GET("themes")
-//    rx.Observable<ThemeBean> getString();
-//
-//    @GET("news/latest")
-//    rx.Observable<StoryBean> getLatest();
-//
-//    @GET("news/{id}")
-//    rx.Observable<ContentBean> getContent(@Path("id") String id);
-//
-//    @GET("story-extra/{id}")
-//    rx.Observable<CommentBean> getComment(@Path("id") String id);
-
     @FormUrlEncoded
     @POST("/user/send.do")
     rx.Observable<ResultBean> send_code(@Field("mobile") String mobile);
@@ -47,15 +35,16 @@ public interface BlueService {
     @FormUrlEncoded
     @POST("/order/vspa/list.do")
     rx.Observable<VspaBean> vspa_order(@Field("accessToken") String accessToken,
-                                       @Field("pageNum") int pageNum,@Field("pageSize")  int pageSize);
+                                       @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
 
     @FormUrlEncoded
     @POST("/massagechair/info.do")
     rx.Observable<ChairInfoBean> char_info(@Field("accessToken") String accessToken, @Field("mobile") String mobile);
 
     @FormUrlEncoded
-    @POST("/massagechair/info.do")
-    rx.Observable<ChairNearbyBean> char_nearby(@Field("accessToken") String accessToken, @Field("lng") String lng, @Field("lat") String lat);
+    @POST("/massagechair/list.do")
+    rx.Observable<ChairNearbyBean> char_nearby(@Field("accessToken") String accessToken, @Field("lng") String lng, @Field("lat") String lat,
+                                               @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
 
     @FormUrlEncoded
     @POST("/recharge/list.do")

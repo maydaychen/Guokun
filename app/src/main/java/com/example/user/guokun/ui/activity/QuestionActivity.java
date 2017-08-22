@@ -22,19 +22,11 @@ public class QuestionActivity extends InitActivity {
 
     }
 
-    @OnClick({R.id.iv_coupon_detail_back,  R.id.rl_sao_question, R.id.rl_pay_question, R.id.rl_order_question, R.id.rl_account_question})
+    @OnClick({R.id.iv_coupon_detail_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_coupon_detail_back:
                 finish();
-                break;
-            case R.id.rl_sao_question:
-                break;
-            case R.id.rl_pay_question:
-                break;
-            case R.id.rl_order_question:
-                break;
-            case R.id.rl_account_question:
                 break;
         }
     }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/affair_title_rl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/ri_how_to_use"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <TextView
+                    style="@style/tv_person_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="支付问题" />
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    style="@style/iv_person_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/zuo_jian_tou" />
+            </RelativeLayout>
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_text"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/ri_how_to_use"-->
+            <!--android:paddingBottom="@dimen/margin_size_10dp"-->
+            <!--android:background="@color/second_font"-->
+            <!--android:paddingLeft="@dimen/margin_size_18dp"-->
+            <!--android:paddingRight="@dimen/margin_size_18dp"-->
+            <!--android:paddingTop="@dimen/margin_size_10dp"-->
+            <!--android:text="打开首页->点击扫一扫->选择相应按摩套餐->支付->开启按摩椅" />-->
+
+            <LinearLayout
+                android:id="@+id/tv_text2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ri_how_to_use"
+                android:background="@color/second_font"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/margin_size_10dp"
+                android:paddingLeft="@dimen/margin_size_18dp"
+                android:paddingRight="@dimen/margin_size_18dp"
+                android:paddingTop="@dimen/margin_size_10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:text="1.支付后椅子不工作" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:text="此种情况系统会自动核实并将您所支付的金额返还到您的账户，优惠金额不返还/n如果没有收到退款消息或页面，请在订单列表页面点击订单反馈，我们将会有客服为您解答"
+                    android:textSize="@dimen/font_size_12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:background="@color/line_e7" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:text="2.支付后未满工作时长" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:text="遇到此问题请在订单页面点击订单反馈，我们将会有客服为您解答"
+                    android:textSize="@dimen/font_size_12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_size_4dp"
+                    android:background="@color/line_e7" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
+</FrameLayout>
