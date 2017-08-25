@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,12 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_size_8dp"
-            android:src="@drawable/signin_phone_icon"/>
+            android:src="@drawable/signin_phone_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+86"/>
+            android:text="+86" />
 
         <View
             android:layout_width="2dp"
@@ -34,7 +33,7 @@
             android:layout_marginLeft="@dimen/margin_size_8dp"
             android:layout_marginRight="@dimen/margin_size_8dp"
             android:layout_marginTop="@dimen/margin_size_16dp"
-            android:background="@color/font_red"/>
+            android:background="@color/font_red" />
 
         <EditText
             android:id="@+id/et_login_tele"
@@ -44,7 +43,7 @@
             android:hint="手机号"
             android:inputType="number"
             android:maxLength="11"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </LinearLayout>
 
     <View
@@ -52,7 +51,7 @@
         android:layout_height="0.5dp"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
-        android:background="@color/second_font"/>
+        android:background="@color/second_font" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,7 +68,7 @@
             android:layout_centerVertical="true"
             android:padding="8dp"
             android:text="获取验证码"
-            android:textColor="@color/font_red"/>
+            android:textColor="@color/font_red" />
 
         <EditText
             android:id="@+id/et_yanzhengma"
@@ -84,7 +83,7 @@
             android:inputType="number"
             android:maxLength="6"
             android:padding="8dp"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </RelativeLayout>
 
     <View
@@ -92,7 +91,7 @@
         android:layout_height="0.5dp"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
-        android:background="@color/second_font"/>
+        android:background="@color/second_font" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,32 +104,27 @@
             android:id="@+id/cb_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"/>
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我已阅读并同意"/>
+            android:text="我已阅读并同意" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="《摩摩哒服务使用协议》"
             android:textColor="@color/font_red"
-            android:textSize="@dimen/font_size_12sp"/>
+            android:textSize="@dimen/font_size_12sp" />
     </LinearLayout>
 
-    <TextView
+
+    <Button
         android:id="@+id/tv_login"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/boder_red"
-        android:gravity="center"
-        android:text="登录"
-        android:textColor="@color/white"/>
+        style="@style/button_red"
+        android:layout_marginTop="30dp"
+        android:text="登录" />
 
     <TextView
         android:id="@+id/tv_signin"
@@ -141,6 +135,6 @@
         android:layout_marginTop="@dimen/margin_size_20dp"
         android:gravity="center"
         android:text="没有账号？"
-        android:textColor="@color/second_font"/>
+        android:textColor="@color/second_font" />
 
 </LinearLayout>

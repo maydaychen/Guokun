@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:text="此种情况系统会自动核实并将您所支付的金额返还到您的账户，优惠金额不返还/n如果没有收到退款消息或页面，请在订单列表页面点击订单反馈，我们将会有客服为您解答"
+                    android:text="此种情况系统会自动核实并将您所支付的金额返还到您的账户，优惠金额不返还\n如果没有收到退款消息或页面，请在订单列表页面点击订单反馈，我们将会有客服为您解答"
                     android:textSize="@dimen/font_size_12sp" />
 
                 <View

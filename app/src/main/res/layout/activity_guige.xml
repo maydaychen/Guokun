@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.user.guokun.ui.activity.GuigeActivity">
+
 
     <RelativeLayout
         android:id="@+id/rl_ask_title"
@@ -18,235 +18,343 @@
             style="@style/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back"/>
+            android:src="@drawable/back" />
 
         <TextView
             style="@style/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="规格选择"/>
+            android:text="规格选择" />
 
     </RelativeLayout>
 
-    <ImageView
-        android:scaleType="fitXY"
-        android:src="@drawable/order_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_project1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_charge_list"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_project1_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-            <TextView
-                android:id="@+id/tv_project1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_project2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_charge_list"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_project2_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-            <TextView
-                android:id="@+id/tv_project2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:weightSum="4">
-
-        <View
-            android:layout_width="@dimen/margin_size_0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:id="@+id/ll_project3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_weight="2"
-            android:background="@drawable/selector_charge_list"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_project3_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-            <TextView
-                android:id="@+id/tv_project3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:duplicateParentState="true"
-                android:gravity="center_horizontal"
-                android:textColor="@color/selector_red"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/margin_size_0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_use_coupon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_size_16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="优惠券"
-            android:textColor="@color/first_font"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
 
             <ImageView
-                android:id="@+id/iv_coupon_back"
                 android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/order_title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_project1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project1_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                    <TextView
+                        android:id="@+id/tv_project1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_project2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project2_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                    <TextView
+                        android:id="@+id/tv_project2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
 
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/zuo_jian_tou"/>
+                <View
+                    android:layout_width="@dimen/margin_size_0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv_coupon"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_project3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project3_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                    <TextView
+                        android:id="@+id/tv_project3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/margin_size_0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_use_coupon"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/iv_coupon_back"
-                android:paddingRight="@dimen/margin_size_4dp"
-                android:text="使用优惠券"
-                android:textColor="@color/second_font"/>
-        </RelativeLayout>
+                android:background="@color/white"
+                android:padding="@dimen/margin_size_16dp">
 
-        <TextView
-            android:id="@+id/tv_coupon_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/font_red"/>
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="优惠券"
+                    android:textColor="@color/first_font" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_size_16dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="实付金额"
-            android:textColor="@color/first_font"/>
+                    <ImageView
+                        android:id="@+id/iv_coupon_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/zuo_jian_tou" />
+
+                    <TextView
+                        android:id="@+id/tv_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/iv_coupon_back"
+                        android:paddingRight="@dimen/margin_size_4dp"
+                        android:text="使用优惠券"
+                        android:textColor="@color/second_font" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_coupon_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/font_red" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/margin_size_16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="实付金额"
+                    android:textColor="@color/first_font" />
 
 
-        <TextView
-            android:id="@+id/tv_real_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/price"
-            android:textColor="@color/font_red"/>
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_real_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/font_red" />
+            </RelativeLayout>
 
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:padding="@dimen/margin_size_16dp">-->
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="@dimen/margin_size_16dp">-->
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:text="手机号"-->
-    <!--android:textColor="@color/first_font"/>-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="手机号"-->
+            <!--android:textColor="@color/first_font"/>-->
 
-    <!--<ImageView-->
-    <!--android:id="@+id/iv_bianjikuang"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:src="@drawable/bian_ji_kuang"/>-->
+            <!--<ImageView-->
+            <!--android:id="@+id/iv_bianjikuang"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/bian_ji_kuang"/>-->
 
-    <!--<TextView-->
-    <!--android:id="@+id/tv_guige_telephone"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_toLeftOf="@id/iv_bianjikuang"-->
-    <!--android:paddingRight="@dimen/margin_size_4dp"-->
-    <!--android:text="13665137658"/>-->
-    <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_guige_telephone"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@id/iv_bianjikuang"-->
+            <!--android:paddingRight="@dimen/margin_size_4dp"-->
+            <!--android:text="13665137658"/>-->
+            <!--</RelativeLayout>-->
+            <RelativeLayout
+                android:id="@+id/rl_ali"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size_10dp"
+                android:background="@color/white"
+                android:padding="@dimen/margin_size_8dp">
 
-    <Button
-        android:id="@+id/bt_submit"
-        style="@style/button_red"
-        android:layout_marginTop="@dimen/margin_size_10dp"/>
+                <ImageView
+                    android:id="@+id/ali_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/zhi_fu_bao" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size_8dp"
+                    android:layout_toRightOf="@id/ali_logo"
+                    android:text="支付宝支付" />
+
+                <CheckBox
+                    android:id="@+id/cb_pay_ali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/selector_check"
+                    android:padding="@dimen/margin_size_8dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_wechat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/margin_size_8dp">
+
+                <ImageView
+                    android:id="@+id/wechat_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/wei_xin_zhiuf" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size_8dp"
+                    android:layout_toRightOf="@id/wechat_logo"
+                    android:text="微信支付" />
+
+                <CheckBox
+                    android:id="@+id/cb_pay_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/selector_check"
+                    android:padding="@dimen/margin_size_8dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_yue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/margin_size_8dp">
+
+                <ImageView
+                    android:id="@+id/yue_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/yu_e_zhifu" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size_8dp"
+                    android:layout_toRightOf="@id/yue_logo"
+                    android:text="余额支付" />
+
+                <CheckBox
+                    android:id="@+id/cb_pay_yue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/selector_check"
+                    android:padding="@dimen/margin_size_8dp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_submit"
+                style="@style/button_red"
+                android:layout_marginTop="@dimen/margin_size_10dp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

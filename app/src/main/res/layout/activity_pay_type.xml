@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/zhi_fu_bao"/>
+            android:src="@drawable/zhi_fu_bao" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_size_8dp"
             android:layout_toRightOf="@id/ali_logo"
-            android:text="支付宝支付"/>
+            android:text="支付宝支付" />
 
         <CheckBox
             android:id="@+id/cb_pay_ali"
@@ -92,7 +92,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:button="@drawable/selector_check"
-            android:padding="@dimen/margin_size_8dp"/>
+            android:padding="@dimen/margin_size_8dp" />
     </RelativeLayout>
 
     <RelativeLayout

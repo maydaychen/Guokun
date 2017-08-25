@@ -4,6 +4,7 @@ import com.example.user.guokun.bean.ChairInfoBean;
 import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
+import com.example.user.guokun.bean.CouponBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
@@ -131,6 +132,24 @@ public class HttpMethods {
 
     public void check_info(Subscriber<CheckInfoBean> subscriber, String accessToken, String orderNum) {
         movieService.check_info(accessToken, orderNum)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void useable_coupon(Subscriber<CouponBean> subscriber, String accessToken) {
+        movieService.useable_coupon(accessToken)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void all_coupon(Subscriber<CouponBean> subscriber, String accessToken, int pageNum) {
+        movieService.all_coupon(accessToken, pageNum, 10)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

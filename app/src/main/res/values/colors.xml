@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#af0005</color>
+    <color name="colorPrimaryDark">#af0005</color>
     <color name="colorAccent">#af0005</color>
     <color name="white">#ffffff</color>
     <color name="black">#000</color>
@@ -10,6 +10,10 @@
     <color name="second_font">#9f9f9f</color>
     <color name="background">#fafafa</color>
     <color name="line_e7">#e7e7e7</color>
+    <color name="line_colour_ee">#eeeeee</color>
+    <color name="font_colour_33">#333333</color>
+    <color name="font_colour_66">#666666</color>
+    <color name="font_colour_99">#999999</color>
 
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>
@@ -36,4 +40,5 @@
     <color name="viewfinder_mask">#60000000</color>
     <color name="transparent">#00000000</color>
     <color name="order_e7">#e7e7e7</color>
+    <color name="blue">#25afff</color>
 </resources>

@@ -4,6 +4,7 @@ import com.example.user.guokun.bean.ChairInfoBean;
 import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
+import com.example.user.guokun.bean.CouponBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
@@ -62,4 +63,12 @@ public interface BlueService {
     @FormUrlEncoded
     @POST("/pay/using.do")
     rx.Observable<CheckInfoBean> check_info(@Field("accessToken") String accessToken, @Field("outTradeNo") String outTradeNo);
+
+    @FormUrlEncoded
+    @POST("/coupon/pay/list.do")
+    rx.Observable<CouponBean> useable_coupon(@Field("accessToken") String accessToken);
+
+    @FormUrlEncoded
+    @POST("/coupon/list.do")
+    rx.Observable<CouponBean> all_coupon(@Field("accessToken") String accessToken, @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
 }

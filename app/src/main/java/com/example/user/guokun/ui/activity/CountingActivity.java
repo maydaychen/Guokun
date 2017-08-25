@@ -1,15 +1,36 @@
 package com.example.user.guokun.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
 
+import com.example.user.guokun.MainActivity;
 import com.example.user.guokun.R;
 
-public class CountingActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class CountingActivity extends InitActivity {
+
+    @BindView(R.id.tv_counting_money)
+    TextView tvCountingMoney;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_counting);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void initData() {
+        tvCountingMoney.setText(String.valueOf(getIntent().getIntExtra("money", 0)));
+        new Handler().postDelayed(() -> startActivity(new Intent(CountingActivity.this, MainActivity.class)), 3000);
+    }
+
+    @OnClick(R.id.iv_pay_back)
+    public void onViewClicked() {
+        startActivity(new Intent(CountingActivity.this, MainActivity.class));
     }
 }

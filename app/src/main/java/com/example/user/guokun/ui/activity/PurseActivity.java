@@ -1,6 +1,7 @@
 package com.example.user.guokun.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.user.guokun.R;
 import com.example.user.guokun.adapter.ChargeListAdapter;
 import com.example.user.guokun.alipay.AliPayManager;
+import com.example.user.guokun.alipay.AliPayMessage;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.UserInfoBean;
 import com.example.user.guokun.http.HttpJsonMethod;
@@ -25,9 +27,13 @@ import com.example.user.guokun.http.HttpMethods;
 import com.example.user.guokun.http.ProgressSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.wxapi.pay.WXPayEntry;
+import com.example.user.guokun.wxapi.pay.WXPayMessage;
 import com.example.user.guokun.wxapi.pay.WXUtils;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -65,6 +71,7 @@ public class PurseActivity extends InitActivity {
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_purse);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         SpannableStringBuilder builder1 = new SpannableStringBuilder(tvPurseXieyi.getText().toString());
         ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
         builder1.setSpan(redSpan, tvPurseXieyi.getText().length() - 6, tvPurseXieyi.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -85,18 +92,14 @@ public class PurseActivity extends InitActivity {
         RxCompoundButton.checkedChanges(mCbChongzhi).subscribe(aBoolean -> {
             if (!aBoolean) {
                 mBtChongzhi.setClickable(false);
-                mBtChongzhi.setBackgroundColor(getResources().getColor(R.color.second_font));
+                mBtChongzhi.setBackgroundResource(R.drawable.boder_grey);
             } else {
                 mBtChongzhi.setClickable(true);
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
             }
         });
-        tvPurseXieyi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        tvPurseXieyi.setOnClickListener(view -> Toast.makeText(PurseActivity.this, "自个看着办", Toast.LENGTH_SHORT).show());
+        mCbChongzhi.setChecked(true);
     }
 
     @Override
@@ -173,10 +176,33 @@ public class PurseActivity extends InitActivity {
         }
     }
 
+    //EventBus阿里支付结果回调事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoonEvent(AliPayMessage payMessage) {
+        if (payMessage.errorCode == 0) {
+            Intent intent = new Intent(PurseActivity.this, CountingActivity.class);
+            intent.putExtra("money",chargeListAdapter.money);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, payMessage.result, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //EventBus微信支付结果回调事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoonEvent(WXPayMessage payMessage) {
+        if (payMessage.errorCode == 0) {
+            Intent intent = new Intent(PurseActivity.this, CountingActivity.class);
+            intent.putExtra("money",chargeListAdapter.money);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, payMessage.errorStr, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

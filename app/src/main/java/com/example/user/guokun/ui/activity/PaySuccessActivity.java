@@ -29,6 +29,8 @@ public class PaySuccessActivity extends InitActivity {
     TextView tvMinute;
     @BindView(R.id.tv_second)
     TextView tvSecond;
+    @BindView(R.id.tv_paysuccess_time)
+    TextView tvPaysuccessTime;
     private SubscriberOnNextListener<CheckInfoBean> ChairInfoOnNext;
     private SharedPreferences mPreferences;
     private String order_num;
@@ -44,15 +46,14 @@ public class PaySuccessActivity extends InitActivity {
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             switch (resultBean.getCode()) {
                 case 0:
-                    new Handler().postDelayed(() -> {
-                        HttpMethods.getInstance().check_info(new ProgressSubscriber(ChairInfoOnNext,
-                                PaySuccessActivity.this), mPreferences.getString("token", ""), order_num);
-                    }, 1500);
+                    new Handler().postDelayed(() -> HttpMethods.getInstance().check_info(new ProgressSubscriber(ChairInfoOnNext,
+                            PaySuccessActivity.this), mPreferences.getString("token", ""), order_num), 1500);
                     break;
                 case 1:
                     recLen = resultBean.getData().getTime_len() * 60;
 //                    mCount.initTime(0, resultBean.getData().getTime_len(), 0);
-                    mTvPaysuccessMoney.setText(String.format(getResources().getString(R.string.price), resultBean.getData().getPrices() + ""));
+                    mTvPaysuccessMoney.setText(String.format(getResources().getString(R.string.service_type), resultBean.getData().getName()));
+                    tvPaysuccessTime.setText(String.format(getResources().getString(R.string.service_time), resultBean.getData().getTime_len() + ""));
                     handler.post(runnable);
 //                    mCount.setOnTimeCompleteListener(() -> startActivity(new Intent(PaySuccessActivity.this, MainActivity.class)));
 //                    mCount.start();
@@ -80,7 +81,6 @@ public class PaySuccessActivity extends InitActivity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             startActivity(new Intent(PaySuccessActivity.this, MainActivity.class));
         }
@@ -106,6 +106,5 @@ public class PaySuccessActivity extends InitActivity {
     public void onViewClicked() {
         startActivity(new Intent(PaySuccessActivity.this, MainActivity.class));
     }
-
 
 }

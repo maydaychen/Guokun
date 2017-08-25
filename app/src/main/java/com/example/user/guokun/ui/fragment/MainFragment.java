@@ -186,11 +186,10 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 //            Intent intent = new Intent(getActivity(), CaptureActivity.class);
 //            startActivityForResult(intent, SHOW_SUBACTIVITY);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);
-            intent.putExtra("code", "898602b6101740177935");
+            intent.putExtra("code", "898602b6101740177983");
             startActivity(intent);
         } else {
-            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
-                    RC_CAMERA_PERM, Manifest.permission.CAMERA);
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera), RC_CAMERA_PERM, Manifest.permission.CAMERA);
         }
     }
 

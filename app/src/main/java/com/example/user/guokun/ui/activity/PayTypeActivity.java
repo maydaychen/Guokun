@@ -99,9 +99,9 @@ public class PayTypeActivity extends InitActivity {
                 switch (PAY_TYPE) {
                     case "0":
                         if (jsonObject.getString("mag").equals("支付成功")) {
-                            Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
-                            String order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
-                            intent.putExtra("order_num", order_num);
+                                Intent intent = new Intent(PayTypeActivity.this, PaySuccessActivity.class);
+                                String order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
+                                intent.putExtra("order_num", order_num);
                             startActivity(intent);
                         } else {
 

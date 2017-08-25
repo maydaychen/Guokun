@@ -1,17 +1,18 @@
 package com.example.user.guokun.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.guokun.R;
+import com.example.user.guokun.bean.CouponBean;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,16 +23,26 @@ import butterknife.ButterKnife;
 
 public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHolder> implements View.OnClickListener {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<Map<String, String>> mData;
+    private List<CouponBean.DataBean> mData = new ArrayList<>();
     private int VIEW_BOTTOM = 1;
+    private Context mContext;
 
     //define interface
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, int data);
     }
 
-    public CouponsAdapter(List<Map<String, String>> mData) {
-        this.mData = mData;
+    public void addAllData(List<CouponBean.DataBean> dataList) {
+        this.mData.addAll(dataList);
+        notifyDataSetChanged();
+    }
+
+    public void clearData() {
+        this.mData.clear();
+    }
+
+    public CouponsAdapter(Context context) {
+        mContext = context;
     }
 
 
@@ -52,13 +63,21 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 //        viewHolder.peijian.setText(null == mData.get(position).get("peijian") || mData.get(position).get("peijian").equals("") ? "--" : mData.get(position).get("peijian"));
 //        viewHolder.num.setText(null == mData.get(position).get("num") || mData.get(position).get("num").equals("") ? "--" : mData.get(position).get("num"));
 //        viewHolder.price.setText(null == mData.get(position).get("price") || mData.get(position).get("price").equals("") ? "--" : mData.get(position).get("price"));
+        viewHolder.mTvCouponName.setText(mData.get(position).getName());
+        viewHolder.mTvCouponExpiry.setText(String.format(mContext.getResources().getString(R.string.tv_coupon_expiry), mData.get(position).getEndtime() + ""));
+        viewHolder.mTvCouponPrice.setText(String.format(mContext.getResources().getString(R.string.price), mData.get(position).getMoney() + ""));
+        viewHolder.mTvCouponName.setText(mData.get(position).getName());
         viewHolder.itemView.setTag(position);
     }
 
     //获取数据的数量
     @Override
     public int getItemCount() {
-        return mData.size() + 1;
+        if (mData != null) {
+            return mData.size();
+        } else {
+            return 0;
+        }
     }
 
 
@@ -70,24 +89,11 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         }
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        int dataItemCount = getItemCount();
-        if (dataItemCount == 1 || dataItemCount == position) {
-            return VIEW_BOTTOM;
-        } else {
-            return 0;
-        }
-    }
-
-
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.cb_coupon)
-        CheckBox mCbCoupon;
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_coupon_price)
         TextView mTvCouponPrice;
         @BindView(R.id.tv_coupon_name)

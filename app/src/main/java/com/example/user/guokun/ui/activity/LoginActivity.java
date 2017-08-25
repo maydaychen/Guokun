@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.example.user.guokun.http.HttpMethods;
 import com.example.user.guokun.http.ProgressSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
+import com.jakewharton.rxbinding.widget.RxTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,14 +33,14 @@ public class LoginActivity extends InitActivity {
     @BindView(R.id.cb_read)
     CheckBox mCbRead;
     @BindView(R.id.tv_login)
-    TextView mTvLogin;
+    Button mTvLogin;
     @BindView(R.id.tv_get_ems)
     TextView mTvGetEms;
     @BindView(R.id.et_login_tele)
     EditText mEtLoginTele;
     @BindView(R.id.et_yanzhengma)
     EditText mEtYanzhengma;
-    private int recLen = 10;
+    private int recLen = 60;
     private boolean flag = true;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -52,10 +55,10 @@ public class LoginActivity extends InitActivity {
         RxCompoundButton.checkedChanges(mCbRead).subscribe(aBoolean -> {
             if (!aBoolean) {
                 mTvLogin.setClickable(false);
-                mTvLogin.setBackgroundColor(getResources().getColor(R.color.second_font));
+                mTvLogin.setBackgroundResource(R.drawable.boder_grey);
             } else {
                 mTvLogin.setClickable(true);
-                mTvLogin.setBackgroundColor(getResources().getColor(R.color.font_red));
+                mTvLogin.setBackgroundResource(R.drawable.boder_red);
             }
         });
 
@@ -67,13 +70,24 @@ public class LoginActivity extends InitActivity {
                 mEditor.apply();
                 finish();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }else {
+            } else {
                 Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             }
         };
 
         ResultOnNext = resultBean -> Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
 
+        RxTextView.textChanges(mEtLoginTele).subscribe(charSequence -> {
+            if (charSequence.length() == 11) {
+                mEtYanzhengma.requestFocus();
+            }
+        });
+        RxTextView.textChanges(mEtYanzhengma).subscribe(charSequence -> {
+            if (charSequence.length() == 6) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+            }
+        });
 
     }
 
