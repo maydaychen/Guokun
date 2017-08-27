@@ -35,6 +35,16 @@
             android:text="优惠券说明" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tv_choose_usenone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_size_8dp"
+        android:layout_marginTop="@dimen/margin_size_8dp"
+        android:background="@color/white"
+        android:padding="@dimen/margin_size_10dp"
+        android:text="不使用优惠券" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_coupon"
         android:layout_width="match_parent"

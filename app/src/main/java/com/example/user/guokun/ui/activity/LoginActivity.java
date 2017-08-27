@@ -65,11 +65,20 @@ public class LoginActivity extends InitActivity {
         LoginOnNext = resultBean -> {
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             if (resultBean.getCode() == 1) {
-                mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
-                mEditor.putBoolean("autoLog", true);
-                mEditor.apply();
-                finish();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                //0已设密码 1
+                if (resultBean.getData().getTraded() == 0) {
+                    mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
+                    mEditor.putBoolean("autoLog", true);
+                    if (mEditor.commit()) {
+                        startActivity(new Intent(LoginActivity.this, SetPayPassActivity.class));
+                    }
+                } else {
+                    mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
+                    mEditor.putBoolean("autoLog", true);
+                    mEditor.apply();
+                    finish();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
             } else {
                 Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             }
@@ -107,7 +116,7 @@ public class LoginActivity extends InitActivity {
                 handler.postDelayed(this, 1000);
             } else {
                 flag = true;
-                recLen = 10;
+                recLen = 60;
                 mTvGetEms.setClickable(true);
                 mTvGetEms.setText("获取验证码");
             }

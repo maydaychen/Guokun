@@ -203,7 +203,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         Log.d("chenyi", "onPermissionsGranted:" + requestCode + ":" + perms.size());
         Intent intent = new Intent(getActivity(), GuigeActivity.class);
-        intent.putExtra("code", "898602b6101740177983");
+        intent.putExtra("code", "898602b6101740177935");
         startActivity(intent);
     }
 

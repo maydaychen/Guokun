@@ -59,8 +59,8 @@ public class HttpJsonMethod {
     }
 
 
-    public void pay(Subscriber<JSONObject> subscriber, String token, int id, String mobile, String payType) {
-        movieService.pay(token, id,mobile,"android",payType)
+    public void pay(Subscriber<JSONObject> subscriber, String token, int id, String mobile, String payType, String couponId, String pwd) {
+        movieService.pay(token, id, mobile, "android", payType, couponId, pwd)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

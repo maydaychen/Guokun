@@ -36,11 +36,11 @@ public class ChooseCouponActivity extends InitActivity {
             CouponsAdapter couponsAdapter = new CouponsAdapter(ChooseCouponActivity.this);
             rvCoupon.setLayoutManager(new LinearLayoutManager(ChooseCouponActivity.this));
             rvCoupon.setAdapter(couponsAdapter);
-            couponsAdapter.addAllData(couponBean.getData());
+            couponsAdapter.addAllData(couponBean.getData().getList());
             couponsAdapter.setOnItemClickListener((view, data) -> {
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("objs", couponBean.getData().get(data));
+                bundle.putSerializable("objs", couponBean.getData().getList().get(data));
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -56,13 +56,20 @@ public class ChooseCouponActivity extends InitActivity {
                 ChooseCouponActivity.this), mPreferences.getString("token", ""));
     }
 
-    @OnClick({R.id.iv_coupon_back, R.id.tv_coupon_detail})
+    @OnClick({R.id.iv_coupon_back, R.id.tv_coupon_detail, R.id.tv_choose_usenone})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_coupon_back:
                 finish();
                 break;
             case R.id.tv_coupon_detail:
+                startActivity(new Intent(ChooseCouponActivity.this, CouponDetailActivity.class));
+                break;
+            case R.id.tv_choose_usenone:
+                Intent intent = new Intent();
+                intent.putExtra("use", false);
+                setResult(RESULT_OK, intent);
+                finish();
                 break;
         }
     }

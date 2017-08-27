@@ -1,4 +1,4 @@
-package com.example.user.guokun;
+package com.example.user.guokun.ui.widget;
 
 import android.content.Context;
 import android.text.Editable;

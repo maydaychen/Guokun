@@ -58,7 +58,7 @@ public interface BlueService {
     @FormUrlEncoded
     @POST("/pay/index.do")
     rx.Observable<JSONObject> pay(@Field("accessToken") String accessToken, @Field("accountingId") int accountingId, @Field("mobile") String mobile,
-                                  @Field("plat") String plat, @Field("payType") String payType);
+                                  @Field("plat") String plat, @Field("payType") String payType, @Field("couponId") String couponId, @Field("psw") String psw);
 
     @FormUrlEncoded
     @POST("/pay/using.do")
@@ -70,5 +70,11 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/coupon/list.do")
-    rx.Observable<CouponBean> all_coupon(@Field("accessToken") String accessToken, @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
+    rx.Observable<CouponBean> all_coupon(@Field("accessToken") String accessToken,
+                                         @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
+
+
+    @FormUrlEncoded
+    @POST("/user/setpas.do")
+    rx.Observable<ResultBean> set_pass(@Field("accessToken") String accessToken, @Field("psw") String psw);
 }

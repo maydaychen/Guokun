@@ -135,7 +135,7 @@ public class PayTypeActivity extends InitActivity {
                 }else {
                     HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
                                     PayTypeActivity.this), mPreferences.getString("token", ""),
-                            getIntent().getIntExtra("id", 0), getIntent().getStringExtra("code"), PAY_TYPE);
+                            getIntent().getIntExtra("id", 0), getIntent().getStringExtra("code"), PAY_TYPE,"","");
                 }
                 break;
         }

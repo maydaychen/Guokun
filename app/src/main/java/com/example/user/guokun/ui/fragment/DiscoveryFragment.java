@@ -57,8 +57,8 @@ public class DiscoveryFragment extends Fragment {
 
 
     public void initData() {
-        list.add("http://pic.58pic.com/58pic/13/76/61/33N58PICRdp_1024.jpg");
-        list.add("http://pic.58pic.com/58pic/13/76/61/33N58PICRdp_1024.jpg");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
         DiscovereyAdapter goodsAdapter = new DiscovereyAdapter(list, getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(goodsAdapter);

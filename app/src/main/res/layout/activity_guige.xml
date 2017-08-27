@@ -204,6 +204,11 @@
                     android:textColor="@color/font_red" />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_e7" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -254,6 +259,7 @@
             <!--android:paddingRight="@dimen/margin_size_4dp"-->
             <!--android:text="13665137658"/>-->
             <!--</RelativeLayout>-->
+
             <RelativeLayout
                 android:id="@+id/rl_ali"
                 android:layout_width="match_parent"
@@ -287,6 +293,11 @@
                     android:padding="@dimen/margin_size_8dp" />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_e7" />
+
             <RelativeLayout
                 android:id="@+id/rl_wechat"
                 android:layout_width="match_parent"
@@ -318,6 +329,11 @@
                     android:button="@drawable/selector_check"
                     android:padding="@dimen/margin_size_8dp" />
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_e7" />
 
             <RelativeLayout
                 android:id="@+id/rl_yue"
@@ -351,9 +367,15 @@
                     android:padding="@dimen/margin_size_8dp" />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_e7" />
+
             <Button
                 android:id="@+id/bt_submit"
                 style="@style/button_red"
+                android:layout_marginBottom="40dp"
                 android:layout_marginTop="@dimen/margin_size_10dp" />
         </LinearLayout>
     </ScrollView>

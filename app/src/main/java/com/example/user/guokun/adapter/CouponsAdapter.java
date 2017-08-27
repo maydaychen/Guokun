@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHolder> implements View.OnClickListener {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<CouponBean.DataBean> mData = new ArrayList<>();
+    private List<CouponBean.DataBean.ListBean> mData = new ArrayList<>();
     private int VIEW_BOTTOM = 1;
     private Context mContext;
 
@@ -32,7 +32,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         void onItemClick(View view, int data);
     }
 
-    public void addAllData(List<CouponBean.DataBean> dataList) {
+    public void addAllData(List<CouponBean.DataBean.ListBean> dataList) {
         this.mData.addAll(dataList);
         notifyDataSetChanged();
     }

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.PayActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_guige_back"
+            style="@style/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back" />
+
+        <TextView
+            style="@style/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_solder"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/rl_pay_title"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:text="@string/tv_solder"
+            android:textSize="@dimen/font_size_14sp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_solder_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/margin_size_8dp"
+            android:textSize="@dimen/font_size_14sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/confirm_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rl_pay_solder"
+        android:background="@color/line_colour_ee"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_price"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:layout_below="@id/confirm_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_centerVertical="true"
+            android:text="@string/tv_money"
+            android:textSize="@dimen/font_size_14sp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_money_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_size_8dp"
+            android:textColor="@color/font_red"
+            android:textSize="@dimen/font_size_14sp"
+            android:layout_alignParentRight="true"
+           android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/rl_pay_price"
+        android:layout_marginTop="@dimen/margin_size_8dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_size_8dp"
+        android:text="@string/tv_pay_kind"
+        android:textSize="@dimen/font_size_14sp"/>
+
+    <TextView
+        android:id="@+id/pry_kind_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_colour_ee"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_ali"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/margin_size_8dp">
+
+        <ImageView
+            android:id="@+id/ali_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/zhi_fu_bao" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_toRightOf="@id/ali_logo"
+            android:text="支付宝支付" />
+
+        <CheckBox
+            android:id="@+id/cb_pay_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_check"
+            android:padding="@dimen/margin_size_8dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/margin_size_8dp">
+
+        <ImageView
+            android:id="@+id/wechat_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/wei_xin_zhiuf" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_toRightOf="@id/wechat_logo"
+            android:text="微信支付" />
+
+        <CheckBox
+            android:id="@+id/cb_pay_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_check"
+            android:padding="@dimen/margin_size_8dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_yue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/margin_size_8dp">
+
+        <ImageView
+            android:id="@+id/yue_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/yu_e_zhifu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_toRightOf="@id/yue_logo"
+            android:text="余额支付" />
+
+        <CheckBox
+            android:id="@+id/cb_pay_yue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_check"
+            android:padding="@dimen/margin_size_8dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_pay"
+        style="@style/button_red"
+        android:text="@string/tv_paynow"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/margin_size_10dp" />
+
+</LinearLayout>

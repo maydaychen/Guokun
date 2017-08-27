@@ -62,6 +62,17 @@ public class LoginBean {
         private int user_score;
         private int wx_sex;
 
+        public int getTraded() {
+            return traded;
+        }
+
+        public void setTraded(int traded) {
+            this.traded = traded;
+        }
+
+
+        private int traded;
+
         public AccessTokenBean getAccessToken() {
             return accessToken;
         }

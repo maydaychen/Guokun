@@ -29,7 +29,7 @@ public class CouponActivity extends InitActivity implements PullLoadMoreRecycler
     @BindView(R.id.fl_coupon)
     FrameLayout mFlCoupon;
 
-    private int page = 0;
+    private int page = 1;
     private SharedPreferences mPreferences;
     private CouponsAdapter mRecyclerViewAdapter;
     private SubscriberOnNextAndErrorListener<CouponBean> AllCouponsOnNext;
@@ -45,8 +45,7 @@ public class CouponActivity extends InitActivity implements PullLoadMoreRecycler
                 mRvCoupon.setVisibility(View.VISIBLE);
                 try {
                     mRvCoupon.setPullLoadMoreCompleted();
-                    mRecyclerViewAdapter.addAllData(vspaBean.getData());
-                    mRecyclerViewAdapter.notifyDataSetChanged();
+                    mRecyclerViewAdapter.addAllData(vspaBean.getData().getList());
                 } catch (NullPointerException e) {
                     if (page != 0) {
                         Toast.makeText(CouponActivity.this, "已经加载完毕！", Toast.LENGTH_LONG).show();
@@ -105,7 +104,7 @@ public class CouponActivity extends InitActivity implements PullLoadMoreRecycler
     private void setRefresh() {
         mRecyclerViewAdapter.clearData();
         mRecyclerViewAdapter.notifyDataSetChanged();
-        page = 0;
+        page = 1;
         mRvCoupon.setVisibility(View.INVISIBLE);
     }
 
@@ -117,7 +116,7 @@ public class CouponActivity extends InitActivity implements PullLoadMoreRecycler
 
     private void getData1() {
         HttpMethods.getInstance().all_coupon(new ProgressErrorSubscriber<>(AllCouponsOnNext,
-                CouponActivity.this), mPreferences.getString("token", ""),page);
+                CouponActivity.this), mPreferences.getString("token", ""), page);
     }
 
 }

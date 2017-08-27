@@ -157,23 +157,6 @@
                     android:textColor="@color/font_colour_33"
                     android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/iv_detail_pic1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin_size_8dp"
-                    android:src="@drawable/yisheng_more1" />
-
-                <ImageView
-                    android:id="@+id/iv_detail_pic2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin_size_8dp"
-                    android:layout_toLeftOf="@id/iv_detail_pic1"
-                    android:src="@drawable/yisheng_more2" />
             </RelativeLayout>
 
             <TextView
@@ -206,24 +189,6 @@
                     android:text="商品评价"
                     android:textColor="@color/font_colour_33"
                     android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/iv_detail_pic3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin_size_8dp"
-                    android:src="@drawable/yisheng_more1" />
-
-                <ImageView
-                    android:id="@+id/iv_detail_pic4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin_size_8dp"
-                    android:layout_toLeftOf="@id/iv_detail_pic3"
-                    android:src="@drawable/yisheng_more2" />
 
             </RelativeLayout>
 

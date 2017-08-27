@@ -35,7 +35,7 @@ public class VspaFragment extends Fragment implements PullLoadMoreRecyclerView.P
     private static final int SHOW_SUBACTIVITY = 1;
     private SharedPreferences mPreferences;
     private VspaAdapter mRecyclerViewAdapter;
-    private int page = 0;
+    private int page = 1;
 
     @Nullable
     @Override
@@ -120,7 +120,7 @@ public class VspaFragment extends Fragment implements PullLoadMoreRecyclerView.P
     private void setRefresh() {
         mRecyclerViewAdapter.clearData();
         mRecyclerViewAdapter.notifyDataSetChanged();
-        page = 0;
+        page = 1;
         mRvVspaOrder.setVisibility(View.INVISIBLE);
     }
 
