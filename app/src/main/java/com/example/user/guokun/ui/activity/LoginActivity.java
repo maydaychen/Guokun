@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.user.guokun.MainActivity;
 import com.example.user.guokun.R;
-import com.example.user.guokun.Utils;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.http.HttpMethods;
@@ -27,6 +26,8 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.user.guokun.StringUtils.isChinaPhoneLegal;
 
 public class LoginActivity extends InitActivity {
 
@@ -65,7 +66,8 @@ public class LoginActivity extends InitActivity {
         LoginOnNext = resultBean -> {
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             if (resultBean.getCode() == 1) {
-                //0已设密码 1
+                //0未设置 1已设密码
+                mEditor.putInt("pay_pwd", resultBean.getData().getTraded());
                 if (resultBean.getData().getTraded() == 0) {
                     mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
                     mEditor.putBoolean("autoLog", true);
@@ -123,12 +125,12 @@ public class LoginActivity extends InitActivity {
         }
     };
 
-    @OnClick({R.id.tv_get_ems, R.id.tv_login, R.id.tv_signin})
+    @OnClick({R.id.tv_get_ems, R.id.tv_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_get_ems:
                 String tele = mEtLoginTele.getText().toString();
-                if (flag && Utils.isChinaPhoneLegal(tele)) {
+                if (flag && isChinaPhoneLegal(tele)) {
                     flag = false;
                     mTvGetEms.setClickable(false);
                     handler.post(runnable);
@@ -143,9 +145,9 @@ public class LoginActivity extends InitActivity {
                 HttpMethods.getInstance().login(
                         new ProgressSubscriber(LoginOnNext, LoginActivity.this), tele1, mEtYanzhengma.getText().toString());
                 break;
-            case R.id.tv_signin:
-                startActivity(new Intent(LoginActivity.this, SigninActivity.class));
-                break;
+//            case R.id.tv_signin:
+//                startActivity(new Intent(LoginActivity.this, SigninActivity.class));
+//                break;
         }
     }
 

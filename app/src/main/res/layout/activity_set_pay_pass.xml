@@ -1,40 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context="com.example.user.guokun.ui.activity.SetPayPassActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.user.guokun.ui.activity.SetPayPassActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="13dp"
-        android:layout_marginRight="13dp"
-        android:layout_marginTop="20px"
-        android:text="请设置支付密码"
-        android:textColor="@color/first_font"
-        android:textSize="18sp" />
-
-    <com.example.user.guokun.ui.widget.PayPwdEditText
-        android:id="@+id/pay_pass"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="50dp" />
+        android:layout_height="40dp"
+        android:layout_gravity="top"
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tv_confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/boder_confirm"
-        android:padding="@dimen/margin_size_8dp"
-        android:text="确认"
-        android:textColor="@color/font_red"
-        android:textSize="@dimen/font_size_18sp" />
+        <TextView
+            style="@style/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付密码设置"/>
+
+        <TextView
+            android:id="@+id/tv_set_pwd_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/margin_size_8dp"
+            android:text="暂不设置"
+            android:textColor="@color/blue"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="100px"
+            android:text="请设置支付密码"
+            android:textColor="@color/first_font"
+            android:textSize="18sp"/>
+
+        <com.example.user.guokun.ui.widget.PayPwdEditText
+            android:id="@+id/pay_pass"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="60dp"/>
+
+        <Button
+            android:id="@+id/tv_confirm"
+            style="@style/button_red"
+            android:layout_marginTop="60dp"
+            android:text="确认"/>
+    </LinearLayout>
 </LinearLayout>

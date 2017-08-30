@@ -112,9 +112,10 @@
             android:text="我已阅读并同意" />
 
         <TextView
+            android:id="@+id/tv_login_xieyi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《摩摩哒服务使用协议》"
+            android:text="《国坤健康协议》"
             android:textColor="@color/font_red"
             android:textSize="@dimen/font_size_12sp" />
     </LinearLayout>
@@ -126,15 +127,15 @@
         android:layout_marginTop="30dp"
         android:text="登录" />
 
-    <TextView
-        android:id="@+id/tv_signin"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginTop="@dimen/margin_size_20dp"
-        android:gravity="center"
-        android:text="没有账号？"
-        android:textColor="@color/second_font" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_signin"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginLeft="11dp"-->
+        <!--android:layout_marginRight="11dp"-->
+        <!--android:layout_marginTop="@dimen/margin_size_20dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="没有账号？"-->
+        <!--android:textColor="@color/second_font" />-->
 
 </LinearLayout>

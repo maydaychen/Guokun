@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.ui.fragment.GoodsFragment;
 import com.example.user.guokun.ui.fragment.VspaFragment;
 import com.example.user.guokun.ui.widget.CustomViewPager;
 
@@ -35,11 +34,11 @@ public class MyOrderActivity extends InitActivity {
 
         tabIndicators = new ArrayList<>();
         tabIndicators.add("Vspa订单");
-        tabIndicators.add("商品订单");
+//        tabIndicators.add("商品订单");
 
         tabFragments = new ArrayList<>();
         tabFragments.add(VspaFragment.newInstance(tabIndicators.get(0)));
-        tabFragments.add(GoodsFragment.newInstance(tabIndicators.get(1)));
+//        tabFragments.add(GoodsFragment.newInstance(tabIndicators.get(1)));
         ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mVpContent.setAdapter(contentAdapter);
 

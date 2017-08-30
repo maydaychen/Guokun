@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ public class PaySuccessActivity extends InitActivity {
         ButterKnife.bind(this);
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         ChairInfoOnNext = resultBean -> {
+            Log.i("chenyi", "initView: " + resultBean.toString());
+            Log.i("chenyi", "initView: " + resultBean.getMag());
             Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             switch (resultBean.getCode()) {
                 case 0:

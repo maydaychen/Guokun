@@ -99,7 +99,7 @@ public class VspaFragment extends Fragment implements PullLoadMoreRecyclerView.P
         mRvVspaOrder.setLinearLayout();
 
         mRvVspaOrder.setOnPullLoadMoreListener(this);
-        mRvVspaOrder.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_view, null));
+        mRvVspaOrder.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_order, null));
         mRecyclerViewAdapter = new VspaAdapter(getActivity());
         mRvVspaOrder.setAdapter(mRecyclerViewAdapter);
 

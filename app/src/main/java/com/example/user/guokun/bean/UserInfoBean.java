@@ -40,6 +40,14 @@ public class UserInfoBean {
     }
 
     public static class DataBean {
+        public int getCouponNum() {
+            return couponNum;
+        }
+
+        public void setCouponNum(int couponNum) {
+            this.couponNum = couponNum;
+        }
+
         /**
          * head_imgurl : http://wx.qlogo.cn/mmopen/PiajxSqBRaEI67H 1hTjBW8wGv4gBZf5ibVwGtRjP6D7HDTiaMNM2A7VDniag4ZMSy7dv9wFYQ2y5 FHhHQaPmicSA12g/0
          * id : 1000980
@@ -49,7 +57,7 @@ public class UserInfoBean {
          * user_score : 0
          * wx_sex : 1
          */
-
+        private int couponNum;
         private String head_imgurl;
         private int id;
         private String insert_dt;

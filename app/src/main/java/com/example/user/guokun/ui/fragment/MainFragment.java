@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -25,10 +24,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MyLocationData;
 import com.example.user.guokun.R;
-import com.example.user.guokun.bean.UserInfoBean;
-import com.example.user.guokun.http.HttpMethods;
-import com.example.user.guokun.http.ProgressSubscriber;
-import com.example.user.guokun.http.SubscriberOnNextListener;
+import com.example.user.guokun.ui.activity.CaptureActivity;
 import com.example.user.guokun.ui.activity.CouponActivity;
 import com.example.user.guokun.ui.activity.FujinActivity;
 import com.example.user.guokun.ui.activity.GuigeActivity;
@@ -44,7 +40,6 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.Manifest.permission.CAMERA;
-import static com.example.user.guokun.Utils.qiangzhi_logout;
 
 /**
  * 作者：JTR on 2016/8/29 10:35
@@ -53,15 +48,15 @@ import static com.example.user.guokun.Utils.qiangzhi_logout;
 public class MainFragment extends Fragment implements EasyPermissions.PermissionCallbacks, BaiduMap.OnMapLoadedCallback, BDLocationListener {
 
     private static final String EXTRA_CONTENT = "content";
+    private static final int SHOW_SUBACTIVITY = 1;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int RC_CAMERA_PERM = 123;
+    private static final int RC_LOCATION_CONTACTS_PERM = 124;
     private LocationClient mLocationClient;
     private double lat;
     private double lon;
     private String address;
     private boolean isFirstLocate = true;
-    private SubscriberOnNextListener<UserInfoBean> UserOnNext;
-    private UserInfoBean mUserInfoBean;
     private SharedPreferences mPreferences;
 
     @BindView(R.id.iv_main_pic)
@@ -105,16 +100,6 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
 //        url_list.add("http://www.paochefang.com/wp-content/uploads/paoimage/2013/06/033242x8o.gif");
-        UserOnNext = userInfoBean -> {
-            if (userInfoBean.getCode() == 1) {
-                mUserInfoBean = userInfoBean;
-            } else if (userInfoBean.getCode() == -9) {
-                qiangzhi_logout(getActivity());
-            } else {
-                Toast.makeText(getActivity(), userInfoBean.getMag(), Toast.LENGTH_SHORT).show();
-            }
-
-        };
     }
 
     public void initView() {
@@ -122,18 +107,25 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
 //        mBanner.setOnBannerListener(position -> Toast.makeText(getActivity(), position + "", Toast.LENGTH_SHORT).show());
         mIvMainPic.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), PurseActivity.class);
-            intent.putExtra("yue", mUserInfoBean.getData().getUser_deposit());
             startActivity(intent);
         });
-        HttpMethods.getInstance().user_info(new ProgressSubscriber(UserOnNext,
-                getActivity()), mPreferences.getString("token", ""));
     }
 
-    private void initMap() {
-        mLocationClient = new LocationClient(getActivity()); //声明LocationClient类
-        mLocationClient.registerLocationListener(this);//注册监听函数
-        initLocation();
-        mLocationClient.start();//开启定位
+    @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)
+    public void initMap() {
+        String[] perms = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(getActivity(), perms)) {
+            // Have permissions, do the thing!
+            mLocationClient = new LocationClient(getActivity()); //声明LocationClient类
+            mLocationClient.registerLocationListener(this);//注册监听函数
+            initLocation();
+            mLocationClient.start();//开启定位
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_locate),
+                    RC_LOCATION_CONTACTS_PERM, perms);
+        }
     }
 
     private void initLocation() {
@@ -183,11 +175,11 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @AfterPermissionGranted(RC_CAMERA_PERM)
     public void init() {
         if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.CAMERA)) {
-//            Intent intent = new Intent(getActivity(), CaptureActivity.class);
-//            startActivityForResult(intent, SHOW_SUBACTIVITY);
-            Intent intent = new Intent(getActivity(), GuigeActivity.class);
-            intent.putExtra("code", "898602b6101740177983");
-            startActivity(intent);
+            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+            startActivityForResult(intent, SHOW_SUBACTIVITY);
+//            Intent intent = new Intent(getActivity(), GuigeActivity.class);
+//            intent.putExtra("code", "898602b6101740177935");
+//            startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera), RC_CAMERA_PERM, Manifest.permission.CAMERA);
         }
@@ -202,9 +194,13 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         Log.d("chenyi", "onPermissionsGranted:" + requestCode + ":" + perms.size());
-        Intent intent = new Intent(getActivity(), GuigeActivity.class);
-        intent.putExtra("code", "898602b6101740177935");
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), GuigeActivity.class);
+//        intent.putExtra("code", "898602b6101740177935");
+//        startActivity(intent);
+        if (requestCode == RC_CAMERA_PERM) {
+            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+            startActivityForResult(intent, SHOW_SUBACTIVITY);
+        }
     }
 
     @Override
@@ -218,7 +214,6 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (null != data) {
-            Toast.makeText(getActivity(), data.getStringExtra("code"), Toast.LENGTH_SHORT).show();
             String code = data.getStringExtra("code").substring(data.getStringExtra("code").indexOf("=") + 1);
             Log.i("chenyi", "onActivityResult: " + code);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);

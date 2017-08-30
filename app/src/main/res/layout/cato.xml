@@ -34,24 +34,30 @@ viewKIND, either express or implied.
         android:background="@color/transparent"/>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_flash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="380dp"
-            android:text="对准按摩椅上的二维码"
-            android:textColor="@color/second_font"/>
+            android:layout_marginBottom="@dimen/margin_size_16dp"
+            android:text="打开手电"
+            android:textColor="@color/white"/>
+
+
 
         <ImageView
             android:id="@+id/iv_flash"
+            android:layout_above="@id/tv_flash"
             android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_24dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
@@ -60,13 +66,15 @@ viewKIND, either express or implied.
             android:src="@drawable/shou_dian_tong"/>
 
         <TextView
-            android:id="@+id/tv_flash"
+            android:id="@+id/tv_mag"
+            android:layout_above="@id/iv_flash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_size_8dp"
-            android:text="打开手电"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:text="对准按摩椅上的二维码"
+            android:textColor="@color/second_font"/>
+
+    </RelativeLayout>
 
 
 </FrameLayout>

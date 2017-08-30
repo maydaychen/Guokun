@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -15,13 +15,14 @@
             <RelativeLayout
                 android:id="@+id/ri_how_to_use"
                 android:layout_width="match_parent"
-                android:layout_height="55dp">
+                android:layout_height="55dp"
+                android:background="@color/white">
 
                 <TextView
                     style="@style/tv_person_left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="订单问题" />
+                    android:text="订单问题"/>
 
                 <ImageView
                     android:id="@+id/iv_image"
@@ -29,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/zuo_jian_tou" />
+                    android:src="@drawable/zuo_jian_tou"/>
             </RelativeLayout>
 
             <!--<TextView-->
@@ -47,54 +48,49 @@
 
             <LinearLayout
                 android:id="@+id/tv_text2"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ri_how_to_use"
-                android:background="@color/second_font"
+                android:background="@color/background"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/margin_size_10dp"
                 android:paddingLeft="@dimen/margin_size_18dp"
                 android:paddingRight="@dimen/margin_size_18dp"
-                android:paddingTop="@dimen/margin_size_10dp">
+                android:paddingTop="@dimen/margin_size_10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:text="1.使用余额支付不了" />
+                    android:text="1.使用余额支付不了"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
                     android:text="先确认下您的国坤账户是否有余额，是否绑定手机号"
-                    android:textSize="@dimen/font_size_12sp" />
+                    android:textSize="@dimen/font_size_12sp"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:background="@color/line_e7" />
+                    android:background="@color/line_e7"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:text="2.在线支付过程中，订单显示未支付成功，款项却被扣了，怎么办？" />
+                    android:text="2.在线支付过程中，订单显示未支付成功，款项却被扣了，怎么办？"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
                     android:text="该问题属于第三方（银行、微信、支付宝等）数据传输延迟问题，您可以在等待一下，如果超过半小时，订单还是未支付状态，第三方会把款项退回到您的付款账户，具体到账时间依银行而应，一般在2个工作日内"
-                    android:textSize="@dimen/font_size_12sp" />
+                    android:textSize="@dimen/font_size_12sp"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:background="@color/line_e7" />
             </LinearLayout>
         </RelativeLayout>
 

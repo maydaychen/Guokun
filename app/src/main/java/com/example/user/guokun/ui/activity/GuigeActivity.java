@@ -1,5 +1,6 @@
 package com.example.user.guokun.ui.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,6 +78,7 @@ public class GuigeActivity extends InitActivity {
     @BindView(R.id.tv_coupon)
     TextView tvCoupon;
 
+    private DecimalFormat df = new DecimalFormat("######0.00");
     private SubscriberOnNextListener<ChairInfoBean> ChairInfoOnNext;
     private SubscriberOnNextListener<JSONObject> PayOnNext;
     private SharedPreferences mPreferences;
@@ -117,7 +121,7 @@ public class GuigeActivity extends InitActivity {
                     current_price = mChairInfoBean.getData().getAccountingList().get(0).getPrices();
                     real_price = current_price - price;
                     mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
-                    mBtSubmit.setText(String.format(getResources().getString(R.string.submit),real_price > 0 ? real_price + "" : "0"));
+                    mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
                 }
             });
             mLlProject2.setOnFocusChangeListener((view, b) -> {
@@ -222,26 +226,26 @@ public class GuigeActivity extends InitActivity {
 //                intent.putExtra("code", getIntent().getStringExtra("code"));
 //                intent.putExtra("type", type);
 //                startActivity(intent);
+
                 if (PAY_TYPE.equals("")) {
                     Toast.makeText(this, "请选择支付方式！", Toast.LENGTH_SHORT).show();
                 } else {
                     if (PAY_TYPE.equals("0")) {
-                        PayDialog payDialog = new PayDialog(GuigeActivity.this);
-                        payDialog.show();
-                        payDialog.setOnItemClickListener(new PayDialog.OnRecyclerViewItemClickListener() {
-                            @Override
-                            public void onItemClick(String data) {
-//                                Toast.makeText(GuigeActivity.this, data, Toast.LENGTH_SHORT).show();
-                                HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
-                                                GuigeActivity.this), mPreferences.getString("token", ""),
-                                        ID, getIntent().getStringExtra("code"), PAY_TYPE, coupon_id,data);
-                            }
-                        });
-
-                    }else {
+                        if (mPreferences.getInt("pay_pwd", 0) == 1) {
+                            PayDialog payDialog = new PayDialog(GuigeActivity.this);
+                            payDialog.show();
+                            payDialog.setOnItemClickListener(data -> HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
+                                            GuigeActivity.this), mPreferences.getString("token", ""),
+                                    ID, getIntent().getStringExtra("code"), PAY_TYPE, coupon_id, data));
+                        } else {
+                            new AlertDialog.Builder(GuigeActivity.this).setTitle("国坤健康")
+                                    .setMessage("未设置支付密码！请设置")
+                                    .setPositiveButton("确定", (dialog, which) -> startActivity(new Intent(GuigeActivity.this, SetPayPassActivity.class))).show();
+                        }
+                    } else {
                         HttpJsonMethod.getInstance().pay(new ProgressSubscriber(PayOnNext,
                                         GuigeActivity.this), mPreferences.getString("token", ""),
-                                ID, getIntent().getStringExtra("code"), PAY_TYPE, coupon_id,"");
+                                ID, getIntent().getStringExtra("code"), PAY_TYPE, coupon_id, "");
                     }
                 }
                 break;
@@ -263,8 +267,8 @@ public class GuigeActivity extends InitActivity {
                 coupon_id = dataBean.getId() + "";
                 price = dataBean.getMoney();
                 real_price = current_price - price;
-                mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
-                mBtSubmit.setText(String.format(getResources().getString(R.string.submit),real_price > 0 ? real_price + "" : "0"));
+                mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? df.format(real_price): "0"));
+                mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
             } else {
                 coupon_id = "";
                 tvCoupon.setText("使用优惠券");
@@ -272,7 +276,7 @@ public class GuigeActivity extends InitActivity {
                 price = 0.00;
                 real_price = current_price - price;
                 mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
-                mBtSubmit.setText(String.format(getResources().getString(R.string.submit),real_price > 0 ? real_price + "" : "0"));
+                mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
             }
         }
 

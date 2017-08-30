@@ -143,7 +143,8 @@ final class CameraConfigurationManager {
         continue;
       }
 
-      int newDiff = Math.abs(newX - screenResolution.x) + Math.abs(newY - screenResolution.y);
+//      int newDiff = Math.abs(newX - screenResolution.x) + Math.abs(newY - screenResolution.y);
+      float newDiff = Math.abs(screenResolution.x * 1.0f / newY - screenResolution.y * 1.0f / newX);
       if (newDiff == 0) {
         bestX = newX;
         bestY = newY;
@@ -151,7 +152,7 @@ final class CameraConfigurationManager {
       } else if (newDiff < diff) {
         bestX = newX;
         bestY = newY;
-        diff = newDiff;
+        diff = (int) newDiff;
       }
 
     }

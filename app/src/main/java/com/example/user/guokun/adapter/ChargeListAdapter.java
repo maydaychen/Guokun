@@ -26,7 +26,7 @@ public class ChargeListAdapter extends RecyclerView.Adapter<ChargeListAdapter.Vi
     private List<ChargeBean.DataBean> mData;
     private Context mContext;
     public int ID;
-    public int money;
+    public double money;
 
     //define interface
     public interface OnRecyclerViewItemClickListener {

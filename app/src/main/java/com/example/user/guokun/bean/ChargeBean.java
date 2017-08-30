@@ -53,10 +53,10 @@ public class ChargeBean {
          */
 
         private String addTime;
-        private int deposit;
+        private double deposit;
         private int enabled;
         private int id;
-        private int money;
+        private double money;
         private int type;
         private String updateTime;
 
@@ -68,11 +68,11 @@ public class ChargeBean {
             this.id = id;
         }
 
-        public int getMoney() {
+        public double getMoney() {
             return money;
         }
 
-        public void setMoney(int money) {
+        public void setMoney(double money) {
             this.money = money;
         }
 
@@ -102,11 +102,11 @@ public class ChargeBean {
             this.addTime = addTime;
         }
 
-        public int getDeposit() {
+        public double getDeposit() {
             return deposit;
         }
 
-        public void setDeposit(int deposit) {
+        public void setDeposit(double deposit) {
             this.deposit = deposit;
         }
 

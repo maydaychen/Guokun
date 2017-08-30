@@ -65,6 +65,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 //        viewHolder.price.setText(null == mData.get(position).get("price") || mData.get(position).get("price").equals("") ? "--" : mData.get(position).get("price"));
         viewHolder.mTvCouponName.setText(mData.get(position).getName());
         viewHolder.mTvCouponExpiry.setText(String.format(mContext.getResources().getString(R.string.tv_coupon_expiry), mData.get(position).getEndtime() + ""));
+        viewHolder.mTvCouponTime.setText(String.format(mContext.getResources().getString(R.string.useable_day), "全天可用"));
         viewHolder.mTvCouponPrice.setText(String.format(mContext.getResources().getString(R.string.price), mData.get(position).getMoney() + ""));
         viewHolder.mTvCouponName.setText(mData.get(position).getName());
         viewHolder.itemView.setTag(position);

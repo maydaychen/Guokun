@@ -25,7 +25,7 @@ public class CountingActivity extends InitActivity {
 
     @Override
     public void initData() {
-        tvCountingMoney.setText(String.valueOf(getIntent().getIntExtra("money", 0)));
+        tvCountingMoney.setText(String.format(getResources().getString(R.string.price), getIntent().getIntExtra("money", 0) + ".00"));
         new Handler().postDelayed(() -> startActivity(new Intent(CountingActivity.this, MainActivity.class)), 3000);
     }
 

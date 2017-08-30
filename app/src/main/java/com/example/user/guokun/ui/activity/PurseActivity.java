@@ -98,7 +98,7 @@ public class PurseActivity extends InitActivity {
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
             }
         });
-        tvPurseXieyi.setOnClickListener(view -> Toast.makeText(PurseActivity.this, "自个看着办", Toast.LENGTH_SHORT).show());
+        tvPurseXieyi.setOnClickListener(view -> {});
         mCbChongzhi.setChecked(true);
     }
 

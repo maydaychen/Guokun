@@ -134,6 +134,26 @@ public final class ViewfinderView extends View {
       // not the entire viewfinder mask.
       postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
     }
+    paint.setColor(laserColor);
+    paint.setStyle(Paint.Style.FILL);
+    // 左上角
+    canvas.drawRect(frame.left, frame.top + 5, frame.left + 5, frame.top
+            + 15, paint);
+    canvas.drawRect(frame.left, frame.top, frame.left
+            + 15, frame.top + 5, paint);
+    // 右上角
+    canvas.drawRect(frame.right - 5, frame.top + 5, frame.right,
+            frame.top + 15, paint);
+    canvas.drawRect(frame.right - 15, frame.top,
+            frame.right, frame.top + 5, paint);
+    // 左下角
+    canvas.drawRect(frame.left, frame.bottom - 15,
+            frame.left + 5, frame.bottom, paint);
+    canvas.drawRect(frame.left, frame.bottom - 5, frame.left
+            + 15, frame.bottom, paint);
+    // 右下角
+    canvas.drawRect(frame.right - 5, frame.bottom - 15, frame.right, frame.bottom, paint);
+    canvas.drawRect(frame.right - 15, frame.bottom - 5, frame.right, frame.bottom, paint);
   }
 
   public void drawViewfinder() {

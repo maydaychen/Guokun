@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.activity.ConfirmActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".ui.activity.ConfirmActivity">
 
 
     <RelativeLayout
         android:id="@+id/rl_confirm_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_comfirm_back"
             style="@style/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back" />
+            android:src="@drawable/back"/>
 
         <TextView
             style="@style/tv_white_24_margin8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/confirm" />
+            android:text="@string/confirm"/>
     </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@id/rl_confirm_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_e7"/>
 
     <RelativeLayout
         android:id="@+id/rl_confirm_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl_confirm_title">
+        android:layout_below="@id/line">
 
         <LinearLayout
             android:id="@+id/ll_confirm_name"
@@ -44,22 +52,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_size_8dp"
-                android:src="@drawable/v2_0_sptjdd_lianxiren" />
+                android:src="@drawable/v2_0_sptjdd_lianxiren"/>
 
             <TextView
                 android:id="@+id/tv_confirm_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_size_2dp"
-
-                android:textSize="@dimen/font_size_14sp" />
+                android:text="陈译"
+                android:textSize="@dimen/font_size_14sp"/>
 
             <TextView
                 android:id="@+id/tv_confirm_telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_size_16dp"
-                android:textSize="@dimen/font_size_14sp" />
+                android:text="13665137658"
+                android:textSize="@dimen/font_size_14sp"/>
         </LinearLayout>
 
         <TextView
@@ -67,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_below="@id/ll_confirm_name"
-            android:background="@color/line_colour_ee" />
+            android:background="@color/line_colour_ee"/>
 
         <LinearLayout
             android:id="@+id/ll_confirm_address"
@@ -82,14 +91,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_size_8dp"
-                android:src="@drawable/v2_0_sptjdd_dizhi" />
+                android:src="@drawable/v2_0_sptjdd_dizhi"/>
 
             <TextView
                 android:id="@+id/tv_confirm_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_size_2dp"
-                android:textSize="@dimen/font_size_14sp" />
+                android:text="山水产业园3号楼10楼1005"
+                android:textSize="@dimen/font_size_14sp"/>
 
         </LinearLayout>
 
@@ -101,7 +111,7 @@
             android:layout_marginRight="@dimen/margin_size_10dp"
             android:background="@color/white"
             android:padding="@dimen/margin_size_8dp"
-            android:src="@drawable/v2_0_sptjdd_bianji" />
+            android:src="@drawable/v2_0_sptjdd_bianji"/>
     </RelativeLayout>
 
     <TextView
@@ -109,7 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/rl_confirm_address"
-        android:background="@color/line_colour_ee" />
+        android:background="@color/line_colour_ee"/>
 
 
     <RelativeLayout
@@ -125,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/margin_size_8dp"
-            android:text="@string/pay_kind" />
+            android:text="@string/pay_kind"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +144,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
             android:text="@string/online_pay"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </RelativeLayout>
 
     <View
@@ -143,7 +153,7 @@
         android:layout_height="0.5dp"
         android:layout_below="@id/rl_confirm_pay"
         android:layout_marginBottom="@dimen/margin_size_8dp"
-        android:background="@color/line_colour_ee" />
+        android:background="@color/line_colour_ee"/>
 
 
     <TextView
@@ -154,14 +164,15 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:textSize="@dimen/font_size_14sp" />
+        android:text="国坤按摩椅"
+        android:textSize="@dimen/font_size_14sp"/>
 
     <TextView
         android:id="@+id/confirm_line4"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/tv_confirm_sname"
-        android:background="@color/line_colour_ee" />
+        android:background="@color/line_colour_ee"/>
 
     <RelativeLayout
         android:id="@+id/rl_confirm_showimg"
@@ -173,7 +184,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_confirm_showimg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/confiem_more"
@@ -182,7 +193,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_size_8dp"
-            android:src="@drawable/index_more" />
+            android:src="@drawable/index_more"/>
 
         <TextView
             android:id="@+id/tv_confirm_num"
@@ -191,7 +202,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/margin_size_8dp"
             android:layout_toLeftOf="@id/confiem_more"
-            android:text="@string/tv_order_num" />
+            android:text="@string/tv_order_num"/>
 
     </RelativeLayout>
 
@@ -200,7 +211,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/rl_confirm_showimg"
-        android:background="@color/line_colour_ee" />
+        android:background="@color/line_colour_ee"/>
 
     <RelativeLayout
         android:id="@+id/rl_confirm_price"
@@ -215,7 +226,7 @@
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/margin_size_8dp"
             android:text="@string/tv_confirm_order_price"
-            android:textColor="@color/second_font" />
+            android:textColor="@color/second_font"/>
 
         <TextView
             android:id="@+id/tv_order_price"
@@ -225,8 +236,7 @@
             android:layout_centerVertical="true"
             android:paddingRight="@dimen/margin_size_8dp"
             android:text="@string/price"
-
-            android:textColor="@color/font_red" />
+            android:textColor="@color/font_red"/>
     </RelativeLayout>
 
     <TextView
@@ -234,7 +244,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/rl_confirm_price"
-        android:background="@color/line_colour_ee" />
+        android:background="@color/line_colour_ee"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -248,7 +258,7 @@
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/margin_size_8dp"
             android:text="@string/tv_confirm_ship_price"
-            android:textColor="@color/second_font" />
+            android:textColor="@color/second_font"/>
 
         <TextView
             android:id="@+id/tv_ship_price"
@@ -258,7 +268,7 @@
             android:layout_centerVertical="true"
             android:paddingRight="@dimen/margin_size_8dp"
             android:text="@string/tv_tijian_price1"
-            android:textColor="@color/font_red" />
+            android:textColor="@color/font_red"/>
     </RelativeLayout>
 
 
@@ -277,7 +287,7 @@
             android:layout_marginLeft="8dp"
             android:text="@string/tv_confirm_price"
             android:textColor="@color/first_font"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tv_confirm_price"
@@ -287,7 +297,7 @@
             android:layout_toRightOf="@id/tv_confirm_text"
             android:text="@string/price"
             android:textColor="@color/font_red"
-            android:textSize="@dimen/font_size_18sp" />
+            android:textSize="@dimen/font_size_18sp"/>
 
         <Button
             android:id="@+id/bt_confirm_commit"
@@ -296,7 +306,7 @@
             android:layout_alignParentRight="true"
             android:background="@color/font_red"
             android:text="@string/bt_confirm"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 

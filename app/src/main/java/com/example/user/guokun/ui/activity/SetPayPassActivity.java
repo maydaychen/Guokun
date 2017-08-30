@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.user.guokun.MainActivity;
@@ -24,6 +26,7 @@ public class SetPayPassActivity extends InitActivity {
     PayPwdEditText payPass;
     private SubscriberOnNextListener<ResultBean> LoginOnNext;
     private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
     private String pwd;
 
     @Override
@@ -31,13 +34,17 @@ public class SetPayPassActivity extends InitActivity {
         setContentView(R.layout.activity_set_pay_pass);
         ButterKnife.bind(this);
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        mEditor = mPreferences.edit();
         LoginOnNext = resultBean -> {
             if (resultBean.getCode() == 1) {
                 Toast.makeText(this, "设置成功！", Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(SetPayPassActivity.this, MainActivity.class));
-                Intent intent = new Intent(SetPayPassActivity.this,MainActivity.class);
+                Intent intent = new Intent(SetPayPassActivity.this, MainActivity.class);
+                mEditor.putInt("pay_pwd", 1);
+                mEditor.apply();
                 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-            }else {
+                finish();
+            } else {
                 Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
             }
         };
@@ -47,13 +54,26 @@ public class SetPayPassActivity extends InitActivity {
     public void initData() {
         payPass.initStyle(R.drawable.edit_num_bg, 6, 0.33f, R.color.font_colour_99, R.color.font_colour_99, 20);
         payPass.setOnTextFinishListener(str -> {//密码输入完后的回调
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
             pwd = str;
         });
     }
 
-    @OnClick(R.id.tv_confirm)
-    public void onViewClicked() {
-        HttpMethods.getInstance().set_pass(
-                new ProgressSubscriber(LoginOnNext, SetPayPassActivity.this), mPreferences.getString("token", ""), pwd);
+    @OnClick({R.id.tv_set_pwd_skip, R.id.tv_confirm})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_set_pwd_skip:
+                startActivity(new Intent(SetPayPassActivity.this, MainActivity.class));
+                break;
+            case R.id.tv_confirm:
+                if (pwd.length() == 6) {
+                    HttpMethods.getInstance().set_pass(
+                            new ProgressSubscriber(LoginOnNext, SetPayPassActivity.this), mPreferences.getString("token", ""), pwd);
+                } else {
+                    Toast.makeText(this, "请输入完整支付密码！", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 }

@@ -1,279 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/tuo_yuan_icon" />
+
+    <TextView
+        android:id="@+id/tv_person_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_size_10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_e7" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/tuo_yuan_icon"/>
-
-        <TextView
-            android:id="@+id/tv_person_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/margin_size_10dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line_e7"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/rl_person_yue"
-                android:layout_width="0dp"
-                android:layout_height="75dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_yu_e"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/yu_e_zhifu"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_size_10dp"
-                    android:layout_toRightOf="@id/iv_yu_e"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="余额（魔豆）"
-                        android:textColor="@color/font_red"/>
-
-                    <TextView
-                        android:id="@+id/tv_person_yue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="0.00"/>
-                </LinearLayout>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/margin_size_8dp"
-                android:layout_marginTop="@dimen/margin_size_8dp"
-                android:background="@color/line_e7"/>
-
-            <RelativeLayout
-                android:id="@+id/rl_person_coupon"
-                android:layout_width="0dp"
-                android:layout_height="75dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_coupon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/geren_youhui_quan"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_size_10dp"
-                    android:layout_toRightOf="@id/iv_coupon"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="优惠券（张）"
-                        android:textColor="@color/font_red"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:text="1"/>
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/background"/>
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/rl_person_purse"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="我的钱包"/>
+            android:id="@+id/rl_person_yue"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageView
-                style="@style/iv_person_right"
+                android:id="@+id/iv_yu_e"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
-            android:background="@color/line_e7"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_person_order"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="订单记录"/>
-
-            <ImageView
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
-            android:background="@color/line_e7"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_person_invite"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="邀请好友"/>
-
-            <ImageView
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
-            android:background="@color/line_e7"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_person_question"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="常见问题"/>
-
-            <ImageView
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
-            android:background="@color/line_e7"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_person_setting"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="我的设置"/>
-
-            <ImageView
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_marginRight="@dimen/margin_size_8dp"
-            android:background="@color/line_e7"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_person_kefu"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <TextView
-                style="@style/tv_person_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="客服咨询"/>
-
-            <ImageView
-                android:id="@+id/iv_zixun"
-                style="@style/iv_person_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/zuo_jian_tou"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv_zixun"
-                android:text="400-855-7878"/>
+                android:src="@drawable/yu_e_zhifu" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_size_10dp"
+                android:layout_toRightOf="@id/iv_yu_e"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="余额（魔豆）"
+                    android:textColor="@color/font_red" />
+
+                <TextView
+                    android:id="@+id/tv_person_yue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0.00" />
+            </LinearLayout>
         </RelativeLayout>
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_size_8dp"
+            android:layout_marginTop="@dimen/margin_size_8dp"
+            android:background="@color/line_e7" />
 
+        <RelativeLayout
+            android:id="@+id/rl_person_coupon"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/geren_youhui_quan" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_size_10dp"
+                android:layout_toRightOf="@id/iv_coupon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="优惠券（张）"
+                    android:textColor="@color/font_red" />
+
+                <TextView
+                    android:id="@+id/coupon_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
-</ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/background" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_purse"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="我的钱包" />
+
+        <ImageView
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_order"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="订单记录" />
+
+        <ImageView
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_invite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="邀请好友" />
+
+        <ImageView
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_question"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="常见问题" />
+
+        <ImageView
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_setting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="我的设置" />
+
+        <ImageView
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person_kefu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_person_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="客服咨询" />
+
+        <ImageView
+            android:id="@+id/iv_zixun"
+            style="@style/iv_person_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zuo_jian_tou" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_zixun"
+            android:text="400-855-7878"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:background="@color/line_e7" />
+
+
+</LinearLayout>

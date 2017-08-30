@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.example.user.guokun.ui.activity.PurseActivity">
 
     <LinearLayout
@@ -31,9 +31,15 @@
                 android:text="我的钱包"/>
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_e7"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="135dp">
+            android:layout_height="135dp"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="90dp"
@@ -46,7 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="余额(金币)"
+                    android:text="余额(魔豆)"
                     android:textColor="@color/white"/>
 
                 <TextView
@@ -63,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/margin_size_4dp"
                 android:text="可直接消费抵用"
                 android:textColor="@color/second_font"/>
         </RelativeLayout>
@@ -70,17 +77,28 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_charge_list"
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_size_10dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_size_10dp"
             android:background="@color/white"
-            android:padding="@dimen/margin_size_10dp"
-            android:text="支付方式"/>
+            android:paddingBottom="@dimen/margin_size_10dp"
+            android:paddingTop="@dimen/margin_size_10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl_pay_price"
+            android:layout_marginTop="@dimen/margin_size_8dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="@dimen/margin_size_8dp"
+            android:text="@string/tv_pay_kind"
+            android:textSize="@dimen/font_size_14sp"/>
+
+        <TextView
+            android:id="@+id/pry_kind_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_colour_ee"/>
 
         <RelativeLayout
             android:id="@+id/rl_ali"
@@ -114,12 +132,12 @@
                 android:padding="@dimen/margin_size_8dp"/>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_10dp"
-            android:layout_marginRight="@dimen/margin_size_10dp"
-            android:background="@color/second_font"/>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="@dimen/margin_size_10dp"-->
+            <!--android:layout_marginRight="@dimen/margin_size_10dp"-->
+            <!--android:background="@color/line_e7"/>-->
 
         <RelativeLayout
             android:id="@+id/rl_wechat"
@@ -153,13 +171,6 @@
                 android:padding="@dimen/margin_size_8dp"/>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/margin_size_10dp"
-            android:layout_marginRight="@dimen/margin_size_10dp"
-            android:background="@color/second_font"/>
-
         <Button
             android:id="@+id/bt_chongzhi"
             style="@style/button_red"
@@ -183,7 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/cb_chongzhi"
-                android:text="我已阅读并同意《国坤健康充返协议》，知悉充值本机和返现以魔豆的形式不可体现，转移。查看详细协议"/>
+                android:text="我已阅读并同意《国坤健康充返协议》，知悉充值本机和返现以魔豆的形式不可提现，转移。查看详细协议"/>
         </RelativeLayout>
 
     </LinearLayout>

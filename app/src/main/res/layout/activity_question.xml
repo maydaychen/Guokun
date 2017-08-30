@@ -1,84 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.user.guokun.ui.activity.QuestionActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_coupon_detail_back"
-            style="@style/iv_back"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_coupon_detail_back"
+                style="@style/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_size_8dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                style="@style/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/questions" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_e7"/>
+
+        <com.example.user.guokun.ui.widget.MyAffair_1
+            android:id="@+id/question1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_size_8dp"
-            android:src="@drawable/back"/>
+            android:layout_height="wrap_content" />
 
-        <TextView
-            style="@style/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/questions"/>
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_marginRight="@dimen/margin_size_8dp"
+            android:background="@color/line_e7" />
 
-    <com.example.user.guokun.ui.widget.MyAffair_1
-        android:id="@+id/question1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <com.example.user.guokun.ui.widget.MyAffair_2
+            android:id="@+id/question2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_size_8dp"
-        android:layout_marginRight="@dimen/margin_size_8dp"
-        android:background="@color/line_e7"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_marginRight="@dimen/margin_size_8dp"
+            android:background="@color/line_e7" />
 
-    <com.example.user.guokun.ui.widget.MyAffair_2
-        android:id="@+id/question2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <com.example.user.guokun.ui.widget.MyAffair_3
+            android:id="@+id/question3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_size_8dp"
-        android:layout_marginRight="@dimen/margin_size_8dp"
-        android:background="@color/line_e7"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_marginRight="@dimen/margin_size_8dp"
+            android:background="@color/line_e7" />
 
-    <com.example.user.guokun.ui.widget.MyAffair_3
-        android:id="@+id/question3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <com.example.user.guokun.ui.widget.MyAffair_4
+            android:id="@+id/question4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_size_8dp"
-        android:layout_marginRight="@dimen/margin_size_8dp"
-        android:background="@color/line_e7"/>
-
-    <com.example.user.guokun.ui.widget.MyAffair_4
-        android:id="@+id/question4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_size_8dp"
-        android:layout_marginRight="@dimen/margin_size_8dp"
-        android:background="@color/line_e7"/>
-
-    <com.example.user.guokun.ui.widget.MyAffair_5
-        android:id="@+id/question5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_8dp"
+            android:layout_marginRight="@dimen/margin_size_8dp"
+            android:background="@color/line_e7" />
+    </LinearLayout>
+</ScrollView>

@@ -10,6 +10,7 @@
         <RelativeLayout
             android:id="@+id/affair_title_rl"
             android:layout_width="fill_parent"
+            android:background="@color/white"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -51,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ri_how_to_use"
-                android:background="@color/second_font"
+                android:background="@color/background"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/margin_size_10dp"
                 android:paddingLeft="@dimen/margin_size_18dp"
@@ -62,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:text="1.支付后椅子不工作" />
+                    android:text="1.支付后按摩椅不工作" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,11 +91,6 @@
                     android:text="遇到此问题请在订单页面点击订单反馈，我们将会有客服为您解答"
                     android:textSize="@dimen/font_size_12sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_size_4dp"
-                    android:background="@color/line_e7" />
             </LinearLayout>
         </RelativeLayout>
 
