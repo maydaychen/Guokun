@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.user.guokun.R;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
@@ -12,6 +13,8 @@ import com.jakewharton.rxbinding.widget.RxCompoundButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.user.guokun.R.id.tv_pay_solder_detail;
 
 
 public class PayActivity extends InitActivity {
@@ -27,13 +30,18 @@ public class PayActivity extends InitActivity {
     RelativeLayout mRlWechat;
     @BindView(R.id.rl_yue)
     RelativeLayout mRlYue;
+    @BindView(tv_pay_solder_detail)
+    TextView mTvPaySolderDetail;
+    @BindView(R.id.tv_pay_money_detail)
+    TextView mTvPayMoneyDetail;
     private String PAY_TYPE = "";
 
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_pay);
         ButterKnife.bind(this);
-
+        mTvPaySolderDetail.setText("国坤健康");
+        mTvPayMoneyDetail.setText(String.format(getResources().getString(R.string.price), "998"));
     }
 
     @Override

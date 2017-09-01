@@ -164,7 +164,7 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:text="国坤按摩椅"
+        android:text="国坤健康"
         android:textSize="@dimen/font_size_14sp"/>
 
     <TextView
@@ -249,8 +249,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_below="@id/confirm_line6"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:layout_alignBaseline="@+id/confirm_line6"
+        android:layout_alignBottom="@+id/confirm_line6"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -276,8 +278,9 @@
         android:id="@+id/confirm_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/tv_confirm_text"

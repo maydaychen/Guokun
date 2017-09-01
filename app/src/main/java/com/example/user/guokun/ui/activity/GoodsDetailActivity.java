@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,26 +22,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
+import com.example.user.guokun.adapter.GoodsCommentAdapter;
 import com.example.user.guokun.bean.ImageInfo;
 import com.example.user.guokun.ui.widget.GlideImageLoader;
 import com.loopj.android.image.SmartImageView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GoodsDetailActivity extends InitActivity {
-    @BindView(R.id.scrollView)
-    ScrollView mScrollView;
     private List<String> url_list;
 
+
+    @BindView(R.id.scrollView)
+    ScrollView mScrollView;
     @BindView(R.id.banner)
     Banner mBanner;
-
     @BindView(R.id.tv_buynow)
     TextView tvBuynow;
     @BindView(R.id.ll_detail_botton)
@@ -51,12 +55,10 @@ public class GoodsDetailActivity extends InitActivity {
     ImageView ivChooseDocBack;
     @BindView(R.id.rl_mine_title)
     RelativeLayout rlMineTitle;
-
     @BindView(R.id.tv_goods_detail_name)
     TextView tvGoodsDetailName;
     @BindView(R.id.tv_goods_detail_price)
     TextView tvGoodsDetailPrice;
-
     @BindView(R.id.tv_goods_detail_shop)
     TextView tvGoodsDetailShop;
     @BindView(R.id.tv_goods_detail_sold)
@@ -74,10 +76,11 @@ public class GoodsDetailActivity extends InitActivity {
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_goods_detail);
         ButterKnife.bind(this);
-        tvGoodsDetailName.setText("iPhone 10");
+        tvGoodsDetailName.setText("国坤按摩椅");
         tvGoodsDetailPrice.setText(String.format(getResources().getString(R.string.price), 100 + ""));
         tvGoodsDetailSold.setText(String.format(getResources().getString(R.string.goods_detail_sold), 888 + ""));
         tvGoodsDetailShop.setText("京东商城");
+        tvGoodsDetailInventory.setText(String.format(getResources().getString(R.string.goods_detail_inventory), "6"));
         url_list = new ArrayList<>();
         url_list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
         url_list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
@@ -89,6 +92,18 @@ public class GoodsDetailActivity extends InitActivity {
         mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
         mBanner.isAutoPlay(false);
         mBanner.setOnBannerListener(position -> Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show());
+
+        List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "张三");
+        map.put("time", "2017-8-30");
+        map.put("miaoshu", "5");
+        map.put("fuwu", "5");
+        map.put("fahuo", "5");
+        list.add(map);
+
+        rvGoodsComment.setLayoutManager(new LinearLayoutManager(this));
+        rvGoodsComment.setAdapter(new GoodsCommentAdapter(GoodsDetailActivity.this, list));
     }
 
     @OnClick({R.id.tv_buynow, R.id.iv_choose_doc_back})
