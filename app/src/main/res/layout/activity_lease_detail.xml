@@ -1,87 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background"
-                tools:context="com.example.user.guokun.ui.activity.MapActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.user.guokun.ui.activity.MapActivity">
 
     <RelativeLayout
-        android:id="@+id/rl_lease_title"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:background="@color/background">
 
-        <ImageView
-            android:id="@+id/iv_map_back"
-            style="@style/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back"/>
+        <RelativeLayout
+            android:id="@+id/rl_lease_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_map_back"
+                style="@style/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"/>
+
+            <TextView
+                style="@style/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="租赁详情"/>
+        </RelativeLayout>
 
         <TextView
-            style="@style/tv_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/lease_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="租赁详情"/>
+            android:layout_below="@id/rl_lease_title"
+            android:padding="@dimen/margin_size_8dp"
+            android:text="租赁信息"/>
+
+        <TextView
+            android:id="@+id/tv_lease_period"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lease_info"
+            android:text="@string/tv_lease_period"/>
+
+        <TextView
+            android:id="@+id/tv_lease_price"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_period"
+            android:text="@string/tv_lease_price"/>
+
+        <TextView
+            android:id="@+id/tv_lease_fee"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_price"
+            android:text="@string/tv_lease_fee"/>
+
+        <TextView
+            android:id="@+id/tv_lease_pledge"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_fee"
+            android:text="@string/tv_lease_pledge"/>
+
+        <TextView
+            android:id="@+id/tv_lease_start_date"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_pledge"
+            android:text="@string/tv_lease_start_date"/>
+
+        <TextView
+            android:id="@+id/tv_lease_end_date"
+            style="@style/tv_title_lease"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_start_date"
+            android:text="@string/tv_lease_end_date"/>
+
+        <TextView
+            android:id="@+id/lease_guige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lease_end_date"
+            android:padding="@dimen/margin_size_8dp"
+            android:text="套餐信息"/>
+
+        <LinearLayout
+            android:id="@+id/ll_guige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lease_guige"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_project1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project1_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                    <TextView
+                        android:id="@+id/tv_project1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_project2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project2_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                    <TextView
+                        android:id="@+id/tv_project2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <View
+                    android:layout_width="@dimen/margin_size_0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_project3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/selector_charge_list"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_project3_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                    <TextView
+                        android:id="@+id/tv_project3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/selector_red"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/margin_size_0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/bt_submit"
+            style="@style/button_red"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/ll_guige"
+            android:layout_marginTop="@dimen/margin_size_10dp"
+            android:text="立即启动"/>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/lease_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_lease_title"
-        android:padding="@dimen/margin_size_8dp"
-        android:text="租赁信息"/>
-
-    <TextView
-        android:id="@+id/tv_lease_period"
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lease_info"
-        android:text="付款周期（天）："/>
-
-    <TextView
-        android:id="@+id/tv_lease_price"
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lease_period"
-        android:text="价格："/>
-
-    <TextView
-        android:id="@+id/tv_lease_fee"
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lease_price"
-        android:text="首期费用："/>
-
-    <TextView
-        android:id="@+id/tv_lease_pledge"
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lease_fee"
-        android:text="押金："/>
-
-    <TextView
-        android:id="@+id/tv_lease_start_date"
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lease_pledge"
-        android:text="租赁开始时间："/>
-
-    <TextView
-        style="@style/tv_title_lease"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lease_start_date"
-        android:text="租赁到期时间："/>
-
-    <Button
-        android:id="@+id/bt_submit"
-        style="@style/button_red"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/margin_size_20dp"
-        android:layout_marginTop="@dimen/margin_size_10dp"/>
-
-
-</RelativeLayout>
+</ScrollView>

@@ -86,15 +86,15 @@ public interface BlueService {
 
     @FormUrlEncoded
     @POST("/lease/info.do")
-    rx.Observable<LeaseDetailBean> lease_info(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId);
+    rx.Observable<LeaseDetailBean> lease_info(@Field("accessToken") String accessToken, @Field("leaseId") int leaseId);
 
     @FormUrlEncoded
     @POST("/lease/start.do")
-    rx.Observable<ResultBean> lease_start(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId,
-                                          @Field("costId") String costId);
+    rx.Observable<ResultBean> lease_start(@Field("accessToken") String accessToken, @Field("leaseId") int leaseId,
+                                          @Field("costId") int costId);
 
     @FormUrlEncoded
     @POST("/lease/pay.do")
-    rx.Observable<ResultBean> lease_pay(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId,
+    rx.Observable<JSONObject> lease_pay(@Field("accessToken") String accessToken, @Field("leaseId") int leaseId,
                                         @Field("payType") String payType);
 }

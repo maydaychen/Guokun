@@ -60,7 +60,7 @@ public class LeaseDetailBean {
         private String update_time;
         private int period;
         private double price;
-        private int fee;
+        private double fee;
         private int pledge;
         private String start_time;
         private String end_time;
@@ -106,11 +106,11 @@ public class LeaseDetailBean {
             this.price = price;
         }
 
-        public int getFee() {
+        public double getFee() {
             return fee;
         }
 
-        public void setFee(int fee) {
+        public void setFee(double fee) {
             this.fee = fee;
         }
 

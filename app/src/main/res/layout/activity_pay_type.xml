@@ -30,37 +30,27 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:padding="@dimen/margin_size_8dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_size_8dp">
 
-        <ImageView
-            android:id="@+id/iv_pay_item"
+        <TextView
+            android:id="@+id/tv_pay_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/margin_size_26dp"
-            android:paddingRight="23dp"/>
+            android:layout_centerVertical="true"
+            android:text="充值"
+            android:textSize="18sp"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/iv_pay_item"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_pay_price"
-                android:textSize="@dimen/font_size_18sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_pay_project"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+            android:layout_toRightOf="@id/tv_pay_item"
+            android:padding="@dimen/margin_size_8dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -75,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/zhi_fu_bao" />
+            android:src="@drawable/zhi_fu_bao"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,7 +73,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_size_8dp"
             android:layout_toRightOf="@id/ali_logo"
-            android:text="支付宝支付" />
+            android:text="支付宝支付"/>
 
         <CheckBox
             android:id="@+id/cb_pay_ali"
@@ -92,7 +82,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:button="@drawable/selector_check"
-            android:padding="@dimen/margin_size_8dp" />
+            android:padding="@dimen/margin_size_8dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -127,37 +117,37 @@
             android:padding="@dimen/margin_size_8dp"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_yue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/margin_size_8dp">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_yue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:padding="@dimen/margin_size_8dp">-->
 
-        <ImageView
-            android:id="@+id/yue_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/yu_e_zhifu"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/yue_logo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/yu_e_zhifu"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_toRightOf="@id/yue_logo"
-            android:text="余额支付"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="@dimen/margin_size_8dp"-->
+            <!--android:layout_toRightOf="@id/yue_logo"-->
+            <!--android:text="余额支付"/>-->
 
-        <CheckBox
-            android:id="@+id/cb_pay_yue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_check"
-            android:padding="@dimen/margin_size_8dp"/>
-    </RelativeLayout>
+        <!--<CheckBox-->
+            <!--android:id="@+id/cb_pay_yue"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:button="@drawable/selector_check"-->
+            <!--android:padding="@dimen/margin_size_8dp"/>-->
+    <!--</RelativeLayout>-->
 
     <Button
         android:id="@+id/bt_submit"

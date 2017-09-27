@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class HttpJsonMethod {
-    public static final String BASE_URL = "http://api2.guokunjiankangkeji.com";
+    public static final String BASE_URL = "http://api.guokunjiankangkeji.com";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -76,6 +76,15 @@ public class HttpJsonMethod {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    public void lease_pay(Subscriber<JSONObject> subscriber, String accessToken, int id, String id2) {
+        movieService.lease_pay(accessToken, id, id2)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 //
 //    public void send_code(Subscriber<JSONObject> subscriber, String access_token, String mobile, String sign, int timestamp) {
 //        movieService.send_code(access_token, mobile, sign, timestamp)

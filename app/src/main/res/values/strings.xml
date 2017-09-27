@@ -10,6 +10,7 @@
     <string name="purse_price">售价：￥%1$s</string>
     <string name="price">￥%1$s</string>
     <string name="project_price">￥%1$s %2$s分钟</string>
+    <string name="project_time">%1$s 分钟</string>
 
     <string name="alipay_result_success">支付成功</string>
     <string name="alipay_result_fail">支付失败</string>
@@ -187,6 +188,12 @@
     <string name="tv_yiquxiao">已取消</string>
     <string name="tv_coupon_expiry">有效期至：%1$s</string>
     <string name="useable_day">可用时间：%1$s</string>
+    <string name="tv_lease_period">付款周期：%1$s 天</string>
+    <string name="tv_lease_price">价格：%1$s 元</string>
+    <string name="tv_lease_fee">首期费用：%1$s 元</string>
+    <string name="tv_lease_pledge">押金：%1$s 元</string>
+    <string name="tv_lease_start_date">租赁开始时间：%1$s</string>
+    <string name="tv_lease_end_date">租赁到期时间：%1$s</string>
 
 
 </resources>

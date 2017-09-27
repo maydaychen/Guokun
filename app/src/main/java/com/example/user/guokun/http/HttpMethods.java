@@ -28,7 +28,7 @@ import rx.schedulers.Schedulers;
  * 邮箱：2091320109@qq.com
  */
 public class HttpMethods {
-    public static final String BASE_URL = "http://api2.guokunjiankangkeji.com";
+    public static final String BASE_URL = "http://api.guokunjiankangkeji.com";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -177,12 +177,22 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
-    public void lease_info(Subscriber<LeaseDetailBean> subscriber, String accessToken, String id) {
-        movieService.lease_info(accessToken,id)
+    public void lease_info(Subscriber<LeaseDetailBean> subscriber, String accessToken, int id) {
+        movieService.lease_info(accessToken, id)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    public void lease_start(Subscriber<ResultBean> subscriber, String accessToken, int id, int id2) {
+        movieService.lease_start(accessToken, id, id2)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 }
