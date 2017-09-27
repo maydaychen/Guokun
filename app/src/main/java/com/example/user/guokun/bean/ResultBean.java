@@ -10,22 +10,22 @@ public class ResultBean {
      * mag : 获取验证码成功
      */
 
-    private int code;
-    private String mag;
+    private int status;
+    private String message;
 
     public int getCode() {
-        return code;
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(int status) {
+        this.status = status;
     }
 
-    public String getMag() {
-        return mag;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMag(String mag) {
-        this.mag = mag;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

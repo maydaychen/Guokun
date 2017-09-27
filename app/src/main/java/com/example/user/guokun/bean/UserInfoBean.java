@@ -6,21 +6,29 @@ package com.example.user.guokun.bean;
 
 public class UserInfoBean {
     /**
-     * code : 1
-     * data : {"head_imgurl":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEI67H 1hTjBW8wGv4gBZf5ibVwGtRjP6D7HDTiaMNM2A7VDniag4ZMSy7dv9wFYQ2y5 FHhHQaPmicSA12g/0","id":1000980,"insert_dt":"2017-07-28 11:15:06.0","nick_name":"起风了","user_deposit":169.91,"user_score":0,"wx_sex":1}
-     * mag : 获取用户 信息成功
+     * status : 1
+     * message : 请求成功
+     * data : {"id":2,"add_time":"2017-09-13 10:39:12","update_time":"2017-09-13 11:53:48","last_time":"2017-09-13 12:45:39","nickname":"18651039625","mobile":"18651039625","sex":0,"imgurl":"","score":0,"deposit":0}
      */
 
-    private int code;
+    private int status;
+    private String message;
     private DataBean data;
-    private String mag;
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public DataBean getData() {
@@ -31,15 +39,31 @@ public class UserInfoBean {
         this.data = data;
     }
 
-    public String getMag() {
-        return mag;
-    }
-
-    public void setMag(String mag) {
-        this.mag = mag;
-    }
-
     public static class DataBean {
+        /**
+         * id : 2
+         * add_time : 2017-09-13 10:39:12
+         * update_time : 2017-09-13 11:53:48
+         * last_time : 2017-09-13 12:45:39
+         * nickname : 18651039625
+         * mobile : 18651039625
+         * sex : 0
+         * imgurl :
+         * score : 0
+         * deposit : 0
+         */
+
+        private int id;
+        private String add_time;
+        private String update_time;
+        private String last_time;
+        private String nickname;
+        private String mobile;
+        private int sex;
+        private String imgurl;
+        private double score;
+        private double deposit;
+
         public int getCouponNum() {
             return couponNum;
         }
@@ -48,31 +72,7 @@ public class UserInfoBean {
             this.couponNum = couponNum;
         }
 
-        /**
-         * head_imgurl : http://wx.qlogo.cn/mmopen/PiajxSqBRaEI67H 1hTjBW8wGv4gBZf5ibVwGtRjP6D7HDTiaMNM2A7VDniag4ZMSy7dv9wFYQ2y5 FHhHQaPmicSA12g/0
-         * id : 1000980
-         * insert_dt : 2017-07-28 11:15:06.0
-         * nick_name : 起风了
-         * user_deposit : 169.91
-         * user_score : 0
-         * wx_sex : 1
-         */
         private int couponNum;
-        private String head_imgurl;
-        private int id;
-        private String insert_dt;
-        private String nick_name;
-        private double user_deposit;
-        private int user_score;
-        private int wx_sex;
-
-        public String getHead_imgurl() {
-            return head_imgurl;
-        }
-
-        public void setHead_imgurl(String head_imgurl) {
-            this.head_imgurl = head_imgurl;
-        }
 
         public int getId() {
             return id;
@@ -82,44 +82,76 @@ public class UserInfoBean {
             this.id = id;
         }
 
-        public String getInsert_dt() {
-            return insert_dt;
+        public String getAdd_time() {
+            return add_time;
         }
 
-        public void setInsert_dt(String insert_dt) {
-            this.insert_dt = insert_dt;
+        public void setAdd_time(String add_time) {
+            this.add_time = add_time;
         }
 
-        public String getNick_name() {
-            return nick_name;
+        public String getUpdate_time() {
+            return update_time;
         }
 
-        public void setNick_name(String nick_name) {
-            this.nick_name = nick_name;
+        public void setUpdate_time(String update_time) {
+            this.update_time = update_time;
         }
 
-        public double getUser_deposit() {
-            return user_deposit;
+        public String getLast_time() {
+            return last_time;
         }
 
-        public void setUser_deposit(double user_deposit) {
-            this.user_deposit = user_deposit;
+        public void setLast_time(String last_time) {
+            this.last_time = last_time;
         }
 
-        public int getUser_score() {
-            return user_score;
+        public String getNickname() {
+            return nickname;
         }
 
-        public void setUser_score(int user_score) {
-            this.user_score = user_score;
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
 
-        public int getWx_sex() {
-            return wx_sex;
+        public String getMobile() {
+            return mobile;
         }
 
-        public void setWx_sex(int wx_sex) {
-            this.wx_sex = wx_sex;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
+        public int getSex() {
+            return sex;
+        }
+
+        public void setSex(int sex) {
+            this.sex = sex;
+        }
+
+        public String getImgurl() {
+            return imgurl;
+        }
+
+        public void setImgurl(String imgurl) {
+            this.imgurl = imgurl;
+        }
+
+        public double getScore() {
+            return score;
+        }
+
+        public void setScore(double score) {
+            this.score = score;
+        }
+
+        public double getDeposit() {
+            return deposit;
+        }
+
+        public void setDeposit(double deposit) {
+            this.deposit = deposit;
         }
     }
 }

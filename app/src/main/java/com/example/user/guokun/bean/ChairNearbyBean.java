@@ -9,21 +9,21 @@ import java.util.List;
 
 public class ChairNearbyBean {
     /**
-     * code : 1
+     * status : 1
      * data : {"list":[{"distance_um":1646,"id":10123,"latitude":"26.011","longitude":"119.011","name":"怡和出厂001"}],"pageNum":1,"pageSize":10,"pages":1,"size":4,"total":4}
-     * mag : 获取附 近设备数据成功
+     * message : 获取附 近设备数据成功
      */
 
-    private int code;
+    private int status;
     private DataBean data;
-    private String mag;
+    private String message;
 
     public int getCode() {
-        return code;
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(int status) {
+        this.status = status;
     }
 
     public DataBean getData() {
@@ -35,11 +35,11 @@ public class ChairNearbyBean {
     }
 
     public String getMag() {
-        return mag;
+        return message;
     }
 
-    public void setMag(String mag) {
-        this.mag = mag;
+    public void setMag(String message) {
+        this.message = message;
     }
 
     public static class DataBean {

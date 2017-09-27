@@ -45,7 +45,7 @@ public class SetPayPassActivity extends InitActivity {
                 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             } else {
-                Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, resultBean.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
     }

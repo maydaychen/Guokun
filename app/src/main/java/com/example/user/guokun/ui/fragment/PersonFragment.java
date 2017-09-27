@@ -25,6 +25,8 @@ import com.example.user.guokun.http.HttpMethods;
 import com.example.user.guokun.http.ProgressSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.ui.activity.CouponActivity;
+import com.example.user.guokun.ui.activity.GoodsOrdersActivity;
+import com.example.user.guokun.ui.activity.MyLeaseActivity;
 import com.example.user.guokun.ui.activity.MyOrderActivity;
 import com.example.user.guokun.ui.activity.PurseActivity;
 import com.example.user.guokun.ui.activity.QuestionActivity;
@@ -93,15 +95,15 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
     public void initData() {
         mPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         UserOnNext = userInfoBean -> {
-            if (userInfoBean.getCode() == 1) {
+            if (userInfoBean.getStatus() == 1) {
                 mUserInfoBean = userInfoBean;
-                mTvPersonName.setText(userInfoBean.getData().getNick_name());
-                mTvPersonYue.setText(userInfoBean.getData().getUser_deposit() + "");
+                mTvPersonName.setText(userInfoBean.getData().getNickname());
+                mTvPersonYue.setText(userInfoBean.getData().getDeposit() + "");
                 mCouponNum.setText(userInfoBean.getData().getCouponNum() + "");
-            } else if (userInfoBean.getCode() == -9) {
+            } else if (userInfoBean.getStatus() == -9) {
                 qiangzhi_logout(getActivity());
             } else {
-                Toast.makeText(getActivity(), userInfoBean.getMag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), userInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -118,7 +120,9 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
     }
 
 
-    @OnClick({R.id.rl_person_yue, R.id.rl_person_coupon, R.id.rl_person_purse, R.id.rl_person_order, R.id.rl_person_invite, R.id.rl_person_question, R.id.rl_person_setting, R.id.rl_person_kefu})
+    @OnClick({R.id.rl_person_yue, R.id.rl_person_coupon, R.id.rl_person_purse, R.id.rl_person_order,
+            R.id.rl_person_invite, R.id.rl_person_question, R.id.rl_person_setting, R.id.rl_person_kefu,
+            R.id.rl_daizhifu, R.id.rl_daifahuo, R.id.rl_yifahuo, R.id.rl_yiwancheng, R.id.rl_shouhou, R.id.rl_person_lease})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_person_yue:
@@ -144,6 +148,21 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
                 break;
             case R.id.rl_person_kefu:
                 call();
+                break;
+            case R.id.rl_daizhifu:
+                Intent intent = new Intent(getActivity(), GoodsOrdersActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_daifahuo:
+                break;
+            case R.id.rl_yifahuo:
+                break;
+            case R.id.rl_yiwancheng:
+                break;
+            case R.id.rl_shouhou:
+                break;
+            case R.id.rl_person_lease:
+                startActivity(new Intent(getActivity(), MyLeaseActivity.class));
                 break;
         }
     }

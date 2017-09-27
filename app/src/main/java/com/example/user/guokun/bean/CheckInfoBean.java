@@ -6,21 +6,21 @@ package com.example.user.guokun.bean;
 
 public class CheckInfoBean {
     /**
-     * code : 1
+     * status : 1
      * data : {"add_time":"2017-07-24 09:54:44.0","id":1034,"is_valid":1,"name":"微盛测试","prices":0.01,"time_len":6,"type_id":7,"update_time":"2017-07-28 11:21:04.0"}
-     * mag : 设备启动成功
+     * message : 设备启动成功
      */
 
-    private int code;
+    private int status;
     private DataBean data;
-    private String mag;
+    private String message;
 
     public int getCode() {
-        return code;
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(int status) {
+        this.status = status;
     }
 
     public DataBean getData() {
@@ -32,11 +32,11 @@ public class CheckInfoBean {
     }
 
     public String getMag() {
-        return mag;
+        return message;
     }
 
-    public void setMag(String mag) {
-        this.mag = mag;
+    public void setMag(String message) {
+        this.message = message;
     }
 
     public static class DataBean {

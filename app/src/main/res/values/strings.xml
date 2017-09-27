@@ -21,6 +21,11 @@
     <string name="order_price">花费：%1$s 元</string>
 
 
+    <string name="terminal_num">设备号：%1$s </string>
+    <string name="lease_start_date">租赁日期：%1$s </string>
+    <string name="lease_end_date">截止日期：%1$s </string>
+
+
     <string name="search">搜索</string>
     <string name="medicine">药品</string>
     <string name="medicineshop">药店</string>
@@ -44,10 +49,6 @@
     <string name="fuwu">服务态度</string>
     <string name="fahuo">发货速度</string>
     <string name="med_miaoshu">商品描述</string>
-
-    <string name="list">商品列表</string>
-    <string name="check_list">查看药店全部药品</string>
-    <string name="Zizhi">资质证书</string>
 
 
     <string name="tv_mall_daily">每日一款</string>

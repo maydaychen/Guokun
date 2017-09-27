@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class HttpJsonMethod {
-    public static final String BASE_URL = "http://api.guokunjiankangkeji.com";
+    public static final String BASE_URL = "http://api2.guokunjiankangkeji.com";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;

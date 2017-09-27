@@ -1,11 +1,14 @@
-package com.example.user.guokun.ui.activity;
+package com.example.user.guokun.ui.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
@@ -18,14 +21,13 @@ import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MyOrderActivity extends InitActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
+/**
+ * Created by user on 2017/9/6.
+ */
 
-    //    @BindView(R.id.tb_order)
-//    TabLayout mTbOrder;
-//    @BindView(R.id.vp_content)
-//    CustomViewPager mVpContent;
+public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
+
     @BindView(R.id.rv_vspa_order)
     PullLoadMoreRecyclerView mRvVspaOrder;
     private SubscriberOnNextAndErrorListener<VspaBean> VspaOnNext;
@@ -34,31 +36,35 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
     private SharedPreferences mPreferences;
     private VspaAdapter mRecyclerViewAdapter;
     private int page = 1;
-//    private List<Fragment> tabFragments;
-//    private List<String> tabIndicators;
 
+    @Nullable
     @Override
-    public void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_my_order);
-        ButterKnife.bind(this);
-
-//        tabIndicators = new ArrayList<>();
-//        tabIndicators.add("Vspa订单");
-////        tabIndicators.add("商品订单");
-//
-//        tabFragments = new ArrayList<>();
-//        tabFragments.add(VspaFragment.newInstance(tabIndicators.get(0)));
-////        tabFragments.add(GoodsFragment.newInstance(tabIndicators.get(1)));
-//        ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
-//        mVpContent.setAdapter(contentAdapter);
-//
-//        mTbOrder.setTabMode(TabLayout.MODE_FIXED);
-//        mTbOrder.setupWithViewPager(mVpContent);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_allgoods, container, false);
+        ButterKnife.bind(this, root);
+        initData();
+        initView();
+        return root;
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public static VspaFragment newInstance(String content) {
+        Bundle arguments = new Bundle();
+        arguments.putString(EXTRA_CONTENT, content);
+
+        VspaFragment mallFragment = new VspaFragment();
+        mallFragment.setArguments(arguments);
+
+        return mallFragment;
+    }
+
+
     public void initData() {
-        mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        mPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         VspaOnNext = new SubscriberOnNextAndErrorListener<VspaBean>() {
             @Override
@@ -70,7 +76,7 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
                     mRecyclerViewAdapter.notifyDataSetChanged();
                 } catch (NullPointerException e) {
                     if (page != 0) {
-                        Toast.makeText(MyOrderActivity.this, "已经加载完毕！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "已经加载完毕！", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -93,14 +99,17 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
         mRvVspaOrder.setLinearLayout();
 
         mRvVspaOrder.setOnPullLoadMoreListener(this);
-        mRvVspaOrder.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_order, null));
-        mRecyclerViewAdapter = new VspaAdapter(this);
+        mRvVspaOrder.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_order, null));
+        mRecyclerViewAdapter = new VspaAdapter(getActivity());
         mRvVspaOrder.setAdapter(mRecyclerViewAdapter);
 
         getData1();
 
     }
 
+    public void initView() {
+
+    }
 
     @Override
     public void onRefresh() {
@@ -123,35 +132,6 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
 
     private void getData1() {
         HttpMethods.getInstance().vspa_order(new ProgressErrorSubscriber<>(VspaOnNext,
-                this), mPreferences.getString("token", ""), page);
+                getActivity()), mPreferences.getString("token", ""), page);
     }
-
-    @OnClick(R.id.iv_coupon_detail_back)
-    public void onViewClicked() {
-        finish();
-    }
-
-
-//    class ContentPagerAdapter extends FragmentPagerAdapter {
-//
-//        ContentPagerAdapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            return tabFragments.get(position);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return tabIndicators.size();
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return tabIndicators.get(position);
-//        }
-//    }
-
 }

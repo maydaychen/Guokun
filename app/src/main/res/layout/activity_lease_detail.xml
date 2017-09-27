@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                tools:context="com.example.user.guokun.ui.activity.MapActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_lease_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_map_back"
+            style="@style/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
+
+        <TextView
+            style="@style/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="租赁详情"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lease_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_lease_title"
+        android:padding="@dimen/margin_size_8dp"
+        android:text="租赁信息"/>
+
+    <TextView
+        android:id="@+id/tv_lease_period"
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lease_info"
+        android:text="付款周期（天）："/>
+
+    <TextView
+        android:id="@+id/tv_lease_price"
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lease_period"
+        android:text="价格："/>
+
+    <TextView
+        android:id="@+id/tv_lease_fee"
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lease_price"
+        android:text="首期费用："/>
+
+    <TextView
+        android:id="@+id/tv_lease_pledge"
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lease_fee"
+        android:text="押金："/>
+
+    <TextView
+        android:id="@+id/tv_lease_start_date"
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lease_pledge"
+        android:text="租赁开始时间："/>
+
+    <TextView
+        style="@style/tv_title_lease"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lease_start_date"
+        android:text="租赁到期时间："/>
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/button_red"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_size_20dp"
+        android:layout_marginTop="@dimen/margin_size_10dp"/>
+
+
+</RelativeLayout>

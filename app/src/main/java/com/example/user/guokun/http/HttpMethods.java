@@ -5,6 +5,8 @@ import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.CouponBean;
+import com.example.user.guokun.bean.LeaseBean;
+import com.example.user.guokun.bean.LeaseDetailBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
@@ -26,7 +28,7 @@ import rx.schedulers.Schedulers;
  * 邮箱：2091320109@qq.com
  */
 public class HttpMethods {
-    public static final String BASE_URL = "http://api.guokunjiankangkeji.com";
+    public static final String BASE_URL = "http://api2.guokunjiankangkeji.com";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -159,6 +161,24 @@ public class HttpMethods {
 
     public void set_pass(Subscriber<ResultBean> subscriber, String accessToken, String pwd) {
         movieService.set_pass(accessToken, pwd)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void lease_list(Subscriber<LeaseBean> subscriber, String accessToken) {
+        movieService.lease_list(accessToken)
+//                .map(new HttpResultFunc<>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void lease_info(Subscriber<LeaseDetailBean> subscriber, String accessToken, String id) {
+        movieService.lease_info(accessToken,id)
 //                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

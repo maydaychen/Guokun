@@ -49,7 +49,6 @@ public class MapActivity extends InitActivity implements BaiduMap.OnMapLoadedCal
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_map);
         ButterKnife.bind(this);
-
     }
 
     @Override

@@ -9,21 +9,29 @@ import java.util.List;
 
 public class CouponBean {
     /**
-     * code : 1
-     * data : {"list":[{"addtime":"2017-08-23 20:28:18","endtime":"2017-08-26 19:28:34","id":1,"money":3,"name":"新用户优惠券","starttime":"2017-08-22 20:28:35","status":0,"type":1,"updatetime":"2017-08-23 20:58:06"}]}
-     * mag : 获取优惠券数据成功
+     * status : 1
+     * message : 请求成功
+     * data : {"pageNum":1,"pageSize":10,"size":3,"pages":1,"total":3,"list":[{"id":1,"add_time":"2017-09-14 15:21:44","update_time":"2017-09-14 15:21:46","type":1,"name":"1121","money":11,"start_time":"2017-09-13 15:21:51","end_time":"2017-09-15 15:21:55","status":0},{"id":3,"add_time":"2017-09-14 15:22:23","update_time":"2017-09-14 15:22:27","type":1,"name":"121","money":1,"start_time":"2017-09-14 15:22:30","end_time":"2017-09-22 15:22:35","status":0},{"id":2,"add_time":"2017-09-14 15:22:05","update_time":"2017-09-14 15:22:07","type":1,"name":"12","money":11,"start_time":"2017-09-04 15:22:12","end_time":"2017-09-05 15:22:15","status":3}]}
      */
 
-    private int code;
+    private int status;
+    private String message;
     private DataBean data;
-    private String mag;
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public DataBean getData() {
@@ -34,16 +42,62 @@ public class CouponBean {
         this.data = data;
     }
 
-    public String getMag() {
-        return mag;
-    }
-
-    public void setMag(String mag) {
-        this.mag = mag;
-    }
-
     public static class DataBean {
+        /**
+         * pageNum : 1
+         * pageSize : 10
+         * size : 3
+         * pages : 1
+         * total : 3
+         * list : [{"id":1,"add_time":"2017-09-14 15:21:44","update_time":"2017-09-14 15:21:46","type":1,"name":"1121","money":11,"start_time":"2017-09-13 15:21:51","end_time":"2017-09-15 15:21:55","status":0},{"id":3,"add_time":"2017-09-14 15:22:23","update_time":"2017-09-14 15:22:27","type":1,"name":"121","money":1,"start_time":"2017-09-14 15:22:30","end_time":"2017-09-22 15:22:35","status":0},{"id":2,"add_time":"2017-09-14 15:22:05","update_time":"2017-09-14 15:22:07","type":1,"name":"12","money":11,"start_time":"2017-09-04 15:22:12","end_time":"2017-09-05 15:22:15","status":3}]
+         */
+
+        private int pageNum;
+        private int pageSize;
+        private int size;
+        private int pages;
+        private int total;
         private List<ListBean> list;
+
+        public int getPageNum() {
+            return pageNum;
+        }
+
+        public void setPageNum(int pageNum) {
+            this.pageNum = pageNum;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
+
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        public int getPages() {
+            return pages;
+        }
+
+        public void setPages(int pages) {
+            this.pages = pages;
+        }
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
 
         public List<ListBean> getList() {
             return list;
@@ -55,42 +109,26 @@ public class CouponBean {
 
         public static class ListBean implements Serializable{
             /**
-             * addtime : 2017-08-23 20:28:18
-             * endtime : 2017-08-26 19:28:34
              * id : 1
-             * money : 3
-             * name : 新用户优惠券
-             * starttime : 2017-08-22 20:28:35
-             * status : 0
+             * add_time : 2017-09-14 15:21:44
+             * update_time : 2017-09-14 15:21:46
              * type : 1
-             * updatetime : 2017-08-23 20:58:06
+             * name : 1121
+             * money : 11
+             * start_time : 2017-09-13 15:21:51
+             * end_time : 2017-09-15 15:21:55
+             * status : 0
              */
 
-            private String addtime;
-            private String endtime;
             private int id;
-            private double money;
-            private String name;
-            private String starttime;
-            private int status;
+            private String add_time;
+            private String update_time;
             private int type;
-            private String updatetime;
-
-            public String getAddtime() {
-                return addtime;
-            }
-
-            public void setAddtime(String addtime) {
-                this.addtime = addtime;
-            }
-
-            public String getEndtime() {
-                return endtime;
-            }
-
-            public void setEndtime(String endtime) {
-                this.endtime = endtime;
-            }
+            private String name;
+            private int money;
+            private String start_time;
+            private String end_time;
+            private int status;
 
             public int getId() {
                 return id;
@@ -100,36 +138,20 @@ public class CouponBean {
                 this.id = id;
             }
 
-            public double getMoney() {
-                return money;
+            public String getAdd_time() {
+                return add_time;
             }
 
-            public void setMoney(double money) {
-                this.money = money;
+            public void setAdd_time(String add_time) {
+                this.add_time = add_time;
             }
 
-            public String getName() {
-                return name;
+            public String getUpdate_time() {
+                return update_time;
             }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getStarttime() {
-                return starttime;
-            }
-
-            public void setStarttime(String starttime) {
-                this.starttime = starttime;
-            }
-
-            public int getStatus() {
-                return status;
-            }
-
-            public void setStatus(int status) {
-                this.status = status;
+            public void setUpdate_time(String update_time) {
+                this.update_time = update_time;
             }
 
             public int getType() {
@@ -140,12 +162,44 @@ public class CouponBean {
                 this.type = type;
             }
 
-            public String getUpdatetime() {
-                return updatetime;
+            public String getName() {
+                return name;
             }
 
-            public void setUpdatetime(String updatetime) {
-                this.updatetime = updatetime;
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public int getMoney() {
+                return money;
+            }
+
+            public void setMoney(int money) {
+                this.money = money;
+            }
+
+            public String getStart_time() {
+                return start_time;
+            }
+
+            public void setStart_time(String start_time) {
+                this.start_time = start_time;
+            }
+
+            public String getEnd_time() {
+                return end_time;
+            }
+
+            public void setEnd_time(String end_time) {
+                this.end_time = end_time;
+            }
+
+            public int getStatus() {
+                return status;
+            }
+
+            public void setStatus(int status) {
+                this.status = status;
             }
         }
     }

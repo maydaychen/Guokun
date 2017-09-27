@@ -64,8 +64,9 @@ public class LoginActivity extends InitActivity {
         });
 
         LoginOnNext = resultBean -> {
-            Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
-            if (resultBean.getCode() == 1) {
+            if (resultBean.getStatus() == 1) {
+                Toast.makeText(this, "登录成功！", Toast.LENGTH_SHORT).show();
+
                 //0未设置 1已设密码
                 mEditor.putInt("pay_pwd", resultBean.getData().getTraded());
                 if (resultBean.getData().getTraded() == 0) {
@@ -82,11 +83,11 @@ public class LoginActivity extends InitActivity {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
             } else {
-                Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, resultBean.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
 
-        ResultOnNext = resultBean -> Toast.makeText(this, resultBean.getMag(), Toast.LENGTH_SHORT).show();
+        ResultOnNext = resultBean -> Toast.makeText(this, resultBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         RxTextView.textChanges(mEtLoginTele).subscribe(charSequence -> {
             if (charSequence.length() == 11) {

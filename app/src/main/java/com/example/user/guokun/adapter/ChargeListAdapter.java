@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 public class ChargeListAdapter extends RecyclerView.Adapter<ChargeListAdapter.ViewHolder> implements View.OnClickListener {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<ChargeBean.DataBean> mData;
+    private List<ChargeBean.DataBean.ListBean> mData;
     private Context mContext;
     public int ID;
     public double money;
@@ -33,7 +33,7 @@ public class ChargeListAdapter extends RecyclerView.Adapter<ChargeListAdapter.Vi
         void onItemClick(View view, int data);
     }
 
-    public ChargeListAdapter(List<ChargeBean.DataBean> mData, Context context) {
+    public ChargeListAdapter(List<ChargeBean.DataBean.ListBean> mData, Context context) {
         this.mData = mData;
         this.mContext = context;
         ID = mData.get(0).getId();

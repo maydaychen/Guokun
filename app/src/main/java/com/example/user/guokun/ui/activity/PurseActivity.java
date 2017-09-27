@@ -106,17 +106,17 @@ public class PurseActivity extends InitActivity {
     public void initData() {
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         ChargeOnNext = resultBean -> {
-            if (resultBean.getCode() == 1) {
+            if (resultBean.getStatus() == 1) {
 //                mRvChargeList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 mRvChargeList.setLayoutManager(new GridLayoutManager(this, 2));
-                chargeListAdapter = new ChargeListAdapter(resultBean.getData(), getApplicationContext());
+                chargeListAdapter = new ChargeListAdapter(resultBean.getData().getList(), getApplicationContext());
                 mRvChargeList.setAdapter(chargeListAdapter);
-            } else if (resultBean.getCode() == -9) {
+            } else if (resultBean.getStatus() == -9) {
                 qiangzhi_logout(PurseActivity.this);
             }
         };
         ChargePayOnNext = jsonObject -> {
-            if (jsonObject.getInt("code") == 1) {
+            if (jsonObject.getInt("status") == 1) {
                 switch (PAY_TYPE) {
                     case "1":
                         WXPayEntry entry = WXUtils.parseWXData(jsonObject.getString("data"));
@@ -132,12 +132,12 @@ public class PurseActivity extends InitActivity {
             }
         };
         UserOnNext = userInfoBean -> {
-            if (userInfoBean.getCode() == 1) {
-                mTvPurseYue.setText(userInfoBean.getData().getUser_deposit() + "");
-            } else if (userInfoBean.getCode() == -9) {
+            if (userInfoBean.getStatus() == 1) {
+                mTvPurseYue.setText(userInfoBean.getData().getDeposit() + "");
+            } else if (userInfoBean.getStatus() == -9) {
                 qiangzhi_logout(PurseActivity.this);
             } else {
-                Toast.makeText(PurseActivity.this, userInfoBean.getMag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PurseActivity.this, userInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
 

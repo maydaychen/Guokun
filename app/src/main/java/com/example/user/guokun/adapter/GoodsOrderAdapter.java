@@ -17,10 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by WuXiaolong
- * on 2015/7/2.
+ * Created by user on 2017/9/7.
  */
-public class VspaAdapter extends RecyclerView.Adapter<VspaAdapter.ViewHolder> implements View.OnClickListener {
+
+public class GoodsOrderAdapter extends RecyclerView.Adapter<GoodsOrderAdapter.ViewHolder> implements View.OnClickListener {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private Context mContext;
     private List<VspaBean.DataBean.ListBean> mData = new ArrayList<>();
@@ -40,7 +40,7 @@ public class VspaAdapter extends RecyclerView.Adapter<VspaAdapter.ViewHolder> im
         this.mData.clear();
     }
 
-    public VspaAdapter(Context context) {
+    public GoodsOrderAdapter(Context context) {
         mContext = context;
     }
 
@@ -65,8 +65,10 @@ public class VspaAdapter extends RecyclerView.Adapter<VspaAdapter.ViewHolder> im
         holder.mOrderName.setText(String.format(mContext.getResources().getString(R.string.item_coupons_project), mData.get(position).getCost_name()));
         holder.mOrderTime.setText(String.format(mContext.getResources().getString(R.string.order_time), mData.get(position).getTime_len() + ""));
         holder.mOrderPrice.setText(String.format(mContext.getResources().getString(R.string.order_price), mData.get(position).getFee() + ""));
+
         holder.itemView.setTag(position);
     }
+
 
     @Override
     public int getItemCount() {

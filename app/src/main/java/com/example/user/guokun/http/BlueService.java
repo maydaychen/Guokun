@@ -5,6 +5,8 @@ import com.example.user.guokun.bean.ChairNearbyBean;
 import com.example.user.guokun.bean.ChargeBean;
 import com.example.user.guokun.bean.CheckInfoBean;
 import com.example.user.guokun.bean.CouponBean;
+import com.example.user.guokun.bean.LeaseBean;
+import com.example.user.guokun.bean.LeaseDetailBean;
 import com.example.user.guokun.bean.LoginBean;
 import com.example.user.guokun.bean.ResultBean;
 import com.example.user.guokun.bean.UserInfoBean;
@@ -34,16 +36,16 @@ public interface BlueService {
     rx.Observable<UserInfoBean> user_info(@Field("accessToken") String accessToken);
 
     @FormUrlEncoded
-    @POST("/order/vspa/list.do")
+    @POST("/vspa/order/list.do")
     rx.Observable<VspaBean> vspa_order(@Field("accessToken") String accessToken,
                                        @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
 
     @FormUrlEncoded
-    @POST("/massagechair/info.do")
+    @POST("/terminal/info.do")
     rx.Observable<ChairInfoBean> char_info(@Field("accessToken") String accessToken, @Field("mobile") String mobile);
 
     @FormUrlEncoded
-    @POST("/massagechair/list.do")
+    @POST("/shop/list.do")
     rx.Observable<ChairNearbyBean> char_nearby(@Field("accessToken") String accessToken, @Field("lng") String lng, @Field("lat") String lat,
                                                @Field("pageNum") int pageNum, @Field("pageSize") int pageSize);
 
@@ -56,13 +58,13 @@ public interface BlueService {
     rx.Observable<JSONObject> charge_pay(@Field("accessToken") String accessToken, @Field("payType") String payType, @Field("rechargeId") int rechargeId);
 
     @FormUrlEncoded
-    @POST("/pay/index.do")
-    rx.Observable<JSONObject> pay(@Field("accessToken") String accessToken, @Field("accountingId") int accountingId, @Field("mobile") String mobile,
+    @POST("/terminal/pay.do")
+    rx.Observable<JSONObject> pay(@Field("accessToken") String accessToken, @Field("costId") int costId, @Field("mobile") String mobile,
                                   @Field("plat") String plat, @Field("payType") String payType, @Field("couponId") String couponId, @Field("psw") String psw);
 
     @FormUrlEncoded
-    @POST("/pay/using.do")
-    rx.Observable<CheckInfoBean> check_info(@Field("accessToken") String accessToken, @Field("outTradeNo") String outTradeNo);
+    @POST("/terminal/using.do")
+    rx.Observable<CheckInfoBean> check_info(@Field("accessToken") String accessToken, @Field("tradeNo") String outTradeNo);
 
     @FormUrlEncoded
     @POST("/coupon/pay/list.do")
@@ -77,4 +79,22 @@ public interface BlueService {
     @FormUrlEncoded
     @POST("/user/setpas.do")
     rx.Observable<ResultBean> set_pass(@Field("accessToken") String accessToken, @Field("psw") String psw);
+
+    @FormUrlEncoded
+    @POST("/lease/list.do")
+    rx.Observable<LeaseBean> lease_list(@Field("accessToken") String accessToken);
+
+    @FormUrlEncoded
+    @POST("/lease/info.do")
+    rx.Observable<LeaseDetailBean> lease_info(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId);
+
+    @FormUrlEncoded
+    @POST("/lease/start.do")
+    rx.Observable<ResultBean> lease_start(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId,
+                                          @Field("costId") String costId);
+
+    @FormUrlEncoded
+    @POST("/lease/pay.do")
+    rx.Observable<ResultBean> lease_pay(@Field("accessToken") String accessToken, @Field("leaseId") String leaseId,
+                                        @Field("payType") String payType);
 }

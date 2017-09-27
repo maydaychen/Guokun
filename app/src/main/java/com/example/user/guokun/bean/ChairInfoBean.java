@@ -8,21 +8,29 @@ import java.util.List;
 
 public class ChairInfoBean {
     /**
-     * code : 1
-     * data : {"accountingList":[{"id":1034,"name":"微盛测试","prices":0.01,"time_len":6},{"id":1035,"name":"微盛测试","prices":6,"time_len":18},{"id":1036,"name":"微盛测试","prices":9,"time_len":30}],"id":10117,"isservice":1,"mobile":"898 602b6101740177983","name":"177983","payList":[{"balance":169.91,"name":"余 额支付","payType":0},{"name":"微信支付","payType":1},{"name":"支付宝支付","payType":2}]}
-     * mag : 获取成功
+     * status : 1
+     * message : 请求成功
+     * data : {"id":4,"add_time":"2017-09-09 20:55:42","update_time":"2017-09-09 20:55:42","name":"898602b01315c0001822","mobile":"898602b01315c0001822","status":3,"lat":"39.915177","lng":"116.403851","is_valid":1,"device":{"id":3,"add_time":"2017-09-07 15:55:52","update_time":"2017-09-07 15:55:52","name":"按摩椅","type":1,"brand":"112131","model":"112131","pic":"images/2/2017/09/VRnktQqkORYrArLhihVi4RRAyO7A2V.jpg"},"costs":[{"id":4,"add_time":"2017-09-07 14:20:37","update_time":"2017-09-07 14:20:37","name":"1131","time_len":11,"price":11,"is_valid":1}]}
      */
 
-    private int code;
+    private int status;
+    private String message;
     private DataBean data;
-    private String mag;
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public DataBean getData() {
@@ -33,30 +41,32 @@ public class ChairInfoBean {
         this.data = data;
     }
 
-    public String getMag() {
-        return mag;
-    }
-
-    public void setMag(String mag) {
-        this.mag = mag;
-    }
-
     public static class DataBean {
         /**
-         * accountingList : [{"id":1034,"name":"微盛测试","prices":0.01,"time_len":6},{"id":1035,"name":"微盛测试","prices":6,"time_len":18},{"id":1036,"name":"微盛测试","prices":9,"time_len":30}]
-         * id : 10117
-         * isservice : 1
-         * mobile : 898 602b6101740177983
-         * name : 177983
-         * payList : [{"balance":169.91,"name":"余 额支付","payType":0},{"name":"微信支付","payType":1},{"name":"支付宝支付","payType":2}]
+         * id : 4
+         * add_time : 2017-09-09 20:55:42
+         * update_time : 2017-09-09 20:55:42
+         * name : 898602b01315c0001822
+         * mobile : 898602b01315c0001822
+         * status : 3
+         * lat : 39.915177
+         * lng : 116.403851
+         * is_valid : 1
+         * device : {"id":3,"add_time":"2017-09-07 15:55:52","update_time":"2017-09-07 15:55:52","name":"按摩椅","type":1,"brand":"112131","model":"112131","pic":"images/2/2017/09/VRnktQqkORYrArLhihVi4RRAyO7A2V.jpg"}
+         * costs : [{"id":4,"add_time":"2017-09-07 14:20:37","update_time":"2017-09-07 14:20:37","name":"1131","time_len":11,"price":11,"is_valid":1}]
          */
 
         private int id;
-        private int isservice;
-        private String mobile;
+        private String add_time;
+        private String update_time;
         private String name;
-        private List<AccountingListBean> accountingList;
-        private List<PayListBean> payList;
+        private String mobile;
+        private int status;
+        private String lat;
+        private String lng;
+        private int is_valid;
+        private DeviceBean device;
+        private List<CostsBean> costs;
 
         public int getId() {
             return id;
@@ -66,20 +76,20 @@ public class ChairInfoBean {
             this.id = id;
         }
 
-        public int getIsservice() {
-            return isservice;
+        public String getAdd_time() {
+            return add_time;
         }
 
-        public void setIsservice(int isservice) {
-            this.isservice = isservice;
+        public void setAdd_time(String add_time) {
+            this.add_time = add_time;
         }
 
-        public String getMobile() {
-            return mobile;
+        public String getUpdate_time() {
+            return update_time;
         }
 
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
+        public void setUpdate_time(String update_time) {
+            this.update_time = update_time;
         }
 
         public String getName() {
@@ -90,34 +100,82 @@ public class ChairInfoBean {
             this.name = name;
         }
 
-        public List<AccountingListBean> getAccountingList() {
-            return accountingList;
+        public String getMobile() {
+            return mobile;
         }
 
-        public void setAccountingList(List<AccountingListBean> accountingList) {
-            this.accountingList = accountingList;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
 
-        public List<PayListBean> getPayList() {
-            return payList;
+        public int getStatus() {
+            return status;
         }
 
-        public void setPayList(List<PayListBean> payList) {
-            this.payList = payList;
+        public void setStatus(int status) {
+            this.status = status;
         }
 
-        public static class AccountingListBean {
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public String getLng() {
+            return lng;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+
+        public int getIs_valid() {
+            return is_valid;
+        }
+
+        public void setIs_valid(int is_valid) {
+            this.is_valid = is_valid;
+        }
+
+        public DeviceBean getDevice() {
+            return device;
+        }
+
+        public void setDevice(DeviceBean device) {
+            this.device = device;
+        }
+
+        public List<CostsBean> getCosts() {
+            return costs;
+        }
+
+        public void setCosts(List<CostsBean> costs) {
+            this.costs = costs;
+        }
+
+        public static class DeviceBean {
             /**
-             * id : 1034
-             * name : 微盛测试
-             * prices : 0.01
-             * time_len : 6
+             * id : 3
+             * add_time : 2017-09-07 15:55:52
+             * update_time : 2017-09-07 15:55:52
+             * name : 按摩椅
+             * type : 1
+             * brand : 112131
+             * model : 112131
+             * pic : images/2/2017/09/VRnktQqkORYrArLhihVi4RRAyO7A2V.jpg
              */
 
             private int id;
+            private String add_time;
+            private String update_time;
             private String name;
-            private double prices;
-            private int time_len;
+            private int type;
+            private String brand;
+            private String model;
+            private String pic;
 
             public int getId() {
                 return id;
@@ -127,6 +185,22 @@ public class ChairInfoBean {
                 this.id = id;
             }
 
+            public String getAdd_time() {
+                return add_time;
+            }
+
+            public void setAdd_time(String add_time) {
+                this.add_time = add_time;
+            }
+
+            public String getUpdate_time() {
+                return update_time;
+            }
+
+            public void setUpdate_time(String update_time) {
+                this.update_time = update_time;
+            }
+
             public String getName() {
                 return name;
             }
@@ -135,12 +209,88 @@ public class ChairInfoBean {
                 this.name = name;
             }
 
-            public double getPrices() {
-                return prices;
+            public int getType() {
+                return type;
             }
 
-            public void setPrices(double prices) {
-                this.prices = prices;
+            public void setType(int type) {
+                this.type = type;
+            }
+
+            public String getBrand() {
+                return brand;
+            }
+
+            public void setBrand(String brand) {
+                this.brand = brand;
+            }
+
+            public String getModel() {
+                return model;
+            }
+
+            public void setModel(String model) {
+                this.model = model;
+            }
+
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
+        }
+
+        public static class CostsBean {
+            /**
+             * id : 4
+             * add_time : 2017-09-07 14:20:37
+             * update_time : 2017-09-07 14:20:37
+             * name : 1131
+             * time_len : 11
+             * price : 11
+             * is_valid : 1
+             */
+
+            private int id;
+            private String add_time;
+            private String update_time;
+            private String name;
+            private int time_len;
+            private double price;
+            private int is_valid;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getAdd_time() {
+                return add_time;
+            }
+
+            public void setAdd_time(String add_time) {
+                this.add_time = add_time;
+            }
+
+            public String getUpdate_time() {
+                return update_time;
+            }
+
+            public void setUpdate_time(String update_time) {
+                this.update_time = update_time;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
 
             public int getTime_len() {
@@ -150,41 +300,21 @@ public class ChairInfoBean {
             public void setTime_len(int time_len) {
                 this.time_len = time_len;
             }
-        }
 
-        public static class PayListBean {
-            /**
-             * balance : 169.91
-             * name : 余 额支付
-             * payType : 0
-             */
-
-            private double balance;
-            private String name;
-            private int payType;
-
-            public double getBalance() {
-                return balance;
+            public double getPrice() {
+                return price;
             }
 
-            public void setBalance(double balance) {
-                this.balance = balance;
+            public void setPrice(double price) {
+                this.price = price;
             }
 
-            public String getName() {
-                return name;
+            public int getIs_valid() {
+                return is_valid;
             }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public int getPayType() {
-                return payType;
-            }
-
-            public void setPayType(int payType) {
-                this.payType = payType;
+            public void setIs_valid(int is_valid) {
+                this.is_valid = is_valid;
             }
         }
     }

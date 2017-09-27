@@ -90,6 +90,7 @@ public class GuigeActivity extends InitActivity {
     private double real_price;
     //当前套餐价格
     private double current_price;
+    private double temp_price;
     private String PAY_TYPE = "";
     private String order_num;
     private String coupon_id;
@@ -101,24 +102,24 @@ public class GuigeActivity extends InitActivity {
         EventBus.getDefault().register(this);
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         ChairInfoOnNext = resultBean -> {
-            ID = resultBean.getData().getAccountingList().get(0).getId();
+            ID = resultBean.getData().getCosts().get(0).getId();
             mChairInfoBean = resultBean;
-            mTvProject1Name.setText(resultBean.getData().getAccountingList().get(0).getName());
-            mTvProject2Name.setText(resultBean.getData().getAccountingList().get(1).getName());
-            mTvProject3Name.setText(resultBean.getData().getAccountingList().get(2).getName());
+            mTvProject1Name.setText(resultBean.getData().getCosts().get(0).getName());
+            mTvProject2Name.setText(resultBean.getData().getCosts().get(1).getName());
+            mTvProject3Name.setText(resultBean.getData().getCosts().get(2).getName());
             mTvProject1.setText(String.format(getResources().getString(R.string.project_price),
-                    resultBean.getData().getAccountingList().get(0).getPrices() + "", resultBean.getData().getAccountingList().get(0).getTime_len() + ""));
+                    resultBean.getData().getCosts().get(0).getPrice() + "", resultBean.getData().getCosts().get(0).getTime_len() + ""));
             mTvProject2.setText(String.format(getResources().getString(R.string.project_price),
-                    resultBean.getData().getAccountingList().get(1).getPrices() + "", resultBean.getData().getAccountingList().get(1).getTime_len() + ""));
+                    resultBean.getData().getCosts().get(1).getPrice() + "", resultBean.getData().getCosts().get(1).getTime_len() + ""));
             mTvProject3.setText(String.format(getResources().getString(R.string.project_price),
-                    resultBean.getData().getAccountingList().get(2).getPrices() + "", resultBean.getData().getAccountingList().get(2).getTime_len() + ""));
-            mTvRealPrice.setText(String.format(getResources().getString(R.string.price), resultBean.getData().getAccountingList().get(0).getPrices() + ""));
-            mBtSubmit.setText(String.format(getResources().getString(R.string.submit), resultBean.getData().getAccountingList().get(0).getPrices() + ""));
+                    resultBean.getData().getCosts().get(2).getPrice() + "", resultBean.getData().getCosts().get(2).getTime_len() + ""));
+            mTvRealPrice.setText(String.format(getResources().getString(R.string.price), resultBean.getData().getCosts().get(0).getPrice() + ""));
+            mBtSubmit.setText(String.format(getResources().getString(R.string.submit), resultBean.getData().getCosts().get(0).getPrice() + ""));
 
             mLlProject1.setOnFocusChangeListener((view, b) -> {
                 if (b) {
-                    ID = mChairInfoBean.getData().getAccountingList().get(0).getId();
-                    current_price = mChairInfoBean.getData().getAccountingList().get(0).getPrices();
+                    ID = mChairInfoBean.getData().getCosts().get(0).getId();
+                    current_price = mChairInfoBean.getData().getCosts().get(0).getPrice();
                     real_price = current_price - price;
                     mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
                     mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
@@ -126,8 +127,8 @@ public class GuigeActivity extends InitActivity {
             });
             mLlProject2.setOnFocusChangeListener((view, b) -> {
                 if (b) {
-                    ID = mChairInfoBean.getData().getAccountingList().get(1).getId();
-                    current_price = mChairInfoBean.getData().getAccountingList().get(1).getPrices();
+                    ID = mChairInfoBean.getData().getCosts().get(1).getId();
+                    current_price = mChairInfoBean.getData().getCosts().get(1).getPrice();
                     real_price = current_price - price;
                     mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
                     mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
@@ -135,8 +136,8 @@ public class GuigeActivity extends InitActivity {
             });
             mLlProject3.setOnFocusChangeListener((view, b) -> {
                 if (b) {
-                    ID = mChairInfoBean.getData().getAccountingList().get(2).getId();
-                    current_price = mChairInfoBean.getData().getAccountingList().get(2).getPrices();
+                    ID = mChairInfoBean.getData().getCosts().get(2).getId();
+                    current_price = mChairInfoBean.getData().getCosts().get(2).getPrice();
                     real_price = current_price - price;
                     mTvRealPrice.setText(String.format(getResources().getString(R.string.price), real_price > 0 ? real_price + "" : "0"));
                     mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
@@ -171,21 +172,21 @@ public class GuigeActivity extends InitActivity {
         mRlYue.setOnClickListener(v -> mCbPayYue.setChecked(true));
 
         PayOnNext = jsonObject -> {
-            if (jsonObject.getInt("code") == 1) {
-                order_num = jsonObject.getJSONObject("data").getString("outTradeNo");
-                if (jsonObject.getJSONObject("data").getDouble("money") == 0) {
+            if (jsonObject.getInt("status") == 1) {
+                order_num = jsonObject.getJSONObject("data").getString("orderNo");
+                if (jsonObject.getJSONObject("data").getDouble("payment") == 0) {
                     Intent intent = new Intent(GuigeActivity.this, PaySuccessActivity.class);
                     intent.putExtra("order_num", order_num);
                     startActivity(intent);
                 } else {
                     switch (PAY_TYPE) {
                         case "0":
-                            if (jsonObject.getString("mag").equals("支付成功")) {
+                            if (jsonObject.getString("message").equals("支付成功")) {
                                 Intent intent = new Intent(GuigeActivity.this, PaySuccessActivity.class);
                                 intent.putExtra("order_num", order_num);
                                 startActivity(intent);
                             } else {
-
+                                Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "1":
@@ -199,7 +200,7 @@ public class GuigeActivity extends InitActivity {
                     }
                 }
             } else {
-                Toast.makeText(this, jsonObject.getString("mag"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -279,7 +280,6 @@ public class GuigeActivity extends InitActivity {
                 mBtSubmit.setText(String.format(getResources().getString(R.string.submit), real_price > 0 ? real_price + "" : "0"));
             }
         }
-
     }
 
     //EventBus阿里支付结果回调事件

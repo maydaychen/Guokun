@@ -5,11 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.bean.CouponBean;
+import com.example.user.guokun.bean.LeaseBean;
+import com.loopj.android.image.SmartImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by user on 2017/8/11.
+ * Created by user on 2017/9/26.
  */
 
-public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHolder> implements View.OnClickListener {
+public class LeaseListAdapter extends RecyclerView.Adapter<LeaseListAdapter.ViewHolder> implements View.OnClickListener {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<CouponBean.DataBean.ListBean> mData = new ArrayList<>();
+    private List<LeaseBean.DataBean.ListBean> mData = new ArrayList<>();
     private int VIEW_BOTTOM = 1;
     private Context mContext;
 
@@ -32,7 +32,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         void onItemClick(View view, int data);
     }
 
-    public void addAllData(List<CouponBean.DataBean.ListBean> dataList) {
+    public void addAllData(List<LeaseBean.DataBean.ListBean> dataList) {
         this.mData.addAll(dataList);
         notifyDataSetChanged();
     }
@@ -41,7 +41,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         this.mData.clear();
     }
 
-    public CouponsAdapter(Context context) {
+    public LeaseListAdapter(Context context) {
         mContext = context;
     }
 
@@ -49,7 +49,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
     //创建新View，被LayoutManager所调用
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_coupons, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_lease_list, viewGroup, false);
         ViewHolder vh = new ViewHolder(view);
         view.setOnClickListener(this);
         return vh;
@@ -63,11 +63,10 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 //        viewHolder.peijian.setText(null == mData.get(position).get("peijian") || mData.get(position).get("peijian").equals("") ? "--" : mData.get(position).get("peijian"));
 //        viewHolder.num.setText(null == mData.get(position).get("num") || mData.get(position).get("num").equals("") ? "--" : mData.get(position).get("num"));
 //        viewHolder.price.setText(null == mData.get(position).get("price") || mData.get(position).get("price").equals("") ? "--" : mData.get(position).get("price"));
-        viewHolder.mTvCouponName.setText(mData.get(position).getName());
-        viewHolder.mTvCouponExpiry.setText(String.format(mContext.getResources().getString(R.string.tv_coupon_expiry), mData.get(position).getEnd_time() + ""));
-        viewHolder.mTvCouponTime.setText(String.format(mContext.getResources().getString(R.string.useable_day), "全天可用"));
-        viewHolder.mTvCouponPrice.setText(String.format(mContext.getResources().getString(R.string.price), mData.get(position).getMoney() + ""));
-        viewHolder.mTvCouponName.setText(mData.get(position).getName());
+//        viewHolder.mIvTerminal.setImageUrl(mData.get(position).getPic());
+        viewHolder.mTvTerminalNum.setText(String.format(mContext.getResources().getString(R.string.terminal_num), mData.get(position).getMobile() + ""));
+        viewHolder.mLeaseStartDate.setText(String.format(mContext.getResources().getString(R.string.lease_start_date), mData.get(position).getAdd_time()));
+        viewHolder.mLeaseEndDate.setText(String.format(mContext.getResources().getString(R.string.lease_end_date), mData.get(position).getEnd_time() + ""));
         viewHolder.itemView.setTag(position);
     }
 
@@ -94,21 +93,16 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         this.mOnItemClickListener = listener;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_coupon_price)
-        TextView mTvCouponPrice;
-        @BindView(R.id.tv_coupon_name)
-        TextView mTvCouponName;
-        @BindView(R.id.tv_coupon_range)
-        TextView mTvCouponRange;
-        @BindView(R.id.tv_coupon_store)
-        TextView mTvCouponStore;
-        @BindView(R.id.tv_coupon_expiry)
-        TextView mTvCouponExpiry;
-        @BindView(R.id.tv_coupon_time)
-        TextView mTvCouponTime;
-        @BindView(R.id.ll_coupon)
-        LinearLayout mLlCoupon;
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_terminal)
+        SmartImageView mIvTerminal;
+        @BindView(R.id.tv_terminal_num)
+        TextView mTvTerminalNum;
+        @BindView(R.id.lease_start_date)
+        TextView mLeaseStartDate;
+        @BindView(R.id.lease_end_date)
+        TextView mLeaseEndDate;
 
         ViewHolder(View view) {
             super(view);

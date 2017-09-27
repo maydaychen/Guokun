@@ -23,6 +23,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MyLocationData;
+import com.example.user.guokun.CRequest;
 import com.example.user.guokun.R;
 import com.example.user.guokun.ui.activity.CaptureActivity;
 import com.example.user.guokun.ui.activity.CouponActivity;
@@ -31,6 +32,7 @@ import com.example.user.guokun.ui.activity.GuigeActivity;
 import com.example.user.guokun.ui.activity.PurseActivity;
 
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -178,7 +180,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
             Intent intent = new Intent(getActivity(), CaptureActivity.class);
             startActivityForResult(intent, SHOW_SUBACTIVITY);
 //            Intent intent = new Intent(getActivity(), GuigeActivity.class);
-//            intent.putExtra("code", "898602b6101740177935");
+//            intent.putExtra("code", "18651039625001");
 //            startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera), RC_CAMERA_PERM, Manifest.permission.CAMERA);
@@ -195,7 +197,7 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         Log.d("chenyi", "onPermissionsGranted:" + requestCode + ":" + perms.size());
 //        Intent intent = new Intent(getActivity(), GuigeActivity.class);
-//        intent.putExtra("code", "898602b6101740177935");
+//        intent.putExtra("code", "18651039625001");
 //        startActivity(intent);
         if (requestCode == RC_CAMERA_PERM) {
             Intent intent = new Intent(getActivity(), CaptureActivity.class);
@@ -214,7 +216,16 @@ public class MainFragment extends Fragment implements EasyPermissions.Permission
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (null != data) {
-            String code = data.getStringExtra("code").substring(data.getStringExtra("code").indexOf("=") + 1);
+//            String code = data.getStringExtra("code").substring(data.getStringExtra("code").indexOf("=") + 1);
+            String code = "";
+            Map<String, String> mapRequest = CRequest.URLRequest(data.getStringExtra("code"));
+
+            for (String strRequestKey : mapRequest.keySet()) {
+                if (strRequestKey.equals("mobile")) {
+                    code = mapRequest.get(strRequestKey);
+                    break;
+                }
+            }
             Log.i("chenyi", "onActivityResult: " + code);
             Intent intent = new Intent(getActivity(), GuigeActivity.class);
             intent.putExtra("code", code);
