@@ -68,6 +68,7 @@ public class LeaseDetailActivity extends InitActivity {
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
         leaseDetailOnNext = leaseDetailBean -> {
+            ID = leaseDetailBean.getData().getCosts().get(0).getId();
             price = leaseDetailBean.getData().getPrice();
             mTvLeasePeriod.setText(String.format(getResources().getString(R.string.tv_lease_period), leaseDetailBean.getData().getPeriod() + ""));
             mTvLeasePrice.setText(String.format(getResources().getString(R.string.tv_lease_price), leaseDetailBean.getData().getPrice() + ""));
