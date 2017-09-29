@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:text="@string/tv_solder"
+            android:text="订单号："
             android:textSize="@dimen/font_size_14sp"/>
 
         <TextView
@@ -173,37 +173,7 @@
             android:padding="@dimen/margin_size_8dp"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_yue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/margin_size_8dp">
 
-        <ImageView
-            android:id="@+id/yue_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/yu_e_zhifu"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_size_8dp"
-            android:layout_toRightOf="@id/yue_logo"
-            android:text="余额支付"/>
-
-        <CheckBox
-            android:id="@+id/cb_pay_yue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_check"
-            android:padding="@dimen/margin_size_8dp"/>
-    </RelativeLayout>
 
     <Button
         android:id="@+id/bt_pay"

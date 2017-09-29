@@ -43,7 +43,7 @@ public class ConfirmPicAdapter extends RecyclerView.Adapter<ConfirmPicAdapter.Vi
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.logo.setImageUrl((String) mData.get(position).get("logo"));
+        viewHolder.logo.setImageUrl("http://" + mData.get(position).get("logo"));
         viewHolder.itemView.setTag(position);
     }
 

@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.user.guokun.R;
+import com.example.user.guokun.bean.GoodsListBean;
 import com.loopj.android.image.SmartImageView;
 
 import java.text.DecimalFormat;
@@ -22,7 +24,7 @@ import butterknife.ButterKnife;
 public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.ViewHolder> implements View.OnClickListener {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private List<String> mData;
+    private List<GoodsListBean.ResultBean> mData;
     private Context mContext;
     private DecimalFormat df = new DecimalFormat("######0.00");
     public int ID;
@@ -32,7 +34,7 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
         void onItemClick(View view, int data);
     }
 
-    public DiscovereyAdapter(List<String> mData, Context context) {
+    public DiscovereyAdapter(List<GoodsListBean.ResultBean> mData, Context context) {
         this.mData = mData;
         this.mContext = context;
     }
@@ -51,7 +53,9 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.ivGoods.setImageUrl(mData.get(position));
+        viewHolder.ivGoods.setImageUrl("http://" + mData.get(position).getThumb());
+        viewHolder.tvGoodName.setText(mData.get(position).getTitle());
+//        viewHolder.tvGoodDes.setText(mData.get(position).getTitle());
         viewHolder.itemView.setTag(position);
     }
 
@@ -78,6 +82,10 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_goods)
         SmartImageView ivGoods;
+        @BindView(R.id.tv_good_name)
+        TextView tvGoodName;
+        @BindView(R.id.tv_good_des)
+        TextView tvGoodDes;
 
         ViewHolder(View view) {
             super(view);

@@ -71,12 +71,14 @@ public class LoginActivity extends InitActivity {
                 mEditor.putInt("pay_pwd", resultBean.getData().getTraded());
                 if (resultBean.getData().getTraded() == 0) {
                     mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
+                    mEditor.putString("tele", mEtLoginTele.getText().toString());
                     mEditor.putBoolean("autoLog", true);
                     if (mEditor.commit()) {
                         startActivity(new Intent(LoginActivity.this, SetPayPassActivity.class));
                     }
                 } else {
                     mEditor.putString("token", resultBean.getData().getAccessToken().getAccess_token());
+                    mEditor.putString("tele", mEtLoginTele.getText().toString());
                     mEditor.putBoolean("autoLog", true);
                     mEditor.apply();
                     finish();

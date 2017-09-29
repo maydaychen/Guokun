@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
 
     >
 
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120dp"
                 android:layout_marginStart="120dp"
-                android:layout_marginTop="14dp" />
+                android:layout_marginTop="14dp"/>
 
             <TextView
                 android:id="@+id/tv_repository"
@@ -31,25 +31,8 @@
                 android:layout_alignLeft="@id/tv_price"
                 android:layout_alignStart="@id/tv_price"
                 android:layout_below="@id/tv_price"
-                android:layout_marginTop="@dimen/margin_size_8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_price"
-                android:layout_alignStart="@id/tv_price"
-                android:layout_below="@id/tv_repository"
-                android:layout_marginTop="@dimen/margin_size_8dp"
-                android:text="请选择尺寸" />
-
+                android:layout_marginTop="@dimen/margin_size_8dp"/>
         </RelativeLayout>
-
-        <ListView
-            android:id="@+id/rv_good_detail_add"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
-
-
 
 
         <RelativeLayout
@@ -58,37 +41,34 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="立即购买" />
-
             <LinearLayout
+                android:id="@+id/ll_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                android:background="@drawable/boder">
 
                 <TextView
                     android:id="@+id/tv_subtraction"
                     android:layout_width="@dimen/margin_size_24dp"
                     android:layout_height="@dimen/margin_size_24dp"
                     android:layout_gravity="center_vertical"
+                    android:background="@color/second_font"
                     android:gravity="center"
                     android:text="-"
-                    android:textColor="@color/second_font"
-                    android:textSize="@dimen/font_size_12sp" />
+                    android:textSize="@dimen/font_size_12sp"/>
 
 
                 <TextView
                     android:id="@+id/tv_good_count"
-                    android:layout_width="@dimen/margin_size_24dp"
+                    android:layout_width="48dp"
                     android:layout_height="@dimen/margin_size_24dp"
                     android:layout_gravity="center_vertical"
+                    android:background="#eee"
                     android:gravity="center"
-                    android:text="1" />
+                    android:text="1"/>
 
 
                 <TextView
@@ -96,11 +76,21 @@
                     android:layout_width="@dimen/margin_size_24dp"
                     android:layout_height="@dimen/margin_size_24dp"
                     android:layout_gravity="center_vertical"
+                    android:background="@color/second_font"
                     android:gravity="center"
                     android:text="+"
-                    android:textColor="@color/second_font"
-                    android:textSize="@dimen/font_size_12sp" />
+                    android:textSize="@dimen/font_size_12sp"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/ll_count"
+                android:padding="@dimen/margin_size_8dp"
+                android:text="购买数量"
+                android:textColor="#999999"
+                android:textSize="@dimen/font_size_12sp"/>
         </RelativeLayout>
 
 
@@ -114,10 +104,10 @@
                 android:id="@+id/tv_buy_now"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
                 android:background="@color/font_red"
                 android:gravity="center"
-                android:text="@string/buynow" />
+                android:text="@string/buynow"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -126,7 +116,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="@dimen/margin_size_10dp"
-        android:padding="1dp"
-        android:src="@drawable/logo" />
+        android:padding="1dp"/>
 
 </FrameLayout>

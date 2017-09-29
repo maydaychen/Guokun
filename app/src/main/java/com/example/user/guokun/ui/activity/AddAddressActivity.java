@@ -1,17 +1,21 @@
 package com.example.user.guokun.ui.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
+import com.example.user.guokun.http.HttpShopMethod;
+import com.example.user.guokun.http.ProgressSubscriber;
+import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -37,16 +41,14 @@ public class AddAddressActivity extends InitActivity implements OnWheelChangedLi
     EditText mEtAddAddressTelephone;
     @BindView(R.id.et_add_address_address)
     EditText mEtAddAddressAddress;
-    @BindView(R.id.et_add_address_code)
-    EditText mEtAddAddressCode;
-    @BindView(R.id.cb_add_address_default)
-    CheckBox mCbAddAddressDefault;
     @BindView(R.id.wheel_add_address)
     RelativeLayout mWheelAddAddress;
     @BindView(R.id.tv_add_address_address)
     TextView mTvAddAddressAddress;
 
-    private Gson mGson = new Gson();
+    private SubscriberOnNextListener<JSONObject> addressOnNext;
+    private Gson gson = new Gson();
+    private SharedPreferences preferences;
     /**
      * 把全国的省市区的信息以json的格式保存，解析完成后赋值为null
      */
@@ -106,7 +108,16 @@ public class AddAddressActivity extends InitActivity implements OnWheelChangedLi
     public void initData() {
 
         initJsonData();
-
+        preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        addressOnNext = jsonObject -> {
+            if (jsonObject.getInt("statusCode") == 1) {
+                Log.i("chenyi", "initData: "+jsonObject.toString());
+                Toast.makeText(AddAddressActivity.this, "添加成功！", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(AddAddressActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+            }
+        };
         mProvince = (WheelView) findViewById(R.id.id_province);
         mCity = (WheelView) findViewById(R.id.id_city);
         mArea = (WheelView) findViewById(R.id.id_area);
@@ -266,6 +277,11 @@ public class AddAddressActivity extends InitActivity implements OnWheelChangedLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_add_address_save:
+                HttpShopMethod.getInstance().add_address(
+                        new ProgressSubscriber(addressOnNext, AddAddressActivity.this),
+                        preferences.getString("access_token", ""), mEtAddAddressName.getText().toString(),
+                        preferences.getString("sessionkey", ""), mEtAddAddressTelephone.getText().toString(),
+                        mCurrentProviceName, mCurrentCityName, mCurrentAreaName, mEtAddAddressAddress.getText().toString());
                 finish();
                 break;
             case R.id.rl_add_address_sanjiliandogn:

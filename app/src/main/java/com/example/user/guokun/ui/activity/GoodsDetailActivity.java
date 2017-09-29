@@ -1,12 +1,11 @@
 package com.example.user.guokun.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -22,23 +20,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.adapter.GoodsCommentAdapter;
+import com.example.user.guokun.bean.GoodsDetailBean;
 import com.example.user.guokun.bean.ImageInfo;
+import com.example.user.guokun.http.HttpShopMethod;
+import com.example.user.guokun.http.ProgressSubscriber;
+import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.ui.widget.GlideImageLoader;
+import com.google.gson.Gson;
 import com.loopj.android.image.SmartImageView;
 import com.youth.banner.Banner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GoodsDetailActivity extends InitActivity {
-    private List<String> url_list;
+    private SubscriberOnNextListener<JSONObject> goodsOnNext;
+    private SubscriberOnNextListener<JSONObject> buyNowOnNext;
+    private Gson gson = new Gson();
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private GoodsDetailBean indexBean;
+    int total = 1;
 
 
     @BindView(R.id.scrollView)
@@ -67,43 +73,57 @@ public class GoodsDetailActivity extends InitActivity {
     TextView tvGoodsDetailInventory;
     @BindView(R.id.wv_goods_detail)
     WebView wvGoodsDetail;
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.rv_goods_comment)
-    RecyclerView rvGoodsComment;
 
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_goods_detail);
         ButterKnife.bind(this);
-        tvGoodsDetailName.setText("国坤按摩椅");
-        tvGoodsDetailPrice.setText(String.format(getResources().getString(R.string.price), 100 + ""));
-        tvGoodsDetailSold.setText(String.format(getResources().getString(R.string.goods_detail_sold), 888 + ""));
         tvGoodsDetailShop.setText("京东商城");
-        tvGoodsDetailInventory.setText(String.format(getResources().getString(R.string.goods_detail_inventory), "6"));
-        url_list = new ArrayList<>();
-        url_list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
-        url_list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
-        url_list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
     }
 
     @Override
     public void initData() {
-        mBanner.setImages(url_list).setImageLoader(new GlideImageLoader()).start();
-        mBanner.isAutoPlay(false);
-        mBanner.setOnBannerListener(position -> Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show());
+        preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        buyNowOnNext = new SubscriberOnNextListener<JSONObject>() {
+            @Override
+            public void onNext(JSONObject jsonObject) throws JSONException {
+                if (jsonObject.getInt("statusCode") == 1) {
+                    Log.i("chenyi", "onNext: " + jsonObject.toString());
 
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "张三");
-        map.put("time", "2017-8-30");
-        map.put("miaoshu", "5");
-        map.put("fuwu", "5");
-        map.put("fahuo", "5");
-        list.add(map);
+//                    BuyNowBean indexBean = gson.fromJson(jsonObject.toString(), BuyNowBean.class);
+                    Intent intent = new Intent(GoodsDetailActivity.this, ConfirmActivity.class);
+                    intent.putExtra("objs", jsonObject.toString());
+//                    intent.putExtra("oid", getIntent().getStringExtra("oid"));
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("objs", indexBean);
+//                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(GoodsDetailActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        goodsOnNext = jsonObject -> {
+            if (jsonObject.getInt("statusCode") == 1) {
+                indexBean = gson.fromJson(jsonObject.toString(), GoodsDetailBean.class);
+                mBanner.setImages(indexBean.getResult().getPics()).setImageLoader(new GlideImageLoader()).start();
+                mBanner.isAutoPlay(false);
+                mBanner.setOnBannerListener(position -> Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show());
+                tvGoodsDetailName.setText(indexBean.getResult().getGoods().getTitle());
+                tvGoodsDetailPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getProductprice()));
+                tvGoodsDetailInventory.setText(String.format(getResources().getString(R.string.goods_detail_inventory), indexBean.getResult().getGoods().getTotal()));
+                tvGoodsDetailSold.setText(String.format(getResources().getString(R.string.goods_detail_sold), indexBean.getResult().getGoods().getSales()));
 
-        rvGoodsComment.setLayoutManager(new LinearLayoutManager(this));
-        rvGoodsComment.setAdapter(new GoodsCommentAdapter(GoodsDetailActivity.this, list));
+
+            } else {
+                Toast.makeText(GoodsDetailActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        HttpShopMethod.getInstance().good_detail(
+                new ProgressSubscriber(goodsOnNext, GoodsDetailActivity.this),
+                preferences.getString("access_token", ""), preferences.getString("sessionkey", ""), getIntent().getStringExtra("id"));
     }
 
     @OnClick({R.id.tv_buynow, R.id.iv_choose_doc_back})
@@ -121,28 +141,41 @@ public class GoodsDetailActivity extends InitActivity {
     private void showPopupWindow(Context context) {
         View contentView = LayoutInflater.from(this).inflate(
                 R.layout.popwindow_good_detail, null);
-        final SmartImageView smartImageView = (SmartImageView) contentView.findViewById(R.id.iv_pop_goods);
-        final TextView tvrepository = (TextView) contentView.findViewById(R.id.tv_repository);
-        TextView tvPrice = (TextView) contentView.findViewById(R.id.tv_price);
-        TextView tvSubCount = (TextView) contentView.findViewById(R.id.tv_subtraction);
-        final TextView tvAddCount = (TextView) contentView.findViewById(R.id.tv_addition);
-        final TextView tvGoodCount = (TextView) contentView.findViewById(R.id.tv_good_count);
+        final SmartImageView smartImageView = contentView.findViewById(R.id.iv_pop_goods);
+        final TextView tvrepository = contentView.findViewById(R.id.tv_repository);
+        TextView tvPrice = contentView.findViewById(R.id.tv_price);
+        TextView tvSubCount = contentView.findViewById(R.id.tv_subtraction);
+        final TextView tvAddCount = contentView.findViewById(R.id.tv_addition);
+        final TextView tvGoodCount = contentView.findViewById(R.id.tv_good_count);
         TextView tvBuyNow = (TextView) contentView.findViewById(R.id.tv_buy_now);
-        final ListView gouwucheAdd = (ListView) contentView.findViewById(R.id.rv_good_detail_add);
         final ImageInfo info = new ImageInfo();
 
         final PopupWindow popupWindow = new PopupWindow(contentView,
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
                 true);
 
+        tvAddCount.setOnClickListener(v -> {
+
+            total++;
+            tvGoodCount.setText(total + "");
+        });
+        tvSubCount.setOnClickListener(v -> {
+            if (total > 1) {
+                total--;
+                tvGoodCount.setText(total + "");
+            }
+        });
         tvBuyNow.setOnClickListener(v -> {
             popupWindow.dismiss();
-            Intent intent = new Intent(GoodsDetailActivity.this, ConfirmActivity.class);
-            startActivity(intent);
+            HttpShopMethod.getInstance().buy_now(
+                    new ProgressSubscriber(buyNowOnNext, GoodsDetailActivity.this),
+                    preferences.getString("access_token", ""), preferences.getString("sessionkey", ""), getIntent().getStringExtra("id"), tvGoodCount.getText().toString());
         });
-
+        tvPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getProductprice()));
+        tvrepository.setText(String.format(getResources().getString(R.string.goods_detail_inventory), indexBean.getResult().getGoods().getTotal()));
+        smartImageView.setImageUrl("http://" + indexBean.getResult().getGoods().getThumb());
         smartImageView.setOnClickListener(v -> {
-            info.setBigImageUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503506356816&di=5dadbd01e162deb6601a801dc6258361&imgtype=0&src=http%3A%2F%2Fimg1.bitautoimg.com%2Fautoalbum%2Ffiles%2F20170407%2F958%2F16325395873602_5454777_3.jpg%3Fr%3D20170703");
+            info.setBigImageUrl("http://" + indexBean.getResult().getGoods().getThumb());
             info.imageViewWidth = smartImageView.getWidth();
             info.imageViewHeight = smartImageView.getHeight();
             int[] points = new int[2];
@@ -154,7 +187,7 @@ public class GoodsDetailActivity extends InitActivity {
             bundle.putSerializable("IMAGE_INFO", info);
             intent.putExtras(bundle);
             startActivity(intent);
-            ((Activity) context).overridePendingTransition(0, 0);
+//            ((Activity) context).overridePendingTransition(0, 0);
         });
         ColorDrawable dw = new ColorDrawable(0x00000000);
         popupWindow.setBackgroundDrawable(dw);

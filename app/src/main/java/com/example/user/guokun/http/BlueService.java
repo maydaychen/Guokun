@@ -16,7 +16,10 @@ import org.json.JSONObject;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 作者：JTR on 2016/11/24 14:15
@@ -97,4 +100,52 @@ public interface BlueService {
     @POST("/lease/pay.do")
     rx.Observable<JSONObject> lease_pay(@Field("accessToken") String accessToken, @Field("leaseId") int leaseId,
                                         @Field("payType") String payType);
+
+
+    //下面是商城
+    @GET("/login/ApiLogin")
+    rx.Observable<JSONObject> index_info(@Query("apiname") String apiname, @Query("apipass") String apipass);
+
+    @Headers("addons: ewei_shop")
+    @FormUrlEncoded
+    @POST("/login")
+    rx.Observable<JSONObject> shop_login(@Field("access_token") String access_token, @Field("mobile") String mobile);
+
+    @Headers("addons: ewei_shop")
+    @GET("/products")
+    rx.Observable<JSONObject> good_list(@Query("access_token") String access_token, @Query("sessionkey") String sessionkey);
+
+    @Headers("addons: ewei_shop")
+    @GET("/products")
+    rx.Observable<JSONObject> good_detail(@Query("access_token") String access_token, @Query("sessionkey") String sessionkey,
+                                          @Query("id") String id);
+
+    @Headers("addons: ewei_shop")
+    @GET("/orders/confirm")
+    rx.Observable<JSONObject> buy_now(@Query("access_token") String access_token, @Query("sessionkey") String sessionkey,
+                                      @Query("goodsid") String goodsid, @Query("total") String total);
+
+    @Headers("addons: ewei_shop")
+    @GET("/addresses")
+    rx.Observable<JSONObject> get_address(@Query("access_token") String access_token, @Query("sessionkey") String sessionkey);
+
+    @Headers("addons: ewei_shop")
+    @FormUrlEncoded
+    @POST("/addresses")
+    rx.Observable<JSONObject> add_address(@Field("access_token") String access_token, @Field("realname") String realname,
+                                          @Field("sessionkey") String sessionkey, @Field("mobile") String mobile,
+                                          @Field("province") String province, @Field("city") String city,
+                                          @Field("area") String area, @Field("address") String address);
+
+    @Headers("addons: ewei_shop")
+    @FormUrlEncoded
+    @POST("/orders/confirm")
+    rx.Observable<JSONObject> confirm_order(@Field("access_token") String access_token, @Field("sessionkey") String sessionkey, @Field("goods") String goods,
+                                            @Field("addressid") String addressid, @Field("dispatchid") String dispatchid);
+
+    @Headers("addons: ewei_shop")
+    @FormUrlEncoded
+    @POST("/orders/payment")
+    rx.Observable<JSONObject> pay(@Field("access_token") String access_token, @Field("ordersn") String ordersn,
+                                  @Field("sessionkey") String sessionkey, @Field("type") String type);
 }

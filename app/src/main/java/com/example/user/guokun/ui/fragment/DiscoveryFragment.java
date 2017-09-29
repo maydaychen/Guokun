@@ -1,6 +1,8 @@
 package com.example.user.guokun.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +11,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.user.guokun.R;
 import com.example.user.guokun.adapter.DiscovereyAdapter;
+import com.example.user.guokun.bean.AccessTokenBean;
+import com.example.user.guokun.bean.GoodsListBean;
+import com.example.user.guokun.bean.ShopLoginBean;
+import com.example.user.guokun.http.HttpShopMethod;
+import com.example.user.guokun.http.ProgressSubscriber;
+import com.example.user.guokun.http.SubscriberOnNextListener;
 import com.example.user.guokun.ui.activity.GoodsDetailActivity;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +38,16 @@ import butterknife.ButterKnife;
 
 public class DiscoveryFragment extends Fragment {
 
+    private SubscriberOnNextListener<JSONObject> getTokenOnNext;
+    private SubscriberOnNextListener<JSONObject> loginOnNext;
+    private SubscriberOnNextListener<JSONObject> goodsOnNext;
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
     private List<String> list = new ArrayList<>();
+    private Gson gson = new Gson();
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
     @BindView(R.id.rv_discovery)
     RecyclerView recyclerView;
 
@@ -37,9 +56,14 @@ public class DiscoveryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_discovery, container, false);
         ButterKnife.bind(this, root);
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         initData();
         initView();
-        return root;
     }
 
     @Override
@@ -57,19 +81,64 @@ public class DiscoveryFragment extends Fragment {
 
 
     public void initData() {
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504859365&di=f89d4e04ca40f303b2827c698913024d&imgtype=jpg&er=1&src=http%3A%2F%2Fimg0.efount.com%2Ffile%2Fp%2F201509%2Fb02422868a60b750a1a336803a5fde4d.jpg");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504265097278&di=60dc5c4ea9277b306c958bdb83bc72bb&imgtype=0&src=http%3A%2F%2Fimg0.efount.com%2Ffile%2Fp%2F201505%2Fd7c40ee05dbeafaef28c49559a2dd5f2.jpg");
-        DiscovereyAdapter goodsAdapter = new DiscovereyAdapter(list, getActivity());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(goodsAdapter);
-        goodsAdapter.setOnItemClickListener((view, data) -> {
-            Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
-            startActivity(intent);
-        });
+        preferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
+        goodsOnNext = jsonObject -> {
+            if (jsonObject.getInt("statusCode") == 1) {
+                GoodsListBean indexBean = gson.fromJson(jsonObject.toString(), GoodsListBean.class);
+                DiscovereyAdapter goodsAdapter = new DiscovereyAdapter(indexBean.getResult(), getActivity());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(goodsAdapter);
+                goodsAdapter.setOnItemClickListener((view, data) -> {
+                    Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+                    intent.putExtra("id", indexBean.getResult().get(data).getId());
+                    startActivity(intent);
+                });
+            } else {
+                Toast.makeText(getActivity(), jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+            }
+        };
+        loginOnNext = resultBean -> {
+            if (resultBean.getInt("statusCode") == 1) {
+                ShopLoginBean indexBean = gson.fromJson(resultBean.toString(), ShopLoginBean.class);
+                editor.putString("sessionkey", indexBean.getResult().getSessionkey());
+                editor.apply();
+                HttpShopMethod.getInstance().good_list(
+                        new ProgressSubscriber(goodsOnNext, getActivity()),
+                        preferences.getString("access_token", ""), indexBean.getResult().getSessionkey());
+            } else {
+                Toast.makeText(getActivity(), resultBean.getString("result"), Toast.LENGTH_SHORT).show();
+            }
+        };
+        getTokenOnNext = resultBean -> {
+            switch (resultBean.getInt("statusCode")) {
+                case 1:
+                    AccessTokenBean indexBean = gson.fromJson(resultBean.toString(), AccessTokenBean.class);
+                    editor.putString("access_token", indexBean.getResult().getAccess_token());
+                    editor.putString("auth_key", indexBean.getResult().getAuth_key());
+                    if (editor.commit()) {
+                        HttpShopMethod.getInstance().login(
+                                new ProgressSubscriber(loginOnNext, getActivity()),
+                                preferences.getString("access_token", ""), preferences.getString("tele", ""));
+                    }
+                    break;
+                case 10003:
+                    Toast.makeText(getActivity(), "服务器错误，请稍后再试...", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    Toast.makeText(getActivity(), resultBean.getString("result"), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        };
+
+
     }
 
     public void initView() {
-
+        HttpShopMethod.getInstance().get_token(
+                new ProgressSubscriber(getTokenOnNext, getActivity()),
+                "guokunjiankangkeji", "69534b32ab51f8cb802720d30fedbxxx");
     }
 
 }
