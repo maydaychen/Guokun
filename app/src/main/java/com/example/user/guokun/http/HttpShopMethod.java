@@ -127,11 +127,26 @@ public class HttpShopMethod {
     }
 
     public void pay(Subscriber<JSONObject> subscriber, String accessToken, String sessionkey, String ordersn, String type) {
-        movieService.pay(accessToken, ordersn,sessionkey, type)
+        movieService.pay(accessToken, ordersn, sessionkey, type)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
+    public void orders(Subscriber<JSONObject> subscriber, String accessToken, String sessionkey, int page, String status) {
+        movieService.orders(accessToken, sessionkey, page, status)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void change_order(Subscriber<JSONObject> subscriber, String accessToken, String reason, String sessionkey, String orderid, String type) {
+        movieService.change_order(accessToken, reason, sessionkey, orderid, type)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 }

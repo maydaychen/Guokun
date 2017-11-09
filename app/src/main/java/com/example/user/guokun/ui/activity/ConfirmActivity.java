@@ -85,7 +85,7 @@ public class ConfirmActivity extends InitActivity {
                 Log.i("chenyi", "initView: " + jsonObject.toString());
                 ConfirmBean confirmBean = gson.fromJson(jsonObject.toString(), ConfirmBean.class);
                 Intent intent = new Intent(ConfirmActivity.this, PayActivity.class);
-                intent.putExtra("price", mBuyNowBean.getResult().getMemberDiscount().getRealprice()+"");
+                intent.putExtra("price", mBuyNowBean.getResult().getMemberDiscount().getRealprice() + "");
                 intent.putExtra("order_num", confirmBean.getResult().getOrdersn());
                 startActivity(intent);
             } else {
@@ -105,10 +105,10 @@ public class ConfirmActivity extends InitActivity {
                             addressId, mBuyNowBean.getResult().getOrderGoods().get(0).getTotal() + "");
                 });
 
-        if (mBuyNowBean.getResult().getAddressLists().size() != 0) {
+        if (null != mBuyNowBean.getResult().getDefaultAddress()) {
             mRlConfirmAddress.setVisibility(View.VISIBLE);
             mTvAddAddress.setVisibility(View.GONE);
-            addressId = mBuyNowBean.getResult().getDefaultAddress().getId();
+            addressId = mBuyNowBean.getResult().getDispatches().get(0).getId();
             dispatchid = mBuyNowBean.getResult().getDispatches().get(0).getId();
             mTvConfirmName.setText(mBuyNowBean.getResult().getDefaultAddress().getRealname());
             mTvConfirmTelephone.setText(mBuyNowBean.getResult().getDefaultAddress().getMobile());

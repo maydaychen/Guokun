@@ -34,7 +34,7 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
     private SharedPreferences mPreferences;
     private VspaAdapter mRecyclerViewAdapter;
     private int page = 1;
-//    private List<Fragment> tabFragments;
+//    private List<DaifahuoFragment> tabFragments;
 //    private List<String> tabIndicators;
 
     @Override
@@ -139,7 +139,7 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
 //        }
 //
 //        @Override
-//        public Fragment getItem(int position) {
+//        public DaifahuoFragment getItem(int position) {
 //            return tabFragments.get(position);
 //        }
 //

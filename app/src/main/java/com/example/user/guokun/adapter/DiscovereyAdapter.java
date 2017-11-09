@@ -53,7 +53,7 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.ivGoods.setImageUrl("http://" + mData.get(position).getThumb());
+        viewHolder.ivGoods.setImageUrl(mData.get(position).getThumb());
         viewHolder.tvGoodName.setText(mData.get(position).getTitle());
 //        viewHolder.tvGoodDes.setText(mData.get(position).getTitle());
         viewHolder.itemView.setTag(position);

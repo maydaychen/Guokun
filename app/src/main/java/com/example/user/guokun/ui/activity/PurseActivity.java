@@ -59,9 +59,9 @@ public class PurseActivity extends InitActivity {
     @BindView(R.id.tv_purse_xieyi)
     TextView tvPurseXieyi;
 
-    private SubscriberOnNextListener<UserInfoBean> UserOnNext;
-    private SubscriberOnNextListener<ChargeBean> ChargeOnNext;
-    private SubscriberOnNextListener<JSONObject> ChargePayOnNext;
+    private SubscriberOnNextListener<UserInfoBean> userOnNext;
+    private SubscriberOnNextListener<ChargeBean> chargeOnNext;
+    private SubscriberOnNextListener<JSONObject> chargePayOnNext;
     private SharedPreferences mPreferences;
     private String PAY_TYPE = "";
     private ChargeListAdapter chargeListAdapter;
@@ -98,14 +98,15 @@ public class PurseActivity extends InitActivity {
                 mBtChongzhi.setBackgroundResource(R.drawable.boder_red);
             }
         });
-        tvPurseXieyi.setOnClickListener(view -> {});
+        tvPurseXieyi.setOnClickListener(view -> {
+        });
         mCbChongzhi.setChecked(true);
     }
 
     @Override
     public void initData() {
         mPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        ChargeOnNext = resultBean -> {
+        chargeOnNext = resultBean -> {
             if (resultBean.getStatus() == 1) {
 //                mRvChargeList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 mRvChargeList.setLayoutManager(new GridLayoutManager(this, 2));
@@ -115,7 +116,7 @@ public class PurseActivity extends InitActivity {
                 qiangzhi_logout(PurseActivity.this);
             }
         };
-        ChargePayOnNext = jsonObject -> {
+        chargePayOnNext = jsonObject -> {
             if (jsonObject.getInt("status") == 1) {
                 switch (PAY_TYPE) {
                     case "1":
@@ -131,7 +132,7 @@ public class PurseActivity extends InitActivity {
                 Toast.makeText(PurseActivity.this, jsonObject.getString("mag"), Toast.LENGTH_SHORT).show();
             }
         };
-        UserOnNext = userInfoBean -> {
+        userOnNext = userInfoBean -> {
             if (userInfoBean.getStatus() == 1) {
                 mTvPurseYue.setText(userInfoBean.getData().getDeposit() + "");
             } else if (userInfoBean.getStatus() == -9) {
@@ -147,8 +148,8 @@ public class PurseActivity extends InitActivity {
     protected void onResume() {
         super.onResume();
         HttpMethods.getInstance().charge(
-                new ProgressSubscriber(ChargeOnNext, PurseActivity.this), mPreferences.getString("token", ""));
-        HttpMethods.getInstance().user_info(new ProgressSubscriber(UserOnNext,
+                new ProgressSubscriber(chargeOnNext, PurseActivity.this), mPreferences.getString("token", ""));
+        HttpMethods.getInstance().user_info(new ProgressSubscriber(userOnNext,
                 PurseActivity.this), mPreferences.getString("token", ""));
     }
 
@@ -168,10 +169,11 @@ public class PurseActivity extends InitActivity {
                 if (PAY_TYPE.equals("")) {
                     Toast.makeText(this, "请选择支付方式！", Toast.LENGTH_SHORT).show();
                 } else {
-                    HttpJsonMethod.getInstance().charge_pay(new ProgressSubscriber(ChargePayOnNext,
+                    HttpJsonMethod.getInstance().charge_pay(new ProgressSubscriber(chargePayOnNext,
                             PurseActivity.this), mPreferences.getString("token", ""), PAY_TYPE, chargeListAdapter.ID);
                 }
-
+                break;
+            default:
                 break;
         }
     }
@@ -181,7 +183,7 @@ public class PurseActivity extends InitActivity {
     public void onMoonEvent(AliPayMessage payMessage) {
         if (payMessage.errorCode == 0) {
             Intent intent = new Intent(PurseActivity.this, CountingActivity.class);
-            intent.putExtra("money",chargeListAdapter.money);
+            intent.putExtra("money", chargeListAdapter.money);
             startActivity(intent);
         } else {
             Toast.makeText(this, payMessage.result, Toast.LENGTH_SHORT).show();
@@ -193,7 +195,7 @@ public class PurseActivity extends InitActivity {
     public void onMoonEvent(WXPayMessage payMessage) {
         if (payMessage.errorCode == 0) {
             Intent intent = new Intent(PurseActivity.this, CountingActivity.class);
-            intent.putExtra("money",chargeListAdapter.money);
+            intent.putExtra("money", chargeListAdapter.money);
             startActivity(intent);
         } else {
             Toast.makeText(this, payMessage.errorStr, Toast.LENGTH_SHORT).show();

@@ -122,7 +122,7 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
 
     @OnClick({R.id.rl_person_yue, R.id.rl_person_coupon, R.id.rl_person_purse, R.id.rl_person_order,
             R.id.rl_person_invite, R.id.rl_person_question, R.id.rl_person_setting, R.id.rl_person_kefu,
-            R.id.rl_daizhifu, R.id.rl_daifahuo, R.id.rl_yifahuo, R.id.rl_yiwancheng, R.id.rl_shouhou, R.id.rl_person_lease})
+            R.id.rl_daizhifu, R.id.rl_daifahuo, R.id.rl_yifahuo, R.id.rl_yiwancheng, R.id.rl_person_lease})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_person_yue:
@@ -154,15 +154,19 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
                 startActivity(intent);
                 break;
             case R.id.rl_daifahuo:
+                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
                 break;
             case R.id.rl_yifahuo:
+//                Intent intent = new Intent(getActivity(), GoodsOrdersActivity.class);
+                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
                 break;
             case R.id.rl_yiwancheng:
-                break;
-            case R.id.rl_shouhou:
+                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
                 break;
             case R.id.rl_person_lease:
                 startActivity(new Intent(getActivity(), MyLeaseActivity.class));
+                break;
+            default:
                 break;
         }
     }

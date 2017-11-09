@@ -61,7 +61,7 @@ public class ConfirmBean {
 
         private String openid;
         private String agentid;
-        private int price;
+        private double price;
         private int cash;
         private int discountprice;
         private int deductprice;
@@ -73,8 +73,8 @@ public class ConfirmBean {
         private String transid;
         private String remark;
         private int addressid;
-        private int goodsprice;
-        private int dispatchprice;
+        private double goodsprice;
+        private double dispatchprice;
         private int dispatchtype;
         private int dispatchid;
         private String carrier;
@@ -102,11 +102,11 @@ public class ConfirmBean {
             this.agentid = agentid;
         }
 
-        public int getPrice() {
+        public double getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(double price) {
             this.price = price;
         }
 
@@ -198,19 +198,19 @@ public class ConfirmBean {
             this.addressid = addressid;
         }
 
-        public int getGoodsprice() {
+        public double getGoodsprice() {
             return goodsprice;
         }
 
-        public void setGoodsprice(int goodsprice) {
+        public void setGoodsprice(double goodsprice) {
             this.goodsprice = goodsprice;
         }
 
-        public int getDispatchprice() {
+        public double getDispatchprice() {
             return dispatchprice;
         }
 
-        public void setDispatchprice(int dispatchprice) {
+        public void setDispatchprice(double dispatchprice) {
             this.dispatchprice = dispatchprice;
         }
 

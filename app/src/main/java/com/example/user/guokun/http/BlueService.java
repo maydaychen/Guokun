@@ -19,6 +19,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -148,4 +149,15 @@ public interface BlueService {
     @POST("/orders/payment")
     rx.Observable<JSONObject> pay(@Field("access_token") String access_token, @Field("ordersn") String ordersn,
                                   @Field("sessionkey") String sessionkey, @Field("type") String type);
+
+    @Headers("addons: ewei_shop")
+    @GET("/orders")
+    rx.Observable<JSONObject> orders(@Query("access_token") String access_token, @Query("sessionkey") String sessionkey,
+                                     @Query("page") int page, @Query("status") String status);
+
+    @Headers("addons: ewei_shop")
+    @FormUrlEncoded
+    @PUT("/orders/operationOrder")
+    rx.Observable<JSONObject> change_order(@Field("access_token") String access_token,@Field("reason") String reason, @Field("sessionkey") String sessionkey,
+                                           @Field("orderid") String orderid, @Field("type") String type);
 }

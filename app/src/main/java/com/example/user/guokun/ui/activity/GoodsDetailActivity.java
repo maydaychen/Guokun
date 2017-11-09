@@ -30,7 +30,6 @@ import com.google.gson.Gson;
 import com.loopj.android.image.SmartImageView;
 import com.youth.banner.Banner;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -75,33 +74,35 @@ public class GoodsDetailActivity extends InitActivity {
     WebView wvGoodsDetail;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        total = 1;
+    }
+
+    @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_goods_detail);
         ButterKnife.bind(this);
-        tvGoodsDetailShop.setText("京东商城");
+        tvGoodsDetailShop.setText("国坤商城");
     }
 
     @Override
     public void initData() {
         preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         editor = preferences.edit();
-        buyNowOnNext = new SubscriberOnNextListener<JSONObject>() {
-            @Override
-            public void onNext(JSONObject jsonObject) throws JSONException {
-                if (jsonObject.getInt("statusCode") == 1) {
-                    Log.i("chenyi", "onNext: " + jsonObject.toString());
-
+        buyNowOnNext = jsonObject -> {
+            if (jsonObject.getInt("statusCode") == 1) {
+                Log.i("chenyi", "onNext: " + jsonObject.toString());
 //                    BuyNowBean indexBean = gson.fromJson(jsonObject.toString(), BuyNowBean.class);
-                    Intent intent = new Intent(GoodsDetailActivity.this, ConfirmActivity.class);
-                    intent.putExtra("objs", jsonObject.toString());
+                Intent intent = new Intent(GoodsDetailActivity.this, ConfirmActivity.class);
+                intent.putExtra("objs", jsonObject.toString());
 //                    intent.putExtra("oid", getIntent().getStringExtra("oid"));
 //                    Bundle bundle = new Bundle();
 //                    bundle.putSerializable("objs", indexBean);
 //                    intent.putExtras(bundle);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(GoodsDetailActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
-                }
+                startActivity(intent);
+            } else {
+                Toast.makeText(GoodsDetailActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
             }
         };
         goodsOnNext = jsonObject -> {
@@ -111,10 +112,15 @@ public class GoodsDetailActivity extends InitActivity {
                 mBanner.isAutoPlay(false);
                 mBanner.setOnBannerListener(position -> Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show());
                 tvGoodsDetailName.setText(indexBean.getResult().getGoods().getTitle());
-                tvGoodsDetailPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getProductprice()));
+                tvGoodsDetailPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getMarketprice()));
                 tvGoodsDetailInventory.setText(String.format(getResources().getString(R.string.goods_detail_inventory), indexBean.getResult().getGoods().getTotal()));
                 tvGoodsDetailSold.setText(String.format(getResources().getString(R.string.goods_detail_sold), indexBean.getResult().getGoods().getSales()));
 
+                wvGoodsDetail.getSettings().setJavaScriptEnabled(true);
+//                String css = "<link rel=\"stylesheet\" href=\"" + s.getCss().get(0) + "\" type=\"text/css\">";
+                String html = "<html><head>" + "</head><body>" + indexBean.getResult().getGoods().getContent() + "</body></html>";
+                html = html.replace("<div class=\"img-place-holder\">", "");
+                wvGoodsDetail.loadDataWithBaseURL("x-data://base", html, "text/html", "UTF-8", null);
 
             } else {
                 Toast.makeText(GoodsDetailActivity.this, jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
@@ -153,7 +159,7 @@ public class GoodsDetailActivity extends InitActivity {
         final PopupWindow popupWindow = new PopupWindow(contentView,
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
                 true);
-
+        tvGoodCount.setText(total + "");
         tvAddCount.setOnClickListener(v -> {
 
             total++;
@@ -171,11 +177,11 @@ public class GoodsDetailActivity extends InitActivity {
                     new ProgressSubscriber(buyNowOnNext, GoodsDetailActivity.this),
                     preferences.getString("access_token", ""), preferences.getString("sessionkey", ""), getIntent().getStringExtra("id"), tvGoodCount.getText().toString());
         });
-        tvPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getProductprice()));
+        tvPrice.setText(String.format(getResources().getString(R.string.price), indexBean.getResult().getGoods().getMarketprice()));
         tvrepository.setText(String.format(getResources().getString(R.string.goods_detail_inventory), indexBean.getResult().getGoods().getTotal()));
-        smartImageView.setImageUrl("http://" + indexBean.getResult().getGoods().getThumb());
+        smartImageView.setImageUrl(indexBean.getResult().getGoods().getThumb());
         smartImageView.setOnClickListener(v -> {
-            info.setBigImageUrl("http://" + indexBean.getResult().getGoods().getThumb());
+            info.setBigImageUrl(indexBean.getResult().getGoods().getThumb());
             info.imageViewWidth = smartImageView.getWidth();
             info.imageViewHeight = smartImageView.getHeight();
             int[] points = new int[2];

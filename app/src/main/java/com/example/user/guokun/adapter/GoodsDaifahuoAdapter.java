@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.bean.VspaBean;
+import com.example.user.guokun.bean.GoodsOrderBean;
+import com.loopj.android.image.SmartImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +18,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by user on 2017/9/7.
+ * Created by user on 2017/10/9.
  */
 
-public class GoodsOrderAdapter extends RecyclerView.Adapter<GoodsOrderAdapter.ViewHolder> implements View.OnClickListener {
+public class GoodsDaifahuoAdapter extends RecyclerView.Adapter<GoodsDaifahuoAdapter.ViewHolder> implements View.OnClickListener {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private Context mContext;
-    private List<VspaBean.DataBean.ListBean> mData = new ArrayList<>();
+    private List<GoodsOrderBean.ResultBean> mData = new ArrayList<>();
 
 
-    public void addAllData(List<VspaBean.DataBean.ListBean> dataList) {
+    public void addAllData(List<GoodsOrderBean.ResultBean> dataList) {
         this.mData.addAll(dataList);
         notifyDataSetChanged();
     }
@@ -40,7 +41,7 @@ public class GoodsOrderAdapter extends RecyclerView.Adapter<GoodsOrderAdapter.Vi
         this.mData.clear();
     }
 
-    public GoodsOrderAdapter(Context context) {
+    public GoodsDaifahuoAdapter(Context context) {
         mContext = context;
     }
 
@@ -55,17 +56,16 @@ public class GoodsOrderAdapter extends RecyclerView.Adapter<GoodsOrderAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_orders, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_daifahuo, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTvOrderTime.setText(mData.get(position).getPay_time());
-        holder.mOrderName.setText(String.format(mContext.getResources().getString(R.string.item_coupons_project), mData.get(position).getCost_name()));
-        holder.mOrderTime.setText(String.format(mContext.getResources().getString(R.string.order_time), mData.get(position).getTime_len() + ""));
-        holder.mOrderPrice.setText(String.format(mContext.getResources().getString(R.string.order_price), mData.get(position).getFee() + ""));
-
+        holder.mTvOrderShopname.setText(mData.get(position).getGoods().get(0).getTitle());
+        holder.mIvPic.setImageUrl(mData.get(position).getGoods().get(0).getThumb());
+        holder.mTvOrderTotalNum.setText(String.format(mContext.getResources().getString(R.string.tv_order_num), mData.get(position).getGoods().get(0).getTotal()));
+        holder.mTvOrderTotalPrice.setText(String.format(mContext.getResources().getString(R.string.tv_order_total_price),  mData.get(position).getGoods().get(0).getPrice()));
         holder.itemView.setTag(position);
     }
 
@@ -79,15 +79,16 @@ public class GoodsOrderAdapter extends RecyclerView.Adapter<GoodsOrderAdapter.Vi
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_order_time)
-        TextView mTvOrderTime;
-        @BindView(R.id.order_name)
-        TextView mOrderName;
-        @BindView(R.id.order_price)
-        TextView mOrderPrice;
-        @BindView(R.id.order_time)
-        TextView mOrderTime;
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_order_shopname)
+        TextView mTvOrderShopname;
+        @BindView(R.id.iv_pic)
+        SmartImageView mIvPic;
+        @BindView(R.id.tv_order_total_num)
+        TextView mTvOrderTotalNum;
+        @BindView(R.id.tv_order_total_price)
+        TextView mTvOrderTotalPrice;
 
         ViewHolder(View view) {
             super(view);

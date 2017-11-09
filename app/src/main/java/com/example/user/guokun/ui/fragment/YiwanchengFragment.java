@@ -12,30 +12,36 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.guokun.R;
-import com.example.user.guokun.adapter.VspaAdapter;
-import com.example.user.guokun.bean.VspaBean;
-import com.example.user.guokun.http.HttpMethods;
+import com.example.user.guokun.adapter.YiwanchengAdapter;
+import com.example.user.guokun.bean.GoodsOrderBean;
+import com.example.user.guokun.http.HttpShopMethod;
 import com.example.user.guokun.http.ProgressErrorSubscriber;
 import com.example.user.guokun.http.SubscriberOnNextAndErrorListener;
+import com.google.gson.Gson;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by user on 2017/9/6.
+ * Created by user on 2017/10/9.
  */
 
-public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
+public class YiwanchengFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
     @BindView(R.id.rv_vspa_order)
     PullLoadMoreRecyclerView mRvVspaOrder;
-    private SubscriberOnNextAndErrorListener<VspaBean> VspaOnNext;
+    private SubscriberOnNextAndErrorListener<JSONObject> VspaOnNext;
     private static final String EXTRA_CONTENT = "content";
     private static final int SHOW_SUBACTIVITY = 1;
     private SharedPreferences mPreferences;
-    private VspaAdapter mRecyclerViewAdapter;
+    private YiwanchengAdapter mRecyclerViewAdapter;
     private int page = 1;
+    private GoodsOrderBean mGoodsOrderBean;
+    private Gson mGson = new Gson();
 
     @Nullable
     @Override
@@ -48,15 +54,21 @@ public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerVi
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getData1();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
-    public static VspaFragment newInstance(String content) {
+    public static YiwanchengFragment newInstance(String content) {
         Bundle arguments = new Bundle();
         arguments.putString(EXTRA_CONTENT, content);
 
-        VspaFragment mallFragment = new VspaFragment();
+        YiwanchengFragment mallFragment = new YiwanchengFragment();
         mallFragment.setArguments(arguments);
 
         return mallFragment;
@@ -66,18 +78,27 @@ public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerVi
     public void initData() {
         mPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
-        VspaOnNext = new SubscriberOnNextAndErrorListener<VspaBean>() {
+        VspaOnNext = new SubscriberOnNextAndErrorListener<JSONObject>() {
             @Override
-            public void onNext(VspaBean vspaBean) {
+            public void onNext(JSONObject jsonObject) {
                 mRvVspaOrder.setVisibility(View.VISIBLE);
+                mRvVspaOrder.setPullLoadMoreCompleted();
+
                 try {
-                    mRvVspaOrder.setPullLoadMoreCompleted();
-                    mRecyclerViewAdapter.addAllData(vspaBean.getData().getList());
-                    mRecyclerViewAdapter.notifyDataSetChanged();
+                    if (jsonObject.getInt("statusCode") == 1) {
+                        mGoodsOrderBean = mGson.fromJson(jsonObject.toString(), GoodsOrderBean.class);
+                        mRecyclerViewAdapter.addAllData(mGoodsOrderBean.getResult());
+                        mRecyclerViewAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getActivity(), jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+                    }
+
                 } catch (NullPointerException e) {
                     if (page != 0) {
                         Toast.makeText(getActivity(), "已经加载完毕！", Toast.LENGTH_LONG).show();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -100,11 +121,8 @@ public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerVi
 
         mRvVspaOrder.setOnPullLoadMoreListener(this);
         mRvVspaOrder.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_order, null));
-        mRecyclerViewAdapter = new VspaAdapter(getActivity());
+        mRecyclerViewAdapter = new YiwanchengAdapter(getActivity());
         mRvVspaOrder.setAdapter(mRecyclerViewAdapter);
-
-        getData1();
-
     }
 
     public void initView() {
@@ -131,7 +149,7 @@ public class AllGoodsFragment extends Fragment implements PullLoadMoreRecyclerVi
     }
 
     private void getData1() {
-        HttpMethods.getInstance().vspa_order(new ProgressErrorSubscriber<>(VspaOnNext,
-                getActivity()), mPreferences.getString("token", ""), page);
+        HttpShopMethod.getInstance().orders(new ProgressErrorSubscriber<>(VspaOnNext,
+                getActivity()), mPreferences.getString("access_token", ""), mPreferences.getString("sessionkey", ""), page, "3");
     }
 }

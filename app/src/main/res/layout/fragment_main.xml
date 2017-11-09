@@ -63,7 +63,7 @@
         android:id="@+id/iv_main_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/main_icon"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/main_gg_img"/>
 
 </LinearLayout>

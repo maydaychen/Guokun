@@ -43,7 +43,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.Manifest.permission.CAMERA;
 
-/**
+/**n
  * 作者：JTR on 2016/8/29 10:35
  * 邮箱：2091320109@qq.com
  */

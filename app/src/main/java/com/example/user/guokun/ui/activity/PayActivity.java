@@ -47,7 +47,7 @@ public class PayActivity extends InitActivity {
     TextView mTvPaySolderDetail;
     @BindView(R.id.tv_pay_money_detail)
     TextView mTvPayMoneyDetail;
-    private String PAY_TYPE = "";
+    private String PAY_TYPE = "wechat_app";
     private SubscriberOnNextListener<JSONObject> payOnNext;
     private SharedPreferences preferences;
 
@@ -65,11 +65,11 @@ public class PayActivity extends InitActivity {
                 Log.i("chenyi", "pay: " + jsonObject.toString());
                 switch (PAY_TYPE) {
                     case "wechat_app":
-                        WXPayEntry entry = WXUtils.parseWXData(jsonObject.getString("data"));
+                        WXPayEntry entry = WXUtils.parseWXData(jsonObject.get("result") + "");
                         WXUtils.startWeChat(PayActivity.this, entry);
                         break;
                     case "alipay_app":
-                        AliPayManager.getInstance().payV2(PayActivity.this, jsonObject.getJSONObject("data").getString("result"));
+                        AliPayManager.getInstance().payV2(PayActivity.this, jsonObject.getString("result"));
                         break;
                 }
             } else {
@@ -131,7 +131,8 @@ public class PayActivity extends InitActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(WXPayMessage payMessage) {
         if (payMessage.errorCode == 0) {
-            startActivity(new Intent(PayActivity.this, GoodsDetailActivity.class));
+            Intent intent = new Intent(PayActivity.this,GoodsOrdersActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, payMessage.errorStr, Toast.LENGTH_SHORT).show();
         }

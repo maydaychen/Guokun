@@ -118,8 +118,8 @@ public class ChairNearbyBean {
             private String address;
             private int distance_um;
             private int id;
-            private String latitude;
-            private String longitude;
+            private String lat;
+            private String lng;
             private String name;
 
             public int getDistance_um() {
@@ -139,19 +139,19 @@ public class ChairNearbyBean {
             }
 
             public String getLatitude() {
-                return latitude;
+                return lat;
             }
 
-            public void setLatitude(String latitude) {
-                this.latitude = latitude;
+            public void setLatitude(String lat) {
+                this.lat = lat;
             }
 
             public String getLongitude() {
-                return longitude;
+                return lng;
             }
 
-            public void setLongitude(String longitude) {
-                this.longitude = longitude;
+            public void setLongitude(String lng) {
+                this.lng = lng;
             }
 
             public String getName() {

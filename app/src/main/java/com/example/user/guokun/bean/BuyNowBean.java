@@ -233,9 +233,9 @@ public class BuyNowBean implements Serializable{
              */
 
             private int total;
-            private int goodsprice;
+            private double goodsprice;
             private double realprice;
-            private int deductprice;
+            private double deductprice;
             private double discountprice;
 
             public int getTotal() {
@@ -246,11 +246,11 @@ public class BuyNowBean implements Serializable{
                 this.total = total;
             }
 
-            public int getGoodsprice() {
+            public double getGoodsprice() {
                 return goodsprice;
             }
 
-            public void setGoodsprice(int goodsprice) {
+            public void setGoodsprice(double goodsprice) {
                 this.goodsprice = goodsprice;
             }
 
@@ -262,11 +262,11 @@ public class BuyNowBean implements Serializable{
                 this.realprice = realprice;
             }
 
-            public int getDeductprice() {
+            public double getDeductprice() {
                 return deductprice;
             }
 
-            public void setDeductprice(int deductprice) {
+            public void setDeductprice(double deductprice) {
                 this.deductprice = deductprice;
             }
 
