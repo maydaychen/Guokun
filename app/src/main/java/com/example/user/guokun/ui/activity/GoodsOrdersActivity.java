@@ -58,6 +58,9 @@ public class GoodsOrdersActivity extends AppCompatActivity {
 
         mTbOrder.setTabMode(TabLayout.MODE_FIXED);
         mTbOrder.setupWithViewPager(mVpContent);
+        if (getIntent().getIntExtra("id", 0) != 0) {
+            mTbOrder.getTabAt(getIntent().getIntExtra("id", 0)).select();
+        }
     }
 
     @OnClick(R.id.iv_coupon_detail_back)

@@ -132,12 +132,6 @@ public class FujinActivity extends InitActivity implements BaiduMap.OnMapLoadedC
         Log.i("chenyi", "lon == " + lon);
         String request = "{\"lat\":\"" + lat + "\",\"lng\":\"" + lon + "\"}";
         Log.d("chenyi", request);
-          /*  webView.callHandler("frame", request, new CallBackFunction() {
-                @Override
-                public void onCallBack(String jsResponseData) {
-                    Log.d("chenyi", "getLat " + jsResponseData);
-                }
-            });*/
         stopRotate();
         getStore();
         mLocationClient.stop();

@@ -41,19 +41,6 @@ public class MyOrderActivity extends InitActivity implements PullLoadMoreRecycle
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_my_order);
         ButterKnife.bind(this);
-
-//        tabIndicators = new ArrayList<>();
-//        tabIndicators.add("Vspa订单");
-////        tabIndicators.add("商品订单");
-//
-//        tabFragments = new ArrayList<>();
-//        tabFragments.add(VspaFragment.newInstance(tabIndicators.get(0)));
-////        tabFragments.add(GoodsFragment.newInstance(tabIndicators.get(1)));
-//        ContentPagerAdapter contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
-//        mVpContent.setAdapter(contentAdapter);
-//
-//        mTbOrder.setTabMode(TabLayout.MODE_FIXED);
-//        mTbOrder.setupWithViewPager(mVpContent);
     }
 
     @Override

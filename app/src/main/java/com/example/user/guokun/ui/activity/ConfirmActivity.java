@@ -99,6 +99,7 @@ public class ConfirmActivity extends InitActivity {
         RxView.clicks(btConfirmCommit)
                 .throttleFirst(2, TimeUnit.SECONDS)
                 .subscribe(o -> {
+                    Log.i("chenyi", "initData: "+addressId);
                     HttpShopMethod.getInstance().confirm_order(
                             new ProgressSubscriber(confirmOnNext, ConfirmActivity.this),
                             preferences.getString("access_token", ""), preferences.getString("sessionkey", ""), mBuyNowBean.getResult().getOrderGoods().get(0).getGoodsid(),
@@ -108,7 +109,7 @@ public class ConfirmActivity extends InitActivity {
         if (null != mBuyNowBean.getResult().getDefaultAddress()) {
             mRlConfirmAddress.setVisibility(View.VISIBLE);
             mTvAddAddress.setVisibility(View.GONE);
-            addressId = mBuyNowBean.getResult().getDispatches().get(0).getId();
+            addressId = mBuyNowBean.getResult().getAddressLists().get(0).getId();
             dispatchid = mBuyNowBean.getResult().getDispatches().get(0).getId();
             mTvConfirmName.setText(mBuyNowBean.getResult().getDefaultAddress().getRealname());
             mTvConfirmTelephone.setText(mBuyNowBean.getResult().getDefaultAddress().getMobile());

@@ -114,6 +114,8 @@ public class PayActivity extends InitActivity {
                             getIntent().getStringExtra("order_num"), PAY_TYPE);
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -121,7 +123,9 @@ public class PayActivity extends InitActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(AliPayMessage payMessage) {
         if (payMessage.errorCode == 0) {
-            startActivity(new Intent(PayActivity.this, GoodsDetailActivity.class));
+            Intent yifahuo = new Intent(PayActivity.this, GoodsOrdersActivity.class);
+            yifahuo.putExtra("id", 1);
+            startActivity(yifahuo);
         } else {
             Toast.makeText(this, payMessage.result, Toast.LENGTH_SHORT).show();
         }
@@ -131,8 +135,9 @@ public class PayActivity extends InitActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(WXPayMessage payMessage) {
         if (payMessage.errorCode == 0) {
-            Intent intent = new Intent(PayActivity.this,GoodsOrdersActivity.class);
-            startActivity(intent);
+            Intent yifahuo = new Intent(PayActivity.this, GoodsOrdersActivity.class);
+            yifahuo.putExtra("id", 1);
+            startActivity(yifahuo);
         } else {
             Toast.makeText(this, payMessage.errorStr, Toast.LENGTH_SHORT).show();
         }

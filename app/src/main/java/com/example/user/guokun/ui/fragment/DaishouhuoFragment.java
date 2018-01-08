@@ -80,17 +80,14 @@ public class DaishouhuoFragment extends Fragment implements PullLoadMoreRecycler
     public static DaishouhuoFragment newInstance(String content) {
         Bundle arguments = new Bundle();
         arguments.putString(EXTRA_CONTENT, content);
-
         DaishouhuoFragment mallFragment = new DaishouhuoFragment();
         mallFragment.setArguments(arguments);
-
         return mallFragment;
     }
 
 
     public void initData() {
         mPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-
         VspaOnNext = new SubscriberOnNextAndErrorListener<JSONObject>() {
             @Override
             public void onNext(JSONObject jsonObject) {
@@ -176,6 +173,8 @@ public class DaishouhuoFragment extends Fragment implements PullLoadMoreRecycler
             case "comf":
                 HttpShopMethod.getInstance().change_order(new ProgressSubscriber<>(changeOnNext,
                         getActivity()), mPreferences.getString("access_token", ""), "", mPreferences.getString("sessionkey", ""), payMessage.getId(), "comf");
+                break;
+            default:
                 break;
         }
 

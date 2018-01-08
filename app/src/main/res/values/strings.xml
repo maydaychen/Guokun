@@ -6,7 +6,7 @@
     <string name="item_coupons_project">项目：%1$s</string>
     <string name="rationale_camera">此应用需要摄像头权限</string>
     <string name="rationale_locate">此应用需要定位及相关权限</string>
-    <string name="item_charge_name">%1$s魔豆</string>
+    <string name="item_charge_name">%1$s金币</string>
     <string name="purse_price">售价：￥%1$s</string>
     <string name="price">￥%1$s</string>
     <string name="project_price">￥%1$s %2$s分钟</string>

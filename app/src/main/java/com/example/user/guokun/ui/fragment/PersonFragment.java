@@ -150,18 +150,24 @@ public class PersonFragment extends Fragment implements EasyPermissions.Permissi
                 call();
                 break;
             case R.id.rl_daizhifu:
-                Intent intent = new Intent(getActivity(), GoodsOrdersActivity.class);
-                startActivity(intent);
+                Intent daifahuo = new Intent(getActivity(), GoodsOrdersActivity.class);
+                daifahuo.putExtra("id", 0);
+                startActivity(daifahuo);
                 break;
             case R.id.rl_daifahuo:
-                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
+                Intent rl_daifahuo = new Intent(getActivity(), GoodsOrdersActivity.class);
+                rl_daifahuo.putExtra("id", 1);
+                startActivity(rl_daifahuo);
                 break;
             case R.id.rl_yifahuo:
-//                Intent intent = new Intent(getActivity(), GoodsOrdersActivity.class);
-                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
+                Intent rl_yifahuo = new Intent(getActivity(), GoodsOrdersActivity.class);
+                rl_yifahuo.putExtra("id", 2);
+                startActivity(rl_yifahuo);
                 break;
             case R.id.rl_yiwancheng:
-                startActivity(new Intent(getActivity(), GoodsOrdersActivity.class));
+                Intent rl_yiwancheng = new Intent(getActivity(), GoodsOrdersActivity.class);
+                rl_yiwancheng.putExtra("id", 3);
+                startActivity(rl_yiwancheng);
                 break;
             case R.id.rl_person_lease:
                 startActivity(new Intent(getActivity(), MyLeaseActivity.class));

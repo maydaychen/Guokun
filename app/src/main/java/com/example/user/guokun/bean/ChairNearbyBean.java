@@ -116,18 +116,18 @@ public class ChairNearbyBean {
              * name : 怡和出厂001
              */
             private String address;
-            private int distance_um;
+            private int distance;
             private int id;
             private String lat;
             private String lng;
             private String name;
 
             public int getDistance_um() {
-                return distance_um;
+                return distance;
             }
 
             public void setDistance_um(int distance_um) {
-                this.distance_um = distance_um;
+                this.distance = distance_um;
             }
 
             public int getId() {
