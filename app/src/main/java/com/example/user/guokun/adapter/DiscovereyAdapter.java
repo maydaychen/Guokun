@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by user on 2017/8/23.
  */
 
-public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.ViewHolder> implements View.OnClickListener {
+public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.ViewHolder> implements View.OnClickListener {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private List<GoodsListBean.ResultBean> mData;
@@ -34,7 +34,7 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
         void onItemClick(View view, int data);
     }
 
-    public DiscovereyAdapter(List<GoodsListBean.ResultBean> mData, Context context) {
+    public DiscoveryAdapter(List<GoodsListBean.ResultBean> mData, Context context) {
         this.mData = mData;
         this.mContext = context;
     }
@@ -43,7 +43,7 @@ public class DiscovereyAdapter extends RecyclerView.Adapter<DiscovereyAdapter.Vi
     //创建新View，被LayoutManager所调用
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_discoverey, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_discovery, viewGroup, false);
         ViewHolder vh = new ViewHolder(view);
         view.setOnClickListener(this);
         return vh;
